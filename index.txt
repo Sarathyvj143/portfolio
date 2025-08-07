@@ -1,0 +1,233 @@
+Parthasarathy R - Python Developer Portfolio
+
+# sidebar
+
+alt = Parthasarathy R
+Parthasarathy R
+Python Developer
+
+Show Contacts
+
+Email
+Sarathyvj007@gmail.com
+
+Phone
++91-8072381162
+
+Location
+Cuddalore, Tamil Nadu
+
+# navbar
+
+About
+Resume
+Portfolio
+Blog
+Contact
+
+# about
+
+About me
+
+Results-driven Python Developer with hands-on experience in building scalable backend systems, data pipelines, and cloud-integrated workflows. Specialized in automation, cost optimization, and data observability across AWS, GCP, and Azure. Strong command of Flask, MySQL, and REST API development. Passionate about delivering real-world solutions and contributing to high-impact freelance and in-house projects.
+
+
+## service
+
+What I'm Doing
+
+alt = Backend Development icon
+Backend & API Development
+Building scalable backend systems and REST APIs using Python, Flask, and FastAPI.
+
+alt = Cloud Automation icon
+Cloud Automation
+Automating workflows and cost optimization across AWS, GCP, and Azure.
+
+alt = Data & Reporting icon
+Data Engineering & Reporting
+Designing MySQL schemas, building data pipelines, and generating automated PDF/email reports.
+
+alt = Dashboarding icon
+Dashboarding & Visualization
+Creating dashboards and visualizations using Superset and Power BI.
+
+
+## testimonials
+
+Testimonials
+
+alt = Daniel lewis
+Daniel lewis
+Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+
+alt = Jessica miller
+Jessica miller
+Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+
+alt = Emily evans
+Emily evans
+Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+
+alt = Henry william
+Henry william
+Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+
+
+## clients
+
+Clients
+
+alt = client logo
+
+
+
+# resume
+
+Resume
+
+Education
+
+B.E. – Electrical and Electronics Engineering
+Sri Krishna College of Engineering and Technology | 2018 – 2022
+CGPA: 8.02
+
+HSC
+Tagore Matriculation Higher Secondary School
+70.6%
+
+SSLC
+St. Antony Matriculation School
+79.8%
+
+Work Experience
+
+Python Developer – Purple Data Technologies, Bangalore
+Jan 2024 – Present
+Developed full-stack Flask applications for multi-cloud automation and observability.
+Built and deployed APIs for inventory and cost data collection from AWS, GCP, and Azure.
+Automated cost-saving, governance, and security workflows across cloud platforms.
+Designed MySQL schemas to store large-scale cloud data efficiently.
+Generated PDF reports and integrated automated email sending features.
+Created dashboards for cloud usage insights using Superset and Power BI.
+Managed CI/CD workflows and ensured high availability in deployments.
+
+Production Planning Intern – Prominance, Coimbatore
+Apr 2023 – Aug 2023
+Planned and optimized production workflows to improve output efficiency.
+Created dispatch schedules, reducing delivery delays and optimizing warehouse inventory.
+
+Technical Skills
+
+Python, SQL, C, Java
+90%
+Flask, FastAPI
+85%
+MySQL
+80%
+AWS, GCP, Azure
+75%
+Docker, Postman, Power BI, Git
+80%
+PDFKit, SMTP, REST API, Cron Jobs
+75%
+Frontend Basics (HTML/CSS), Workflow Automation
+70%
+
+
+
+# portfolio
+
+Portfolio
+
+All
+Python
+IoT
+
+Select category
+All
+Python
+IoT
+
+alt = Jarvis Chatbot with Speech Recognition
+Jarvis Chatbot with Speech Recognition
+Python
+Developed a personal assistant chatbot using Python and speech libraries. Integrated dynamic learning for improved interaction and query handling.
+
+alt = Smart Dustbin Monitoring System
+Smart Dustbin Monitoring System
+IoT
+Built an IoT-based system using GSM to monitor and report waste bin levels in real-time.
+# contact
+
+# Certifications
+
+Certifications
+Microsoft Python Certification
+VI Solutions, Bangalore (2021)
+Python Certification
+Crown Web Academy (2021)
+
+# Soft Skills & Achievements
+
+Soft Skills
+Flexibility, Time Management, Communication
+
+Achievements
+Indian Talent Class Topper (2015–2016)
+
+
+
+# blog
+
+Blog
+
+alt = Design conferences in 2022
+Design
+Fab 23, 2022
+Design conferences in 2022
+Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
+
+alt = Best fonts every designer
+Design
+Fab 23, 2022
+Best fonts every designer
+Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
+
+alt = Design digest #80
+Design
+Fab 23, 2022
+Design digest #80
+Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
+
+alt = UI interactions of the week
+Design
+Fab 23, 2022
+UI interactions of the week
+Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
+
+alt = The forgotten art of spacing
+Design
+Fab 23, 2022
+The Forgotten Art Of Spacing
+Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+alt = Design digest #79
+Design
+Fab 23, 2022
+Design Digest #79
+Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
+
+
+
+# contact
+
+Contact
+
+Contact Form
+
+Full name
+Email address
+Your Message
+
+Send Message
