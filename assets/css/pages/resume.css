@@ -1,0 +1,3 @@
+/* Page-specific hooks for Resume; most styles in components.css */
+.resume .article-title { margin-bottom: 30px; }
+/* Optional: add page-only overrides here */

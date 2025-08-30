@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design conferences in 2022 - Parthasarathy R</title>
+  <link rel="shortcut icon" href="/assets/images/logo.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/pages/blog.css">
+  <link rel="stylesheet" href="/assets/css/components/header-blog.css">
+  <style>
+    /* Unified layout with main blog page */
+    .blog-post-wrapper {
+      display: flex;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .sidebar {
+      width: 350px;
+      flex-shrink: 0;
+      background: var(--eerie-black-2);
+      border-radius: 24px;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: fit-content;
+      position: sticky;
+      top: 40px;
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.10);
+    }
+
+    .sidebar .toc-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--orange-yellow-crayola);
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+    }
+    .sidebar .toc-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--orange-yellow-crayola);
+      border-radius: 2px;
+    }
+    .sidebar .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .sidebar .toc-list li {
+      margin-bottom: 18px;
+      position: relative;
+      padding-left: 24px;
+    }
+    .sidebar .toc-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--orange-yellow-crayola);
+      font-weight: 700;
+    }
+    .sidebar .toc-list a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .sidebar .toc-list a:hover {
+      color: var(--orange-yellow-crayola);
+    }
+
+    .main-content {
+      flex: 1;
+      background: var(--eerie-black-2);
+      border-radius: 24px;
+      padding: 48px 48px 40px 48px;
+      min-width: 0;
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.10);
+    }
+
+    .blog-post-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .blog-post-meta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--light-gray);
+    }
+    .blog-post-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 12px;
+      margin: 30px auto;
+      display: block;
+    }
+    .blog-post-text {
+      line-height: 1.8;
+      color: var(--light-gray);
+      margin-bottom: 20px;
+    }
+    .content-section {
+      margin-bottom: 40px;
+    }
+    .content-section h2 {
+      color: var(--orange-yellow-crayola);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+    }
+    .content-section h3 {
+      color: var(--light-gray);
+      font-size: 1.4rem;
+      margin: 25px 0 15px 0;
+    }
+    .content-section p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    .content-section ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    .content-section li {
+      margin-bottom: 8px;
+    }
+    .back-to-blog {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange-yellow-crayola);
+      text-decoration: none;
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+    .back-to-blog:hover {
+      color: var(--light-gray);
+    }
+    @media (max-width: 1200px) {
+      .blog-post-wrapper {
+        flex-direction: column;
+        gap: 24px;
+        padding: 24px 0;
+      }
+      .sidebar {
+        width: 100%;
+        position: static;
+        border-radius: 20px;
+        box-shadow: none;
+        margin-bottom: 24px;
+      }
+      .main-content {
+        border-radius: 20px;
+        box-shadow: none;
+        padding: 32px 16px 24px 16px;
+      }
+    }
+    @media (max-width: 768px) {
+      .blog-post-wrapper {
+        padding: 12px 0;
+      }
+      .sidebar,
+      .main-content {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Blog Header -->
+  <header class="blog-header">
+    <nav class="blog-nav">
+      <a href="/" class="blog-logo">Blog</a>
+      <ul class="blog-nav-list">
+        <li><a href="/components/pages/blog.html" class="active">Home</a></li>
+        <li><a href="/components/pages/portfolio.html">Portfolio</a></li>
+        <li><a href="/components/pages/about.html">About</a></li>
+        <li><a href="/components/pages/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="blog-post-wrapper">
+      <!-- Sidebar styled like main blog page -->
+      <aside class="sidebar">
+        <h2 class="toc-title">Table of Contents</h2>
+        <ul class="toc-list">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#key-takeaways">Key Takeaways</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content Area styled like main blog page -->
+      <div class="main-content">
+        <article class="blog-post-content">
+        <a href="/components/pages/blog.html" class="back-to-blog">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          Back to Blog
+        </a>
+        
+        <div class="blog-post-header">
+          <div class="blog-post-meta">
+            <p class="blog-category">Design</p>
+            <span class="dot"></span>
+            <time datetime="2022-02-23">Feb 23, 2022</time>
+          </div>
+          <h1 class="h1">Design conferences in 2022</h1>
+        </div>
+
+        <img src="/assets/images/blog-1.jpg" alt="Design conferences in 2022" class="blog-post-image">
+
+        <div class="blog-post-text">
+          <div class="content-section" id="introduction">
+            <p>
+              Veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+            </p>
+            
+            <p>
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+            </p>
+            
+            <p>
+              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.
+            </p>
+          </div>
+          
+          <div class="content-section" id="key-takeaways">
+            <h2>Key Takeaways</h2>
+            <ul>
+              <li>Understanding the latest design trends and methodologies</li>
+              <li>Networking with industry professionals and thought leaders</li>
+              <li>Learning about emerging technologies in design</li>
+              <li>Exploring new tools and techniques for better user experience</li>
+            </ul>
+          </div>
+          
+          <div class="content-section" id="conclusion">
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/js/include.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/components/header-blog.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html> 
