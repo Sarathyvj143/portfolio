@@ -1,0 +1,77 @@
+{
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "Experience",
+        "title_short_nav": "Experience",
+        "title_long_prefix": "Summary of my",
+        "title_long": "{{Work}} Experience"
+      }
+    }
+  },
+
+  "articles": [
+    {
+      "id": 1,
+      "component": "ArticleTimeline",
+      "locales": {},
+      "settings": {
+        "order_items_by": "dateStart",
+        "order_items_sort": "desc"
+      },
+      "items": [
+        {
+          "id": 1,
+          "img": "images/pictures/timeline-place-purpledata.png",
+          "faIcon": "fa-brands fa-python",
+          "faIconColors": { "bg": "#FFD43B", "fill": "#306998" },
+          "dateStart": { "year": 2024, "month": 1 },
+          "dateEnd": { "now": true },
+          "locales": {
+            "en": {
+              "title": "{{Python Developer}}",
+              "province": "Bangalore, Karnataka",
+              "country": "India",
+              "institution": "Purple Data Technologies",
+              "text": "Spearheading the complete Flask application lifecycle from API development to deployment, with a focus on cloud data workflows and observability.",
+              "list": [
+                "Designed and implemented backend workflows for inventory and cost data collection across AWS, GCP, and Azure.",
+                "Created robust APIs for processing and serving cloud data to enable efficient visualization.",
+                "Built dynamic front-end interfaces integrated with Flask for seamless user experience.",
+                "Developed scalable database structures for optimized data storage and retrieval.",
+                "Delivered actionable insights for cost optimization, governance, and security via dashboards.",
+                "Led deployments ensuring high availability and reliability of Flask applications.",
+                "Automated workflows providing cost-saving and security governance recommendations.",
+                "Utilized Flask, Python, MySQL, AWS, GCP, and Azure in an integrated solution."
+              ],
+              "tags": ["Python", "Flask", "MySQL", "AWS", "GCP", "Azure", "APIs", "Data Visualization"]
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "images/pictures/timeline-place-prominance.png",
+          "faIcon": "fa-solid fa-industry",
+          "faIconColors": { "bg": "#444", "fill": "#EEE" },
+          "dateStart": { "year": 2023, "month": 4 },
+          "dateEnd": { "year": 2023, "month": 8 },
+          "locales": {
+            "en": {
+              "title": "Production Planning {{Intern}}",
+              "province": "Coimbatore, Tamil Nadu",
+              "country": "India",
+              "institution": "Prominance - uPVC Windows & Doors",
+              "text": "Contributed to production and inventory planning processes to improve efficiency and warehouse operations.",
+              "list": [
+                "Led production planning strategies to optimize manufacturing workflows.",
+                "Executed dispatch schedules ensuring timely deliveries.",
+                "Streamlined inventory management for warehouse operations."
+              ],
+              "tags": ["Production Planning", "Process Optimization", "Inventory Management"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

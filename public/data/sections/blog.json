@@ -1,0 +1,113 @@
+{
+    "title": {
+        "locales": {
+            "en": {
+                "title_short": "Blog",
+                "title_short_nav": "Blog",
+                "title_long_prefix": "Read my",
+                "title_long": "{{Blog}} Posts"
+            }
+        }
+    },
+    "articles": [
+        {
+            "id": 1,
+            "component": "Blog",
+            "locales": {
+                "en": {
+                    "description": "Read my latest thoughts, tutorials, and insights"
+                }
+            },
+            "settings": {
+                "order_items_by": "id",
+                "order_items_sort": "asc"
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "categoryId": "blog",
+                    "img": "/images/pictures/blog-react.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Getting Started with React",
+                            "text": "A comprehensive guide to building your first React application with modern best practices and tools."
+                        }
+                    },
+                    "blogData": {
+                        "id": "getting-started-with-react",
+                        "date": "2024-01-15",
+                        "readTime": "8 min read",
+                        "tags": ["React", "JavaScript", "Frontend"],
+                        "author": "Your Name"
+                    }
+                },
+                {
+                    "id": 2,
+                    "categoryId": "blog",
+                    "img": "/images/pictures/blog-css.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "en": {
+                            "title": "Modern CSS Techniques",
+                            "text": "Explore advanced CSS features like Grid, Flexbox, and CSS Custom Properties to create stunning layouts."
+                        }
+                    },
+                    "blogData": {
+                        "id": "modern-css-techniques",
+                        "date": "2024-01-10",
+                        "readTime": "12 min read",
+                        "tags": ["CSS", "Frontend", "Design"],
+                        "author": "Your Name"
+                    }
+                },
+                {
+                    "id": 3,
+                    "categoryId": "blog",
+                    "img": "/images/pictures/blog-js.jpg",
+                    "faIcon": "",
+                    "faIconColors": {"bg": "", "fill": ""},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "en": {
+                            "title": "JavaScript Performance Tips",
+                            "text": "Learn practical techniques to optimize your JavaScript code and improve application performance."
+                        }
+                    },
+                    "blogData": {
+                        "id": "javascript-performance-tips",
+                        "date": "2024-01-05",
+                        "readTime": "10 min read",
+                        "tags": ["JavaScript", "Performance", "Optimization"],
+                        "author": "Your Name"
+                    }
+                },
+                {
+                    "id": 4,
+                    "categoryId": "blog",
+                    "img": "/images/pictures/blog-aws.jpg",
+                    "faIcon": "fas fa-cloud",
+                    "faIconColors": {"bg": "#ff9900", "fill": "#ffffff"},
+                    "link": {"href": "", "tooltipString": ""},
+                    "locales": {
+                        "en": {
+                            "title": "😂 Oops, I Crossed an AZ! – The Hidden AWS Bill",
+                            "text": "Discover the surprising costs of AWS inter-Availability Zone data transfer and how to optimize your cloud architecture."
+                        }
+                    },
+                    "blogData": {
+                        "id": "aws-inter-az-data-transfer-costs",
+                        "date": "2025-09-01",
+                        "readTime": "8 min read",
+                        "tags": ["AWS", "Cloud Computing", "Cost Optimization"],
+                        "author": "Cloud Cost Expert"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "id": "getting-started-with-react",
+    "title": {
+        "en": "Getting Started with React"
+    },
+    "description": {
+        "en": "A comprehensive guide to building your first React application with modern best practices and tools."
+    },
+    "image": "/images/pictures/blog-react.jpg",
+    "date": "2024-01-15",
+    "readTime": "8 min read",
+    "author": "Your Name",
+    "tags": ["React", "JavaScript", "Frontend"],
+    "content": {
+        "en": {
+            "sections": [
+                {
+                    "id": "introduction",
+                    "title": "Introduction",
+                    "content": "React has revolutionized the way we build user interfaces. In this comprehensive guide, we'll explore the fundamentals of React and build a complete application from scratch."
+                },
+                {
+                    "id": "what-is-react",
+                    "title": "What is React?",
+                    "content": "React is a JavaScript library for building user interfaces, particularly single-page applications. It's used for handling the view layer and can be used for developing both web and mobile applications."
+                },
+                {
+                    "id": "key-concepts",
+                    "title": "Key Concepts",
+                    "content": "React is built around several key concepts: components, JSX, props, state, and the virtual DOM. Understanding these concepts is crucial for building effective React applications."
+                },
+                {
+                    "id": "components",
+                    "title": "Components",
+                    "content": "Components are the building blocks of React applications. They are reusable pieces of UI that can contain their own logic and styling. Components can be functional or class-based."
+                },
+                {
+                    "id": "jsx",
+                    "title": "JSX",
+                    "content": "JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files. It makes it easier to write and understand React components."
+                },
+                {
+                    "id": "props-and-state",
+                    "title": "Props and State",
+                    "content": "Props are used to pass data from parent components to child components, while state is used to manage data that can change over time within a component."
+                },
+                {
+                    "id": "conclusion",
+                    "title": "Conclusion",
+                    "content": "React provides a powerful and flexible way to build user interfaces. By understanding the core concepts and following best practices, you can create efficient and maintainable applications."
+                }
+            ]
+        }
+    }
+}

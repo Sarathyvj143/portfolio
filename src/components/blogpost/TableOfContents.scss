@@ -1,0 +1,89 @@
+.table-of-contents {
+    background: var(--color-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+
+    &.sticky {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .toc-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--color-primary);
+    }
+
+    .toc-nav {
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            .toc-item {
+                margin-bottom: 0.5rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .toc-link {
+                    background: none;
+                    border: none;
+                    padding: 0.75rem 1rem;
+                    width: 100%;
+                    text-align: left;
+                    color: var(--color-text-alt);
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    position: relative;
+                    overflow: hidden;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                        width: 0;
+                        background: var(--color-primary);
+                        transition: width 0.2s ease;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        color: var(--color-primary);
+                        background: rgba(var(--color-primary-rgb), 0.1);
+
+                        &::before {
+                            width: 4px;
+                        }
+                    }
+
+                    &.active {
+                        color: var(--color-primary);
+                        background: rgba(var(--color-primary-rgb), 0.1);
+                        font-weight: 600;
+
+                        &::before {
+                            width: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        &.sticky {
+            position: static;
+        }
+    }
+}

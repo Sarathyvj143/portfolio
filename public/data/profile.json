@@ -1,0 +1,26 @@
+{
+  "name": "Partha Sarathy R",
+
+  "profilePictureUrl": "images/pictures/profile-picture.jpg",
+  "resumePdfUrl": "documents/partha_sarathy_resume.pdf",
+
+  "statusCircleVisible": true,
+  "statusCircleVariant": "available",
+  "statusCircleHoverMessage": "status_message_available_for_opportunities",
+
+  "locales": {
+    "en": {
+      "localized_name": "Partha Sarathy R",
+      "localized_name_stylized": "[[Partha {{Sarathy R}}]]",
+      "status_message_available_for_opportunities": "Available for opportunities!",
+      "roles": [
+        "Python Developer",
+        "Backend Developer",
+        "Cloud & DevOps Enthusiast",
+        "Data Engineer"
+      ],
+      "name_pronunciation_ipa": "",
+      "name_pronunciation_audio_url": ""
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "Education",
+        "title_short_nav": "Education",
+        "title_long_prefix": "This is my",
+        "title_long": "{{Education}} Background"
+      }
+    }
+  },
+
+  "articles": [
+    {
+      "id": 1,
+      "component": "ArticleTimeline",
+      "locales": {},
+      "settings": {
+        "order_items_by": "dateStart",
+        "order_items_sort": "desc"
+      },
+      "items": [
+        {
+          "id": 1,
+          "img": "images/pictures/timeline-place-skcet.png",
+          "faIcon": "",
+          "faIconColors": { "bg": "", "fill": "" },
+          "dateStart": { "year": 2019, "month": 8 },
+          "dateEnd": { "year": 2023, "month": 4 },
+          "locales": {
+            "en": {
+              "title": "{{Bachelor of Engineering}} in Electrical and Electronics Engineering",
+              "province": "Tamil Nadu",
+              "country": "India",
+              "institution": "Sri Krishna College of Engineering and Technology",
+              "text": "Successfully completed Bachelor's degree specializing in Electrical and Electronics Engineering with a CGPA of 8.02.",
+              "list": [
+                "Specialization: Electrical and Electronics Engineering",
+                "CGPA: 8.02"
+              ],
+              "tags": ["Electrical Engineering", "Electronics", "Engineering"]
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "images/pictures/timeline-place-tagore.png",
+          "faIcon": "",
+          "faIconColors": { "bg": "", "fill": "" },
+          "dateStart": { "year": 2017, "month": 6 },
+          "dateEnd": { "year": 2019, "month": 4 },
+          "locales": {
+            "en": {
+              "title": "Higher Secondary Education",
+              "province": "Tamil Nadu",
+              "country": "India",
+              "institution": "Tagore Matriculation and Higher Secondary School",
+              "text": "Completed Higher Secondary (State Board, Bio-Math) with 70.6%.",
+              "list": [
+                "Stream: State Board (Bio-math)",
+                "Percentage: 70.6%"
+              ],
+              "tags": ["Higher Secondary", "Bio-math"]
+            }
+          }
+        },
+        {
+          "id": 3,
+          "img": "images/pictures/timeline-place-stantony.png",
+          "faIcon": "",
+          "faIconColors": { "bg": "", "fill": "" },
+          "dateStart": { "year": 2016, "month": 6 },
+          "dateEnd": { "year": 2017, "month": 4 },
+          "locales": {
+            "en": {
+              "title": "Secondary School Education",
+              "province": "Tamil Nadu",
+              "country": "India",
+              "institution": "St. Antony Matriculation School",
+              "text": "Completed Secondary School (State Board) with 79.8%.",
+              "list": [
+                "Stream: State Board",
+                "Percentage: 79.8%"
+              ],
+              "tags": ["Secondary School"]
+            }
+          }
+        },
+        {
+          "id": 4,
+          "img": "images/pictures/timeline-place-besant.png",
+          "faIcon": "",
+          "faIconColors": { "bg": "", "fill": "" },
+          "dateStart": { "year": 2023, "month": 8 },
+          "dateEnd": { "year": 2024, "month": 1 },
+          "locales": {
+            "en": {
+              "title": "Data Science Course",
+              "province": "Tamil Nadu",
+              "country": "India",
+              "institution": "Besant Technologies",
+              "text": "Completed a Data Science course with hands-on training in data analysis, machine learning, and real-world projects.",
+              "list": [
+                "Focus on Data Science fundamentals",
+                "Machine Learning applications",
+                "Practical industry-oriented projects"
+              ],
+              "tags": ["Data Science", "Machine Learning", "Data Analysis"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

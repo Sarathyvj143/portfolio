@@ -1,0 +1,50 @@
+{
+    "id": "modern-css-techniques",
+    "title": {
+        "en": "Modern CSS Techniques"
+    },
+    "description": {
+        "en": "Explore advanced CSS features like Grid, Flexbox, and CSS Custom Properties to create stunning layouts."
+    },
+    "image": "/images/pictures/blog-css.jpg",
+    "date": "2024-01-10",
+    "readTime": "12 min read",
+    "author": "Your Name",
+    "tags": ["CSS", "Frontend", "Design"],
+    "content": {
+        "en": {
+            "sections": [
+                {
+                    "id": "introduction",
+                    "title": "Introduction",
+                    "content": "CSS has evolved significantly over the years, introducing powerful layout systems and modern features that make web design more flexible and efficient than ever before."
+                },
+                {
+                    "id": "css-grid",
+                    "title": "CSS Grid",
+                    "content": "CSS Grid is a two-dimensional layout system that allows you to create complex web layouts with rows and columns. It's perfect for creating page layouts and complex component arrangements."
+                },
+                {
+                    "id": "flexbox",
+                    "title": "Flexbox",
+                    "content": "Flexbox is a one-dimensional layout method for arranging items in rows or columns. It's excellent for creating flexible and responsive layouts that adapt to different screen sizes."
+                },
+                {
+                    "id": "css-custom-properties",
+                    "title": "CSS Custom Properties",
+                    "content": "CSS Custom Properties (CSS variables) allow you to store and reuse values throughout your stylesheet. They make it easier to maintain consistent design systems and create dynamic themes."
+                },
+                {
+                    "id": "responsive-design",
+                    "title": "Responsive Design",
+                    "content": "Modern CSS techniques make it easier than ever to create responsive designs that work seamlessly across all devices and screen sizes."
+                },
+                {
+                    "id": "conclusion",
+                    "title": "Conclusion",
+                    "content": "By mastering these modern CSS techniques, you can create more maintainable, flexible, and beautiful web designs that provide excellent user experiences."
+                }
+            ]
+        }
+    }
+}

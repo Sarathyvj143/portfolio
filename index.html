@@ -1,230 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parthasarathy R - Python Developer</title>
-  <link rel="shortcut icon" href="assets/images/logo.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/pages/about.css">
-</head>
-<body>
-  <main>
-    <!-- Sidebar -->
-    <aside class="sidebar" data-sidebar>
-      <div class="sidebar-info">
-        <figure class="avatar-box">
-          <img src="assets/images/my-avatar.png" alt="Parthasarathy R" width="80">
-        </figure>
-        <div class="info-content">
-          <h1 class="name" title="Parthasarathy R">Parthasarathy R</h1>
-          <p class="title">Python Developer</p>
-        </div>
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-      </div>
-      <div class="sidebar-info_more">
-        <div class="separator"></div>
-        <ul class="contacts-list">
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-              <a href="mailto:Sarathyvj007@gmail.com" class="contact-link">Sarathyvj007@gmail.com</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="phone-portrait-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-              <a href="tel:+918072381162" class="contact-link">+91-8072381162</a>
-            </div>
-          </li>
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Cuddalore, Tamil Nadu</address>
-            </div>
-          </li>
-        </ul>
-        <div class="separator"></div>
-        <ul class="social-list">
-          <li class="social-item">
-            <a href="https://github.com/yourusername" class="social-link" target="_blank" rel="noopener">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://linkedin.com/in/yourname" class="social-link" target="_blank" rel="noopener">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </aside>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Portfolio</title>
 
-    <div class="main-content">
-      <!-- Navbar -->
-      <div id="header-mount"></div>
+        <!-- FavIcon -->
+        <link rel="icon" type="image/svg+xml" href="/images/svg/logo.svg" />
 
-      <!-- About page content -->
-      <article class="about" data-page="about">
-        <header><h2 class="h2 article-title">About me</h2></header>
-        <section class="about-text">
-          <p>
-            Results-driven Python Developer with hands-on experience in building scalable backend systems, data pipelines, and cloud-integrated workflows. Specialized in automation, cost optimization, and data observability across AWS, GCP, and Azure. Strong command of Flask, MySQL, and REST API development. Passionate about delivering real-world solutions and contributing to high-impact freelance and in-house projects.
-          </p>
-        </section>
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://sarathyvj143.github.io/portfolio/" />
 
-        <section class="service">
-          <h3 class="h3 service-title">What I'm Doing</h3>
-          <ul class="service-list">
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="assets/images/icon-dev.svg" alt="Backend Development icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Backend &amp; API Development</h4>
-                <p class="service-item-text">Building scalable backend systems and REST APIs using Python, Flask, and FastAPI.</p>
-              </div>
-            </li>
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="assets/images/icon-app.svg" alt="Cloud Automation icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Cloud Automation</h4>
-                <p class="service-item-text">Automating workflows and cost optimization across AWS, GCP, and Azure.</p>
-              </div>
-            </li>
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="assets/images/icon-design.svg" alt="Data & Reporting icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Data Engineering &amp; Reporting</h4>
-                <p class="service-item-text">Designing MySQL schemas, building data pipelines, and generating automated PDF/email reports.</p>
-              </div>
-            </li>
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="assets/images/icon-photo.svg" alt="Dashboarding icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Dashboarding &amp; Visualization</h4>
-                <p class="service-item-text">Creating dashboards and visualizations using Superset and Power BI.</p>
-              </div>
-            </li>
-          </ul>
-        </section>
+        <!-- Meta: Configurations -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="format-detection" content="address=no"/>
+        <meta name="color-scheme" content="dark">
 
-        <section class="testimonials">
-          <h3 class="h3 testimonials-title">Testimonials</h3>
-          <ul class="testimonials-list has-scrollbar">
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-                <figure class="testimonials-avatar-box">
-                  <img src="assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
-                </figure>
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel lewis</h4>
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet.
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-                <figure class="testimonials-avatar-box">
-                  <img src="assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
-                </figure>
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica miller</h4>
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>Richard was hired to create a corporate identity. We were very pleased with the work done.</p>
-                </div>
-              </div>
-            </li>
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-                <figure class="testimonials-avatar-box">
-                  <img src="assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
-                </figure>
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily evans</h4>
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>Richard was hired to create a corporate identity. We were very pleased with the work done.</p>
-                </div>
-              </div>
-            </li>
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-                <figure class="testimonials-avatar-box">
-                  <img src="assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
-                </figure>
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry william</h4>
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>Richard was hired to create a corporate identity. We were very pleased with the work done.</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </section>
+        <!-- Meta: SEO -->
+        <meta name="description" content="A futuristic react portfolio template by Ryan Balieiro."/>
+        <meta name="keywords" content="resume, cv, ryan balieiro, ryanbalieiro, react, web developer, template"/>
+        <meta name="robots" content="index, follow"/>
+        <meta name="googlebot" content="index, follow"/>
+        <meta name="google" content="notranslate"/>
+        <meta name="author" content="Ryan Balieiro"/>
+        <meta name="theme-color" content="#111111"/>
 
-        <div class="modal-container" data-modal-container>
-          <div class="overlay" data-overlay></div>
-          <section class="testimonials-modal">
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <img src="assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
-              </figure>
-              <img src="assets/images/icon-quote.svg" alt="quote icon">
-            </div>
-            <div class="modal-content">
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-              <time datetime="2021-06-14">14 June, 2021</time>
-              <div data-modal-text>
-                <p>Text</p>
-              </div>
-            </div>
-          </section>
-        </div>
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://sarathyvj143.github.io/portfolio/" />
+        <meta property="og:title" content="Portfolio" />
+        <meta property="og:description" content="My personal portfolio website" />
+        <meta property="og:image" content="https://sarathyvj143.github.io/portfolio/images/pictures/og-image.jpg" />
 
-        <section class="clients">
-          <h3 class="h3 clients-title">Clients</h3>
-          <ul class="clients-list has-scrollbar">
-            <li class="clients-item"><a href="#"><img src="assets/images/logo-1-color.png" alt="client logo"></a></li>
-            <li class="clients-item"><a href="#"><img src="assets/images/logo-2-color.png" alt="client logo"></a></li>
-            <li class="clients-item"><a href="#"><img src="assets/images/logo-3-color.png" alt="client logo"></a></li>
-            <li class="clients-item"><a href="#"><img src="assets/images/logo-4-color.png" alt="client logo"></a></li>
-            <li class="clients-item"><a href="#"><img src="assets/images/logo-5-color.png" alt="client logo"></a></li>
-            <li class="clients-item"><a href="#"><img src="assets/images/logo-6-color.png" alt="client logo"></a></li>
-          </ul>
-        </section>
-      </article>
-    </div>
-  </main>
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://sarathyvj143.github.io/portfolio/" />
+        <meta property="twitter:title" content="Portfolio" />
+        <meta property="twitter:description" content="My personal portfolio website" />
+        <meta property="twitter:image" content="https://sarathyvj143.github.io/portfolio/images/pictures/og-image.jpg" />
 
-  <!-- Optional footer -->
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Portfolio",
+            "description": "My personal portfolio website",
+            "url": "https://sarathyvj143.github.io/portfolio/"
+        }
+        </script>
 
-  <footer></footer>
+        <!-- GitHub Pages SPA Redirect Script -->
+        <script type="text/javascript">
+            // Single Page Apps for GitHub Pages
+            // This script checks to see if a redirect is present in the query string
+            // and converts it back into the correct URL and adds it to the browser history
+            // without affecting the current page.
+            (function(l) {
+                if (l.search[1] === '/' ) {
+                    var decoded = l.search.slice(1).split('&').map(function(s) { 
+                        return s.replace(/~and~/g, '&')
+                    }).join('?');
+                    window.history.replaceState(null, null,
+                        l.pathname.slice(0, -1) + decoded + l.hash
+                    );
+                }
+            }(window.location))
+        </script>
 
-  <script src="assets/js/include.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/components/sidebar.js"></script>
-  <script src="assets/js/components/navbar.js"></script>
-  <script src="assets/js/pages/about.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Saira:400,700" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    </head>
+    <body style="background-color: #111111">
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>

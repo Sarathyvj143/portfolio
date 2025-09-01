@@ -1,0 +1,299 @@
+{
+  "title": {
+    "locales": {
+      "en": {
+        "title_short": "Skills",
+        "title_short_nav": "Skills",
+        "title_long_prefix": "Explore",
+        "title_long": "My {{Skill Set}}"
+      }
+    }
+  },
+
+  "articles": [
+    {
+      "id": 1,
+      "component": "ArticleCards",
+      "locales": {},
+      "settings": {
+        "order_items_by": "id",
+        "order_items_sort": "asc"
+      },
+      "items": [
+        {
+          "id": 1,
+          "img": "",
+          "faIcon": "fa-solid fa-code",
+          "faIconColors": { "bg": "", "fill": "" },
+          "date": { "year": null, "month": null },
+          "link": { "href": "", "tooltipString": "" },
+          "locales": {
+            "en": {
+              "title": "{{Programming}}",
+              "text": "Python, Flask, Docker, MySQL, Power BI, C, Java, React, Node.js"
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "",
+          "faIcon": "fa-solid fa-gears",
+          "faIconColors": { "bg": "", "fill": "" },
+          "date": { "year": null, "month": null },
+          "link": { "href": "", "tooltipString": "" },
+          "locales": {
+            "en": {
+              "title": "{{Tools & Technologies}}",
+              "text": "Data Visualization, Frontend Development, Database Management"
+            }
+          }
+        },
+        {
+          "id": 3,
+          "img": "",
+          "faIcon": "fa-solid fa-cloud",
+          "faIconColors": { "bg": "", "fill": "" },
+          "date": { "year": null, "month": null },
+          "link": { "href": "", "tooltipString": "" },
+          "locales": {
+            "en": {
+              "title": "{{Cloud Expertise}}",
+              "text": "AWS, GCP, Azure"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "id": 2,
+      "component": "ArticleSkills",
+      "locales": {
+        "en": { "title": "Programming & Backend Stack" }
+      },
+      "settings": {
+        "max_items_per_row": 3,
+        "max_rows_collapse_threshold": 6,
+        "order_items_by": "percentage",
+        "order_items_sort": "desc",
+        "round_icons": false
+      },
+      "items": [
+        {
+          "id": 1,
+          "img": "",
+          "faIcon": "fa-brands fa-python",
+          "faIconColors": { "bg": "", "fill": "#306998" },
+          "date": { "year": 2019, "month": 6 },
+          "percentage": 90,
+          "locales": {
+            "en": {
+              "title": "Python",
+              "text": "Proficient in data analysis, backend development, and machine learning with Python.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "",
+          "faIcon": "fa-solid fa-flask",
+          "faIconColors": { "bg": "", "fill": "#000000" },
+          "date": { "year": 2020, "month": 1 },
+          "percentage": 85,
+          "locales": {
+            "en": {
+              "title": "Flask",
+              "text": "Building RESTful APIs and backend services using Flask.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 3,
+          "img": "",
+          "faIcon": "fa-brands fa-docker",
+          "faIconColors": { "bg": "", "fill": "#2496ED" },
+          "date": { "year": 2021, "month": 4 },
+          "percentage": 80,
+          "locales": {
+            "en": {
+              "title": "Docker",
+              "text": "Working knowledge of Docker for containerization and deployment.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 4,
+          "img": "",
+          "faIcon": "fa-solid fa-database",
+          "faIconColors": { "bg": "", "fill": "#4479A1" },
+          "date": { "year": 2020, "month": 10 },
+          "percentage": 85,
+          "locales": {
+            "en": {
+              "title": "MySQL",
+              "text": "Database management, optimization, and backend integration with MySQL.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 5,
+          "img": "",
+          "faIcon": "fa-solid fa-chart-line",
+          "faIconColors": { "bg": "", "fill": "#F2C811" },
+          "date": { "year": 2022, "month": 2 },
+          "percentage": 75,
+          "locales": {
+            "en": {
+              "title": "Power BI",
+              "text": "Data visualization and dashboard creation with Power BI.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 6,
+          "img": "",
+          "faIcon": "fa-brands fa-java",
+          "faIconColors": { "bg": "", "fill": "#007396" },
+          "date": { "year": 2018, "month": 9 },
+          "percentage": 80,
+          "locales": {
+            "en": {
+              "title": "Java",
+              "text": "Strong understanding of Java for software development and backend systems.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 7,
+          "img": "",
+          "faIcon": "fa-solid fa-c",
+          "faIconColors": { "bg": "", "fill": "#00599C" },
+          "date": { "year": 2017, "month": 6 },
+          "percentage": 70,
+          "locales": {
+            "en": {
+              "title": "C Programming",
+              "text": "Good knowledge of C for problem solving and programming fundamentals.",
+              "level": ""
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "component": "ArticleSkills",
+      "locales": {
+        "en": { "title": "Frontend Stack" }
+      },
+      "settings": {
+        "max_items_per_row": 3,
+        "max_rows_collapse_threshold": 6,
+        "order_items_by": "percentage",
+        "order_items_sort": "desc",
+        "round_icons": false
+      },
+      "items": [
+        {
+          "id": 1,
+          "img": "",
+          "faIcon": "fa-brands fa-react",
+          "faIconColors": { "bg": "", "fill": "#61DAFB" },
+          "date": { "year": 2020, "month": 6 },
+          "percentage": 85,
+          "locales": {
+            "en": {
+              "title": "React",
+              "text": "Experience building interactive web applications with React.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "",
+          "faIcon": "fa-brands fa-node-js",
+          "faIconColors": { "bg": "", "fill": "#339933" },
+          "date": { "year": 2020, "month": 3 },
+          "percentage": 80,
+          "locales": {
+            "en": {
+              "title": "Node.js",
+              "text": "Building scalable backend and full-stack applications with Node.js.",
+              "level": ""
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "id": 4,
+      "component": "ArticleSkills",
+      "locales": {
+        "en": { "title": "Cloud Expertise" }
+      },
+      "settings": {
+        "max_items_per_row": 3,
+        "max_rows_collapse_threshold": 3,
+        "order_items_by": "percentage",
+        "order_items_sort": "desc",
+        "round_icons": false
+      },
+      "items": [
+        {
+          "id": 1,
+          "img": "",
+          "faIcon": "fa-brands fa-aws",
+          "faIconColors": { "bg": "", "fill": "#FF9900" },
+          "date": { "year": 2022, "month": 5 },
+          "percentage": 75,
+          "locales": {
+            "en": {
+              "title": "AWS",
+              "text": "Hands-on experience with AWS cloud services.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "",
+          "faIcon": "fa-brands fa-google",
+          "faIconColors": { "bg": "", "fill": "#4285F4" },
+          "date": { "year": 2022, "month": 8 },
+          "percentage": 70,
+          "locales": {
+            "en": {
+              "title": "Google Cloud Platform (GCP)",
+              "text": "Practical experience deploying apps and using GCP services.",
+              "level": ""
+            }
+          }
+        },
+        {
+          "id": 3,
+          "img": "",
+          "faIcon": "fa-brands fa-microsoft",
+          "faIconColors": { "bg": "", "fill": "#0078D4" },
+          "date": { "year": 2023, "month": 1 },
+          "percentage": 65,
+          "locales": {
+            "en": {
+              "title": "Azure",
+              "text": "Basic knowledge of Microsoft Azure for cloud solutions.",
+              "level": ""
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
