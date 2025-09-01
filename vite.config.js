@@ -2,13 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
     const isDev = command === 'serve'
+    const isPreview = command === 'serve' && mode === 'production'
     
     return {
         // For GitHub Pages, we need to use the repo name as the base path
-        // Use empty base for development
-        base: isDev ? '/' : '/portfolio/',
+        // Use empty base for development and local preview
+        base: isDev || isPreview ? '/' : '/portfolio/',
         plugins: [react()],
         build: {
             rollupOptions: {
