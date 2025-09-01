@@ -3,13 +3,15 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-    const isDev = command === 'serve'
-    const isPreview = command === 'serve' && mode === 'production'
+    // For GitHub Pages deployment
+    const isGitHubPages = process.env.GITHUB_PAGES === 'true'
+    // For local development
+    const isDev = command === 'serve' && mode !== 'production'
     
     return {
-        // For GitHub Pages, we need to use the repo name as the base path
-        // Use empty base for development and local preview
-        base: isDev || isPreview ? '/' : '/portfolio/',
+        // Only use '/portfolio/' base for GitHub Pages production build
+        // Use '/' for all local development and preview
+        base: isGitHubPages ? '/portfolio/' : '/',
         plugins: [react()],
         build: {
             rollupOptions: {
