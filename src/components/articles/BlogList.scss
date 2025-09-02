@@ -5,18 +5,11 @@
 
     .blog-list-header {
         text-align: center;
-        margin-bottom: 3rem;
-
-        .blog-list-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--bs-primary);
-            margin-bottom: 1rem;
-        }
+        margin-bottom: 2rem;
 
         .blog-list-description {
             font-size: 1.1rem;
-            color: var(--bs-secondary);
+            color: var(--color-text-alt);
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;

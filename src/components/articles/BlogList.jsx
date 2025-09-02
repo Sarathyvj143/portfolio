@@ -40,11 +40,17 @@ function BlogList({ items, description, onBlogSelect }) {
             console.error("Could not find blogData.id for item:", item);
         }
     }
+    
+    // Generate a URL for a blog post using search params
+    const getBlogUrl = (blogId) => {
+        const url = new URL(window.location);
+        url.searchParams.set('blogId', blogId);
+        return url.toString();
+    }
 
     return (
         <div className="blog-list">
             <div className="blog-list-header">
-                <h1 className="blog-list-title">Blog</h1>
                 {description && (
                     <p className="blog-list-description">{description}</p>
                 )}

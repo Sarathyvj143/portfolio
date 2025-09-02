@@ -37,9 +37,16 @@ function BlogCard({ item, language, onClick }) {
         }
     }
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         console.log("BlogCard clicked, item:", item);
+        
         if (onClick) {
+            // If it's an anchor tag click, let the default behavior work
+            if (e && e.target && e.target.tagName === 'A') {
+                return;
+            }
+            
+            // Otherwise use the custom handler
             onClick();
         }
     }

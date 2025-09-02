@@ -115,9 +115,9 @@ function BlogPost({ blogId, onBack }) {
     if (loading) {
         return (
             <div className="blog-post-container">
-                <header className="blog-post-header-nav">
+                {/* <header className="blog-post-header-nav">
                     <NavHeaderMain activeHref="#blog" />
-                </header>
+                </header> */}
                 <div className="blog-post-wrapper">
                     <div className="blog-post-loading">
                         <div className="loading-spinner"></div>
@@ -131,9 +131,9 @@ function BlogPost({ blogId, onBack }) {
     if (!blogPost) {
         return (
             <div className="blog-post-container">
-                <header className="blog-post-header-nav">
+                {/* <header className="blog-post-header-nav">
                     <NavHeaderMain activeHref="#blog" />
-                </header>
+                </header> */}
                 <div className="blog-post-wrapper">
                     <div className="blog-post-error">
                         <h2>Blog Post Not Found</h2>
@@ -169,9 +169,9 @@ function BlogPost({ blogId, onBack }) {
     return (
         <div className="blog-post-container">
             {/* Header Navbar */}
-            <header className="blog-post-header-nav">
+            {/* <header className="blog-post-header-nav">
                 <NavHeaderMain activeHref="#blog" />
-            </header>
+            </header> */}
             
             {/* Main Content Area */}
             <div className="blog-post-wrapper">

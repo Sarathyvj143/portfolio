@@ -84,7 +84,7 @@
           "img": "",
           "faIcon": "fa-brands fa-python",
           "faIconColors": { "bg": "", "fill": "#306998" },
-          "date": { "year": 2019, "month": 6 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 90,
           "locales": {
             "en": {
@@ -99,7 +99,7 @@
           "img": "",
           "faIcon": "fa-solid fa-flask",
           "faIconColors": { "bg": "", "fill": "#000000" },
-          "date": { "year": 2020, "month": 1 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 85,
           "locales": {
             "en": {
@@ -114,7 +114,7 @@
           "img": "",
           "faIcon": "fa-brands fa-docker",
           "faIconColors": { "bg": "", "fill": "#2496ED" },
-          "date": { "year": 2021, "month": 4 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 80,
           "locales": {
             "en": {
@@ -129,7 +129,7 @@
           "img": "",
           "faIcon": "fa-solid fa-database",
           "faIconColors": { "bg": "", "fill": "#4479A1" },
-          "date": { "year": 2020, "month": 10 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 85,
           "locales": {
             "en": {
@@ -144,7 +144,7 @@
           "img": "",
           "faIcon": "fa-solid fa-chart-line",
           "faIconColors": { "bg": "", "fill": "#F2C811" },
-          "date": { "year": 2022, "month": 2 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 75,
           "locales": {
             "en": {
@@ -159,7 +159,7 @@
           "img": "",
           "faIcon": "fa-brands fa-java",
           "faIconColors": { "bg": "", "fill": "#007396" },
-          "date": { "year": 2018, "month": 9 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 80,
           "locales": {
             "en": {
@@ -174,7 +174,7 @@
           "img": "",
           "faIcon": "fa-solid fa-c",
           "faIconColors": { "bg": "", "fill": "#00599C" },
-          "date": { "year": 2017, "month": 6 },
+          "date": { "year": null, "month": null },
           "percentage": 70,
           "locales": {
             "en": {
@@ -206,7 +206,7 @@
           "img": "",
           "faIcon": "fa-brands fa-react",
           "faIconColors": { "bg": "", "fill": "#61DAFB" },
-          "date": { "year": 2020, "month": 6 },
+          "date": { "year": 2025, "month": 1 },
           "percentage": 85,
           "locales": {
             "en": {
@@ -221,7 +221,7 @@
           "img": "",
           "faIcon": "fa-brands fa-node-js",
           "faIconColors": { "bg": "", "fill": "#339933" },
-          "date": { "year": 2020, "month": 3 },
+          "date": { "year": 2025, "month": 6 },
           "percentage": 80,
           "locales": {
             "en": {
@@ -253,7 +253,7 @@
           "img": "",
           "faIcon": "fa-brands fa-aws",
           "faIconColors": { "bg": "", "fill": "#FF9900" },
-          "date": { "year": 2022, "month": 5 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 75,
           "locales": {
             "en": {
@@ -268,7 +268,7 @@
           "img": "",
           "faIcon": "fa-brands fa-google",
           "faIconColors": { "bg": "", "fill": "#4285F4" },
-          "date": { "year": 2022, "month": 8 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 70,
           "locales": {
             "en": {
@@ -283,7 +283,7 @@
           "img": "",
           "faIcon": "fa-brands fa-microsoft",
           "faIconColors": { "bg": "", "fill": "#0078D4" },
-          "date": { "year": 2023, "month": 1 },
+          "date": { "year": 2024, "month": 1 },
           "percentage": 65,
           "locales": {
             "en": {

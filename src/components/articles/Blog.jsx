@@ -28,116 +28,107 @@ function Blog({ dataWrapper, id }) {
         }
     }, [dataWrapper]);
 
-    useEffect(() => {
-        // Check if we're viewing a specific blog post
-        const urlParams = new URLSearchParams(window.location.search)
-        const blogId = urlParams.get('blogId')
+    // Function to extract blog ID from URL search params
+    const getBlogIdFromUrl = () => {
+        // For portfolios with section-based navigation, we'll store blog ID in localStorage
+        // and search params to maintain compatibility with existing navigation system
         
-        // Also check for GitHub Pages SPA routing format
-        // For GitHub Pages with SPA routing, the URL might look like /?/blog?blogId=some-id
-        // Extract the blogId from pathname (format: /?/path?blogId=some-id)
-        const pathname = window.location.pathname
-        const hash = window.location.hash
+        // 1. Check URL search parameters
+        const searchParams = new URLSearchParams(window.location.search);
+        const urlBlogId = searchParams.get('blogId');
         
-        // Check for SPA format in pathname or hash
-        let spaBlogId = null
-        if (pathname.includes('/?/')) {
-            const pathMatch = pathname.match(/\/\?\/(.+)/)
-            if (pathMatch && pathMatch[1] && pathMatch[1].includes('blogId=')) {
-                const params = new URLSearchParams(pathMatch[1].split('?')[1])
-                spaBlogId = params.get('blogId')
-            }
-        } else if (hash && hash.includes('blogId=')) {
-            const hashParams = new URLSearchParams(hash.substring(1))
-            spaBlogId = hashParams.get('blogId')
+        // 2. Check URL hash for direct links
+        const hash = window.location.hash;
+        let hashBlogId = null;
+        
+        if (hash && hash.includes('blogId=')) {
+            const hashParams = new URLSearchParams(hash.includes('?') ? 
+                hash.substring(hash.indexOf('?')) : hash);
+            hashBlogId = hashParams.get('blogId');
         }
         
-        // Use either the regular blogId or the SPA format blogId
-        const finalBlogId = blogId || spaBlogId
+        // 3. Return the first valid blog ID found
+        const blogId = urlBlogId || hashBlogId;
         
-        console.log("Blog: URL check - regular blogId:", blogId, "SPA blogId:", spaBlogId)
+        return {
+            blogId,
+            isPostView: !!blogId
+        };
+    }
+
+    // Check URL on mount and when location changes
+    useEffect(() => {
+        const { blogId, isPostView } = getBlogIdFromUrl();
+        console.log("Blog: URL check - blogId:", blogId, "isPostView:", isPostView);
         
-        if (finalBlogId) {
-            setSelectedBlogId(finalBlogId)
-            setCurrentView('post')
+        if (isPostView && blogId) {
+            setSelectedBlogId(blogId);
+            setCurrentView('post');
+            // Store for navigation persistence
+            localStorage.setItem('current_blog_id', blogId);
         } else {
-            setCurrentView('list')
-            setSelectedBlogId(null)
+            setCurrentView('list');
+            setSelectedBlogId(null);
+            localStorage.removeItem('current_blog_id');
         }
     }, [location.currentSection])
 
+    // Navigate to a specific blog post
     const handleBlogSelect = (blogId) => {
         console.log("Blog: handleBlogSelect called with blogId:", blogId);
         setSelectedBlogId(blogId)
         setCurrentView('post')
         
-        // Update URL without page reload - for single-page applications
-        // We'll add the blogId as a query parameter
-        const currentPath = window.location.pathname;
+        // Use search params for compatibility with your portfolio's navigation
+        // This approach works better with your existing LocationProvider
+        const url = new URL(window.location);
+        url.searchParams.set('blogId', blogId);
         
-        // For GitHub Pages SPA routing compatibility, check if we're using the SPA format
-        const isGitHubPages = window.location.hostname !== 'localhost' && 
-                              window.location.hostname !== '127.0.0.1';
+        console.log("Blog: Updating URL to:", url.toString());
+        window.history.pushState({ blogId }, '', url.toString());
         
-        let newUrl;
-        if (isGitHubPages && (currentPath.includes('/?/') || currentPath.endsWith('/'))) {
-            // GitHub Pages SPA format
-            if (currentPath.includes('/?/')) {
-                // Extract the base part and add our query parameter
-                const basePath = currentPath.split('/?/')[0];
-                newUrl = `${basePath}/?/blog?blogId=${blogId}`;
-            } else {
-                // Just append to the current path
-                newUrl = `${currentPath}?/blog?blogId=${blogId}`;
-            }
-        } else {
-            // Standard format for local development
-            newUrl = `${currentPath}${currentPath.endsWith('/') ? '' : '/'}?blogId=${blogId}`;
-        }
-        
-        console.log("Blog: Updating URL to:", newUrl);
-        // Use history.pushState to update the URL without a page reload
-        window.history.pushState({ blogId }, '', newUrl)
+        // Store the blog ID for navigation persistence
+        localStorage.setItem('current_blog_id', blogId);
     }
 
+    // Navigate back to blog list
     const handleBackToList = () => {
         setCurrentView('list')
         setSelectedBlogId(null)
         
-        // Update URL without page reload - remove the query parameter
-        const currentPath = window.location.pathname;
+        // Remove blogId from URL
+        const url = new URL(window.location);
+        url.searchParams.delete('blogId');
         
-        // For GitHub Pages SPA routing compatibility
-        const isGitHubPages = window.location.hostname !== 'localhost' && 
-                              window.location.hostname !== '127.0.0.1';
-        
-        let newUrl;
-        if (isGitHubPages && currentPath.includes('/?/')) {
-            // For GitHub Pages SPA, just go back to the base path with the SPA format
-            const basePath = currentPath.split('/?/')[0];
-            newUrl = `${basePath}/?/blog`;
-        } else {
-            // Standard format for local development
-            newUrl = currentPath;
-        }
-        
-        window.history.pushState({}, '', newUrl)
+        window.history.pushState({}, '', url.toString());
+        localStorage.removeItem('current_blog_id');
     }
 
     // Listen for browser back/forward buttons
     useEffect(() => {
-        const handlePopState = (event) => {
-            if (event.state && event.state.blogId) {
-                setSelectedBlogId(event.state.blogId)
-                setCurrentView('post')
+        const handleNavigation = () => {
+            const { blogId, isPostView } = getBlogIdFromUrl();
+            
+            if (isPostView && blogId) {
+                setSelectedBlogId(blogId);
+                setCurrentView('post');
+                localStorage.setItem('current_blog_id', blogId);
             } else {
-                setCurrentView('list')
-                setSelectedBlogId(null)
+                setCurrentView('list');
+                setSelectedBlogId(null);
+                localStorage.removeItem('current_blog_id');
             }
         }
 
-        window.addEventListener('popstate', handlePopState)
-        return () => window.removeEventListener('popstate', handlePopState)
+        // Check for direct links or back/forward navigation
+        window.addEventListener('popstate', handleNavigation);
+        
+        // Initial check
+        handleNavigation();
+        
+        return () => {
+            window.removeEventListener('popstate', handleNavigation);
+        }
     }, [])
 
     if (currentView === 'post' && selectedBlogId) {
