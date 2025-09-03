@@ -8,12 +8,14 @@ import TableOfContents from "/src/components/blogpost/TableOfContents.jsx"
 import Layout from "/src/components/layout/Layout.jsx"
 import NavHeaderMain from "/src/components/nav/partials/NavHeaderMain.jsx"
 import { getAssetUrl, isGitHubPages } from "/src/hooks/assetHelper.js"
+import {useUtils} from "/src/hooks/utils.js"
 
 function BlogPost({ blogId, onBack }) {
     const language = useLanguage()
     const navigation = useNavigation()
     const data = useData()
     const viewport = useViewport()
+    const utils = useUtils()
     const [blogPost, setBlogPost] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -178,9 +180,18 @@ function BlogPost({ blogId, onBack }) {
                 {/* Table of Contents Sidebar (20%) */}
                 <aside className="blog-post-toc">
                     <div className="blog-post-toc-inner">
-                        <button onClick={handleBackToBlog} className="back-button">
-                            ← Back to Blog
-                        </button>
+                        <div className="blog-post-action-buttons">
+                            <button onClick={handleBackToBlog} className="back-button">
+                                ← Back to Blog
+                            </button>
+                            
+                            <button 
+                                onClick={() => utils.file.download(getAssetUrl("/documents/Partha_Sarathy_R_Software_Developer.pdf"))} 
+                                className="resume-button"
+                            >
+                                <i className="fa-solid fa-file-arrow-down"></i> Resume
+                            </button>
+                        </div>
                         
                         <TableOfContents 
                             sections={content?.sections || []}
