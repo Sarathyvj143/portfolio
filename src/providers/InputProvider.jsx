@@ -1,5 +1,5 @@
 /**
- * @author Ryan Balieiro
+ * @author Parthasarathy
  * @date 2025-05-10
  * @description This provider is responsible for managing user input events such as keyboard and mouse interactions.
  */

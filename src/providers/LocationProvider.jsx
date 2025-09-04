@@ -1,5 +1,5 @@
 /**
- * @author Ryan Balieiro
+ * @author Parthasarathy
  * @date 2025-05-10
  * @description This provider acts as a router for the application, managing the active section and category based on the URL hash.
  */
@@ -9,6 +9,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react'
 function LocationProvider({ children, sections, categories }) {
     const [didMount, setDidMount] = useState(false)
     const [activeSectionId, setActiveSectionId] = useState(null)
+    const [previousSectionId, setPreviousSectionId] = useState(null)
     const [nextSectionId, setNextSectionId] = useState(null)
     const [visitHistoryByCategory, setVisitHistoryByCategory] = useState({})
     const [visitedSectionsCount, setVisitedSectionsCount] = useState(0)
@@ -106,6 +107,10 @@ function LocationProvider({ children, sections, categories }) {
     }
 
     const _toNextSection = () => {
+        // Store the current section as previous before updating
+        setPreviousSectionId(activeSectionId)
+        
+        // Update active section to the next section
         setActiveSectionId(nextSectionId)
 
         const section = sections.find(section => section.id === nextSectionId)
@@ -131,7 +136,9 @@ function LocationProvider({ children, sections, categories }) {
             goToCategory,
             goToCategoryWithId,
             visitedSectionsCount,
-            visitHistoryByCategory
+            visitHistoryByCategory,
+            currentSection: activeSectionId,
+            previousSection: previousSectionId
         }}>
             {didMount && children}
         </LocationContext.Provider>
@@ -150,7 +157,9 @@ const LocationContext = createContext(null)
  *    goToCategory: Function,
  *    goToCategoryWithId: Function,
  *    visitedSectionsCount: Number,
- *    visitHistoryByCategory: Object
+ *    visitHistoryByCategory: Object,
+ *    currentSection: String,
+ *    previousSection: String
  * }}
  */
 export const useLocation = () => useContext(LocationContext)

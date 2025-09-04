@@ -1,4 +1,4 @@
-﻿import "./Blog.scss"
+import "./Blog.scss"
 import React, { useState, useEffect } from 'react'
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 import {useLocation} from "/src/providers/LocationProvider.jsx"
@@ -34,7 +34,7 @@ function Blog({ dataWrapper, id }) {
         // For portfolios with section-based navigation, we'll store blog ID in localStorage
         // and search params to maintain compatibility with existing navigation system
         
-        // 1. Check URL search parameters (most common case)
+        // 1. Check URL search parameters
         const searchParams = new URLSearchParams(window.location.search);
         const urlBlogId = searchParams.get('blogId');
         
@@ -42,35 +42,10 @@ function Blog({ dataWrapper, id }) {
         const hash = window.location.hash;
         let hashBlogId = null;
         
-        // Special handling for combined format: ?blogId=xxx#blog
-        if (urlBlogId && hash === '#blog') {
-            console.log("Blog: Found direct blog post link with section hash:", urlBlogId);
-            return {
-                blogId: urlBlogId,
-                isPostView: true,
-                isDirectLink: true
-            };
-        }
-        
-        // Handle hash-only format that contains blogId parameter
         if (hash && hash.includes('blogId=')) {
-            let paramsPart = '';
-            
-            // Handle different hash formats:
-            // #blog?blogId=xxx
-            if (hash.includes('?')) {
-                paramsPart = hash.substring(hash.indexOf('?') + 1);
-            } 
-            // #?blogId=xxx or #blogId=xxx
-            else if (hash.includes('=')) {
-                paramsPart = hash.substring(1); // Remove the # character
-            }
-            
-            if (paramsPart) {
-                const hashParams = new URLSearchParams(paramsPart);
-                hashBlogId = hashParams.get('blogId');
-                console.log("Blog: Found blogId in hash:", hashBlogId);
-            }
+            const hashParams = new URLSearchParams(hash.includes('?') ? 
+                hash.substring(hash.indexOf('?')) : hash);
+            hashBlogId = hashParams.get('blogId');
         }
         
         // 3. Return the first valid blog ID found
@@ -78,8 +53,7 @@ function Blog({ dataWrapper, id }) {
         
         return {
             blogId,
-            isPostView: !!blogId,
-            isDirectLink: !!urlBlogId && hash === '#blog'
+            isPostView: !!blogId
         };
     }
 
@@ -89,38 +63,23 @@ function Blog({ dataWrapper, id }) {
         // Only run this when we're in the blog section
         if (location.currentSection !== 'blog') return;
         
-        // First check if we have a direct blog post link
-        const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
-        
-        // If this is a direct link to a blog post (like http://localhost:5173/?blogId=xxx#blog)
-        // we should show that post instead of the blog list
-        if (isDirectLink && blogId) {
-            console.log("Blog: Direct blog post link detected:", blogId);
-            setSelectedBlogId(blogId);
-            setCurrentView('post');
-            localStorage.setItem('current_blog_id', blogId);
-            return;
-        }
-        
         // If we're coming from another section to the blog section
         // OR if this is the first time loading the blog section
         if (location.previousSection !== 'blog' || location.previousSection === null) {
-            // Force blog list view UNLESS we have a direct blog post link
-            if (!isDirectLink) {
-                setCurrentView('list');
-                setSelectedBlogId(null);
-                
-                // Clean URL by removing any blogId parameter
-                const url = new URL(window.location);
-                if (url.searchParams.has('blogId')) {
-                    url.searchParams.delete('blogId');
-                    window.history.replaceState({}, '', url.toString());
-                }
-                
-                // Store this navigation time
-                setLastNavigationTime(Date.now());
-                console.log("Blog: RESET to blog list view when navigating from another section");
+            // Force blog list view
+            setCurrentView('list');
+            setSelectedBlogId(null);
+            
+            // Clean URL by removing any blogId parameter
+            const url = new URL(window.location);
+            if (url.searchParams.has('blogId')) {
+                url.searchParams.delete('blogId');
+                window.history.replaceState({}, '', url.toString());
             }
+            
+            // Store this navigation time
+            setLastNavigationTime(Date.now());
+            console.log("Blog: RESET to blog list view when navigating from another section");
         }
     }, [location.currentSection, location.previousSection]);
     
@@ -137,16 +96,16 @@ function Blog({ dataWrapper, id }) {
         if (location.currentSection !== 'blog' || !blogItems.length) return;
         
         // Check if there's a blog ID in the URL
-        const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
+        const { blogId, isPostView } = getBlogIdFromUrl();
         
         if (isPostView && blogId) {
             // Only if we're explicitly navigating to a blog post via URL
-            console.log("Blog: URL has blogId:", blogId, "isDirectLink:", isDirectLink);
+            console.log("Blog: URL has blogId:", blogId);
             setSelectedBlogId(blogId);
             setCurrentView('post');
             localStorage.setItem('current_blog_id', blogId);
         }
-    }, [location.currentSection, blogItems, window.location.search, window.location.hash, lastNavigationTime]);
+    }, [location.currentSection, blogItems, window.location.search, lastNavigationTime]);
 
     // Handle browser back/forward navigation
     useEffect(() => {
@@ -161,42 +120,24 @@ function Blog({ dataWrapper, id }) {
             }
             
             // Get blog ID from URL if present
-            const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
+            const { blogId, isPostView } = getBlogIdFromUrl();
             
             if (isPostView && blogId) {
                 setSelectedBlogId(blogId);
                 setCurrentView('post');
                 localStorage.setItem('current_blog_id', blogId);
-                console.log("Blog: PopState - Loading blog post:", blogId, "isDirectLink:", isDirectLink);
             } else {
                 setCurrentView('list');
                 setSelectedBlogId(null);
                 localStorage.removeItem('current_blog_id');
-                console.log("Blog: PopState - Showing blog list view");
             }
+            
+            console.log("Blog: PopState - View:", isPostView ? 'post' : 'list', "BlogId:", blogId);
         };
         
         window.addEventListener('popstate', handlePopState);
-        
-        // Also listen for hash changes which are important for handling direct links
-        const handleHashChange = () => {
-            if (location.currentSection === 'blog') {
-                const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
-                console.log("Blog: Hash changed - checking for blogId:", blogId, "isDirectLink:", isDirectLink);
-                
-                if (isDirectLink && blogId) {
-                    setSelectedBlogId(blogId);
-                    setCurrentView('post');
-                    localStorage.setItem('current_blog_id', blogId);
-                }
-            }
-        };
-        
-        window.addEventListener('hashchange', handleHashChange);
-        
         return () => {
             window.removeEventListener('popstate', handlePopState);
-            window.removeEventListener('hashchange', handleHashChange);
         };
     }, [location.currentSection, lastNavigationTime]);
 
@@ -208,16 +149,9 @@ function Blog({ dataWrapper, id }) {
         setSelectedBlogId(blogId);
         setCurrentView('post');
         
-        // Update URL with the selected blog ID and add the #blog hash
-        // This format works better with direct links
+        // Update URL with the selected blog ID
         const url = new URL(window.location);
         url.searchParams.set('blogId', blogId);
-        
-        // Add the #blog hash if it's not already there
-        if (!url.hash || url.hash !== '#blog') {
-            url.hash = 'blog';
-        }
-        
         window.history.pushState({ blogId }, '', url.toString());
         
         // Store the blog ID for navigation persistence
@@ -229,15 +163,9 @@ function Blog({ dataWrapper, id }) {
         setCurrentView('list');
         setSelectedBlogId(null);
         
-        // Remove blogId from URL but keep the #blog hash
+        // Remove blogId from URL
         const url = new URL(window.location);
         url.searchParams.delete('blogId');
-        
-        // Make sure we keep the #blog hash
-        if (!url.hash || url.hash !== '#blog') {
-            url.hash = 'blog';
-        }
-        
         window.history.pushState({}, '', url.toString());
         
         console.log("Blog: Back to list view");
@@ -266,3 +194,71 @@ function Blog({ dataWrapper, id }) {
 }
 
 export default Blog;
+
+    // Handle browser back/forward navigation
+    useEffect(() => {
+        const handlePopState = () => {
+            // First check if we're in the blog section
+            if (location.currentSection !== 'blog') return;
+            
+            // Skip if we just navigated to the blog section from elsewhere
+            if (Date.now() - lastNavigationTime < 500) {
+                console.log("Blog: Skipping popstate handler immediately after section navigation");
+                return;
+            }
+            
+            // Get blog ID from URL if present
+            const { blogId, isPostView } = getBlogIdFromUrl();
+            
+            if (isPostView && blogId) {
+                setSelectedBlogId(blogId);
+                setCurrentView('post');
+                localStorage.setItem('current_blog_id', blogId);
+            } else {
+                setCurrentView('list');
+                setSelectedBlogId(null);
+                localStorage.removeItem('current_blog_id');
+            }
+            
+            console.log("Blog: PopState - View:", isPostView ? 'post' : 'list', "BlogId:", blogId);
+        };
+        
+        window.addEventListener('popstate', handlePopState);
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [location.currentSection, lastNavigationTime]);
+
+    // Navigate to a specific blog post
+    const handleBlogSelect = (blogId) => {
+        if (!blogId) return;
+        
+        console.log("Blog: handleBlogSelect called with blogId:", blogId);
+        setSelectedBlogId(blogId);
+        setCurrentView('post');
+        
+        // Update URL with the selected blog ID
+        const url = new URL(window.location);
+        url.searchParams.set('blogId', blogId);
+        window.history.pushState({ blogId }, '', url.toString());
+        
+        // Store the blog ID for navigation persistence
+        localStorage.setItem('current_blog_id', blogId);
+    };
+
+    // Navigate back to blog list
+    const handleBackToList = () => {
+        setCurrentView('list');
+        setSelectedBlogId(null);
+        
+        // Remove blogId from URL
+        const url = new URL(window.location);
+        url.searchParams.delete('blogId');
+        window.history.pushState({}, '', url.toString());
+        
+        // We keep the localStorage item to remember the last viewed blog post
+        // Only remove it when explicitly requested or when viewing another blog post
+        console.log("Blog: Back to list view");
+    };
+
+export default Blog
