@@ -31,9 +31,6 @@ function Blog({ dataWrapper, id }) {
 
     // Function to extract blog ID from URL search params
     const getBlogIdFromUrl = () => {
-        // For portfolios with section-based navigation, we'll store blog ID in localStorage
-        // and search params to maintain compatibility with existing navigation system
-        
         // 1. Check URL search parameters (most common case)
         const searchParams = new URLSearchParams(window.location.search);
         const urlBlogId = searchParams.get('blogId');
@@ -84,74 +81,80 @@ function Blog({ dataWrapper, id }) {
     }
 
     // CRITICAL: This useEffect runs whenever the section changes
-    // We want to ALWAYS show the blog list when navigating to the blog section
     useEffect(() => {
         // Only run this when we're in the blog section
         if (location.currentSection !== 'blog') return;
         
-        // First check if we have a direct blog post link
-        const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
+        console.log("Blog: Section navigation detected - previous:", location.previousSection, "current:", location.currentSection);
         
-        // If this is a direct link to a blog post (like http://localhost:5173/?blogId=xxx#blog)
-        // we should show that post instead of the blog list
-        if (isDirectLink && blogId) {
-            console.log("Blog: Direct blog post link detected:", blogId);
-            setSelectedBlogId(blogId);
-            setCurrentView('post');
-            localStorage.setItem('current_blog_id', blogId);
+        // When coming from another section to the blog section
+        if (location.previousSection !== 'blog' && location.previousSection !== null) {
+            console.log("Blog: Coming from a different section - ALWAYS reset to list view");
+            
+            // IMPORTANT: Force reset to list view when coming from other sections
+            setCurrentView('list');
+            setSelectedBlogId(null);
+            
+            // Clean URL
+            const url = new URL(window.location);
+            if (url.searchParams.has('blogId')) {
+                url.searchParams.delete('blogId');
+                window.history.replaceState({}, '', url.toString());
+            }
+            
+            // Record navigation time
+            setLastNavigationTime(Date.now());
             return;
         }
         
-        // If we're coming from another section to the blog section
-        // OR if this is the first time loading the blog section
-        if (location.previousSection !== 'blog' || location.previousSection === null) {
-            // Force blog list view UNLESS we have a direct blog post link
-            if (!isDirectLink) {
+        // First-time loading the blog section (from a direct URL)
+        if (location.previousSection === null) {
+            // Check if there's a blog ID in the URL for direct links
+            const { blogId, isDirectLink } = getBlogIdFromUrl();
+            
+            if (isDirectLink && blogId) {
+                console.log("Blog: Direct blog post link detected:", blogId);
+                setSelectedBlogId(blogId);
+                setCurrentView('post');
+            } else {
+                console.log("Blog: First-time loading - showing list view");
                 setCurrentView('list');
                 setSelectedBlogId(null);
-                
-                // Clean URL by removing any blogId parameter
-                const url = new URL(window.location);
-                if (url.searchParams.has('blogId')) {
-                    url.searchParams.delete('blogId');
-                    window.history.replaceState({}, '', url.toString());
-                }
-                
-                // Store this navigation time
-                setLastNavigationTime(Date.now());
-                console.log("Blog: RESET to blog list view when navigating from another section");
             }
+            
+            // Record navigation time
+            setLastNavigationTime(Date.now());
         }
     }, [location.currentSection, location.previousSection]);
     
     // This useEffect handles URL changes ONLY after we're already in the blog section
     useEffect(() => {
         // Skip if we just navigated to the blog section from elsewhere
-        // This prevents the URL-based navigation from overriding our "show list" rule
         if (Date.now() - lastNavigationTime < 500) {
             console.log("Blog: Skipping URL check immediately after section navigation");
             return;
         }
         
-        // We only process URL parameters if we're already in the blog section
+        // Only process URL parameters if we're already in the blog section AND blog items loaded
         if (location.currentSection !== 'blog' || !blogItems.length) return;
         
-        // Check if there's a blog ID in the URL
-        const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
-        
-        if (isPostView && blogId) {
-            // Only if we're explicitly navigating to a blog post via URL
-            console.log("Blog: URL has blogId:", blogId, "isDirectLink:", isDirectLink);
-            setSelectedBlogId(blogId);
-            setCurrentView('post');
-            localStorage.setItem('current_blog_id', blogId);
+        // We ONLY handle URL changes when we're already in the blog section
+        // This ensures that navigating from elsewhere always shows the list view first
+        if (location.previousSection === 'blog') {
+            const { blogId, isPostView } = getBlogIdFromUrl();
+            
+            if (isPostView && blogId) {
+                console.log("Blog: URL has blogId and we're already in blog section:", blogId);
+                setSelectedBlogId(blogId);
+                setCurrentView('post');
+            }
         }
-    }, [location.currentSection, blogItems, window.location.search, window.location.hash, lastNavigationTime]);
+    }, [location.currentSection, location.previousSection, blogItems, window.location.search, window.location.hash, lastNavigationTime]);
 
     // Handle browser back/forward navigation
     useEffect(() => {
         const handlePopState = () => {
-            // First check if we're in the blog section
+            // Only handle popstate when in the blog section
             if (location.currentSection !== 'blog') return;
             
             // Skip if we just navigated to the blog section from elsewhere
@@ -161,33 +164,32 @@ function Blog({ dataWrapper, id }) {
             }
             
             // Get blog ID from URL if present
-            const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
+            const { blogId, isPostView } = getBlogIdFromUrl();
             
-            if (isPostView && blogId) {
+            // Only change view based on URL state, and ONLY if already in blog section
+            if (isPostView && blogId && location.previousSection === 'blog') {
+                console.log("Blog: PopState - Loading blog post:", blogId);
                 setSelectedBlogId(blogId);
                 setCurrentView('post');
-                localStorage.setItem('current_blog_id', blogId);
-                console.log("Blog: PopState - Loading blog post:", blogId, "isDirectLink:", isDirectLink);
             } else {
+                console.log("Blog: PopState - Showing blog list view");
                 setCurrentView('list');
                 setSelectedBlogId(null);
-                localStorage.removeItem('current_blog_id');
-                console.log("Blog: PopState - Showing blog list view");
             }
         };
         
         window.addEventListener('popstate', handlePopState);
         
-        // Also listen for hash changes which are important for handling direct links
+        // Handle hash changes separately
         const handleHashChange = () => {
             if (location.currentSection === 'blog') {
-                const { blogId, isPostView, isDirectLink } = getBlogIdFromUrl();
-                console.log("Blog: Hash changed - checking for blogId:", blogId, "isDirectLink:", isDirectLink);
+                const { blogId, isDirectLink } = getBlogIdFromUrl();
+                console.log("Blog: Hash changed - checking for blogId:", blogId);
                 
-                if (isDirectLink && blogId) {
+                // ONLY change view if this is a direct link AND we're in blog section
+                if (isDirectLink && blogId && location.previousSection === 'blog') {
                     setSelectedBlogId(blogId);
                     setCurrentView('post');
-                    localStorage.setItem('current_blog_id', blogId);
                 }
             }
         };
@@ -198,7 +200,7 @@ function Blog({ dataWrapper, id }) {
             window.removeEventListener('popstate', handlePopState);
             window.removeEventListener('hashchange', handleHashChange);
         };
-    }, [location.currentSection, lastNavigationTime]);
+    }, [location.currentSection, location.previousSection, lastNavigationTime]);
 
     // Navigate to a specific blog post
     const handleBlogSelect = (blogId) => {
@@ -220,8 +222,7 @@ function Blog({ dataWrapper, id }) {
         
         window.history.pushState({ blogId }, '', url.toString());
         
-        // Store the blog ID for navigation persistence
-        localStorage.setItem('current_blog_id', blogId);
+        // Removed localStorage.setItem to prevent auto-redirects on future visits
     };
 
     // Navigate back to blog list
