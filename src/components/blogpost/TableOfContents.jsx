@@ -6,6 +6,7 @@ function TableOfContents({ sections, title }) {
     const language = useLanguage()
     const [activeSection, setActiveSection] = useState('')
     const [isSticky, setIsSticky] = useState(false)
+    const [expandedItems, setExpandedItems] = useState({})
 
     useEffect(() => {
         const handleScroll = () => {
@@ -49,6 +50,33 @@ function TableOfContents({ sections, title }) {
             })
         }
     }
+    
+    const toggleExpand = (sectionId) => {
+        setExpandedItems(prev => ({
+            ...prev,
+            [sectionId]: !prev[sectionId]
+        }))
+    }
+    
+    // Generate a short preview from section content
+    const generatePreview = (content) => {
+        if (!content) return '';
+        
+        // If content is HTML/JSX, convert to plain text first
+        let plainText = '';
+        if (typeof content === 'string') {
+            // Try to extract text from HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            plainText = tempDiv.textContent || tempDiv.innerText || '';
+        } else {
+            // If it's a React element, we can't easily get a preview
+            return '';
+        }
+        
+        // Get first 50 characters
+        return plainText.substring(0, 50) + (plainText.length > 50 ? '...' : '');
+    }
 
     if (!sections || sections.length === 0) {
         return null
@@ -61,16 +89,39 @@ function TableOfContents({ sections, title }) {
             <h3 className="toc-title">{tocTitle}</h3>
             <nav className="toc-nav">
                 <ul className="toc-list">
-                    {sections.map((section, index) => (
-                        <li key={section.id || index} className="toc-item">
-                            <button
-                                className={`toc-link ${activeSection === section.id ? 'active' : ''}`}
-                                onClick={() => scrollToSection(section.id)}
-                            >
-                                {section.title}
-                            </button>
-                        </li>
-                    ))}
+                    {sections.map((section, index) => {
+                        const isExpanded = expandedItems[section.id];
+                        const previewText = generatePreview(section.content);
+                        
+                        return (
+                            <li key={section.id || index} className="toc-item">
+                                <div className="toc-item-container">
+                                    <button
+                                        className={`toc-link ${activeSection === section.id ? 'active' : ''}`}
+                                        onClick={() => scrollToSection(section.id)}
+                                    >
+                                        {section.title}
+                                    </button>
+                                    
+                                    {previewText && (
+                                        <button 
+                                            className="toc-expand-button" 
+                                            onClick={() => toggleExpand(section.id)}
+                                            aria-label={isExpanded ? "Collapse section preview" : "Expand section preview"}
+                                        >
+                                            <i className={`fa-solid ${isExpanded ? 'fa-minus' : 'fa-plus'}`}></i>
+                                        </button>
+                                    )}
+                                </div>
+                                
+                                {isExpanded && previewText && (
+                                    <div className="toc-preview">
+                                        {previewText}
+                                    </div>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
         </div>

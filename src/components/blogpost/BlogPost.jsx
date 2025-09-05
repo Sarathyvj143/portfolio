@@ -6,8 +6,6 @@ import {useData} from "/src/providers/DataProvider.jsx"
 import {useViewport} from "/src/providers/ViewportProvider.jsx"
 import {useLocation} from "/src/providers/LocationProvider.jsx"
 import TableOfContents from "/src/components/blogpost/TableOfContents.jsx"
-import Layout from "/src/components/layout/Layout.jsx"
-import NavHeaderMain from "/src/components/nav/partials/NavHeaderMain.jsx"
 import { getAssetUrl, isGitHubPages } from "/src/hooks/assetHelper.js"
 import {useUtils} from "/src/hooks/utils.js"
 
@@ -210,20 +208,20 @@ function BlogPost({ blogId, onBack }) {
                                 ← Back to Blog
                             </button>
                             
-                            <button 
+                            {/* <button 
                                 onClick={() => utils.file.download(getAssetUrl("/documents/Partha_Sarathy_R_Software_Developer.pdf"))} 
                                 className="resume-button"
                             >
                                 <i className="fa-solid fa-file-arrow-down"></i> Resume
-                            </button>
+                            </button> */}
                             
-                            <button 
+                            {/* <button 
                                 onClick={toggleMainSidebar} 
                                 className="toggle-sidebar-button"
                                 title="Toggle main navigation"
                             >
                                 <i className="fa-solid fa-bars"></i> Toggle Navigation
-                            </button>
+                            </button> */}
                         </div>
                         
                         <TableOfContents 
@@ -253,15 +251,7 @@ function BlogPost({ blogId, onBack }) {
                             <p className="blog-post-description">{description}</p>
                         )}
                         
-                        {image && (
-                            <div className="blog-post-image-container">
-                                <img 
-                                    src={image.startsWith('http') ? image : getAssetUrl(image)} 
-                                    alt={title}
-                                    className="blog-post-image"
-                                />
-                            </div>
-                        )}
+                        {/* Removed image container to create more space for content */}
                         
                         {tags.length > 0 && (
                             <div className="blog-post-tags">
@@ -278,13 +268,72 @@ function BlogPost({ blogId, onBack }) {
                         {content && content.sections && content.sections.map((section, index) => (
                             <section key={section.id || index} id={section.id} className="blog-post-section">
                                 <h2 className="blog-post-section-title">{section.title}</h2>
-                                <div className="blog-post-section-content">
-                                    {section.content}
-                                </div>
+                                <div 
+                                    className="blog-post-section-content"
+                                    dangerouslySetInnerHTML={{ __html: section.content }}
+                                ></div>
                             </section>
                         ))}
                     </div>
                 </main>
+                
+                {/* Mobile TOC Button */}
+                {viewport.width <= 768 && (
+                    <button 
+                        className="blog-post-mobile-toc"
+                        onClick={() => {
+                            // Create a modal for TOC on mobile
+                            const modal = document.createElement('div');
+                            modal.style.position = 'fixed';
+                            modal.style.top = '0';
+                            modal.style.left = '0';
+                            modal.style.width = '100%';
+                            modal.style.height = '100%';
+                            modal.style.background = 'var(--color-bg)';
+                            modal.style.zIndex = '1000';
+                            modal.style.padding = '20px';
+                            modal.style.overflow = 'auto';
+                            
+                            // Add close button
+                            const closeBtn = document.createElement('button');
+                            closeBtn.innerHTML = '&times;';
+                            closeBtn.style.position = 'absolute';
+                            closeBtn.style.top = '10px';
+                            closeBtn.style.right = '10px';
+                            closeBtn.style.background = 'none';
+                            closeBtn.style.border = 'none';
+                            closeBtn.style.fontSize = '24px';
+                            closeBtn.style.color = 'var(--color-text)';
+                            closeBtn.style.cursor = 'pointer';
+                            closeBtn.onclick = () => document.body.removeChild(modal);
+                            
+                            // Clone the TOC
+                            const tocClone = document.querySelector('.blog-post-toc-inner').cloneNode(true);
+                            
+                            // Add the title
+                            const title = document.createElement('h2');
+                            title.textContent = 'Table of Contents';
+                            title.style.marginBottom = '20px';
+                            
+                            modal.appendChild(closeBtn);
+                            modal.appendChild(title);
+                            modal.appendChild(tocClone);
+                            
+                            // Add event listeners to all links in the cloned TOC
+                            const links = tocClone.querySelectorAll('.toc-link');
+                            links.forEach(link => {
+                                link.addEventListener('click', (e) => {
+                                    // Remove modal when a link is clicked
+                                    document.body.removeChild(modal);
+                                });
+                            });
+                            
+                            document.body.appendChild(modal);
+                        }}
+                    >
+                        <i className="fa-solid fa-list"></i>
+                    </button>
+                )}
             </div>
         </div>
     )

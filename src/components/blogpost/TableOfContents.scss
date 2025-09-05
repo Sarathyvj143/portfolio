@@ -1,8 +1,9 @@
 .table-of-contents {
     background: var(--color-bg);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem; /* Further reduced padding */
     margin-top: 1rem;
+    font-size: 0.8rem; /* Further reduced base font size */
 
     &.sticky {
         position: sticky;
@@ -10,12 +11,12 @@
     }
 
     .toc-title {
-        font-size: 1.2rem;
+        font-size: 0.75rem; /* Further reduced from 0.85rem */
         font-weight: 600;
         color: var(--color-text);
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid var(--color-primary);
+        margin-bottom: 0.6rem; /* Further reduced margin */
+        padding-bottom: 0.3rem; /* Further reduced padding */
+        border-bottom: 1px solid var(--color-primary); /* Thinner border */
     }
 
     .toc-nav {
@@ -25,26 +26,34 @@
             margin: 0;
 
             .toc-item {
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.3rem; /* Reduced from 0.5rem */
 
                 &:last-child {
                     margin-bottom: 0;
+                }
+                
+                .toc-item-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
                 }
 
                 .toc-link {
                     background: none;
                     border: none;
-                    padding: 0.75rem 1rem;
-                    width: 100%;
+                    padding: 0.3rem 0.5rem; /* Further reduced padding */
+                    width: calc(100% - 18px); /* Adjusted for smaller expand button */
                     text-align: left;
                     color: var(--color-text-alt);
-                    font-size: 0.95rem;
+                    font-size: 0.65rem; /* Further reduced from 0.75rem */
                     font-weight: 500;
-                    border-radius: 8px;
+                    border-radius: 3px; /* Smaller radius */
                     cursor: pointer;
                     transition: all 0.2s ease;
                     position: relative;
                     overflow: hidden;
+                    line-height: 1.15; /* Tighter line height */
 
                     &::before {
                         content: '';
@@ -57,7 +66,7 @@
                         transition: width 0.2s ease;
                         z-index: -1;
                     }
-
+                    
                     &:hover {
                         color: var(--color-primary);
                         background: rgba(var(--color-primary-rgb), 0.1);
@@ -76,6 +85,40 @@
                             width: 4px;
                         }
                     }
+                }
+                
+                .toc-expand-button {
+                    width: 18px;
+                    height: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: none;
+                    border: none;
+                    color: var(--color-text-alt);
+                    cursor: pointer;
+                    padding: 0;
+                    margin-right: 3px;
+                    font-size: 0.6rem; /* Further reduced */
+                    border-radius: 2px; /* Smaller */
+                    
+                    &:hover {
+                        background: rgba(var(--color-primary-rgb), 0.1);
+                        color: var(--color-primary);
+                    }
+                }
+                
+                .toc-preview {
+                    padding: 0.3rem 0.5rem; /* Further reduced padding */
+                    margin-left: 0.5rem; /* Further reduced margin */
+                    margin-top: 0.15rem; /* Further reduced margin */
+                    margin-bottom: 0.3rem; /* Further reduced margin */
+                    font-size: 0.6rem; /* Further reduced from 0.7rem */
+                    color: var(--color-text-alt);
+                    background: rgba(var(--color-bg-alt-rgb), 0.5);
+                    border-left: 1px solid var(--color-primary); /* Thinner border */
+                    border-radius: 0 3px 3px 0; /* Smaller radius */
+                    line-height: 1.2; /* Further tightened line height */
                 }
             }
         }

@@ -17,77 +17,82 @@
                 {
                     "id": "introduction",
                     "title": "Introduction",
-                    "content": "Have you ever opened your AWS bill, spilled your coffee, and shouted: \"What the heck is EC2 - Other and why is it charging me more than my coffee addiction?\"\n\nCongratulations—you've been hit by the sneaky inter-AZ data transfer charges. $0.01 per GB seems tiny, but it adds up fast, like monthly subscriptions you forgot about.\n\nThis blog will walk you through what inter-AZ traffic is, why it costs money, and how to detect & fix it—all with a dash of humor to keep your sanity intact."
+                    "content": "<p>Have you ever opened your AWS bill, spilled your coffee, and shouted:</p>\n\n<div class=\"highlighted-question\">\n  <p>\"What the heck is EC2 - Other and why is it charging me more than my coffee addiction?\"</p>\n\n</div>\n\n<p>Congratulations—you've been hit by the sneaky inter-AZ data transfer charges. $0.01 per GB seems tiny, but it adds up fast, like monthly subscriptions you forgot about.</p>\n\n<p>This blog will walk you through what inter-AZ traffic is, why it costs money, and how to detect & fix it—all with a dash of humor to keep your sanity intact.</p>"
                 },
                 {
                     "id": "what-is-inter-az-data-transfer",
                     "title": "What is Inter-AZ Data Transfer?",
-                    "content": "AWS Availability Zones (AZs) are isolated locations within a region. Think of regions as cities, and AZs as neighborhoods.\n\n- Data between AZs = inter-AZ transfer\n- AWS charges for this traffic, even inside the same region\n- Appears on your bill as EC2 - Other\n\nExample: EC2 in us-east-1a talking to RDS in us-east-1b is paying for a virtual courier to cross the street."
+                    "content": "<p>AWS Availability Zones (AZs) are isolated locations within a region. Think of regions as cities, and AZs as neighborhoods.</p>\n<ul >  <li>Data between AZs = inter-AZ transfer</li>\n  <li>AWS charges for this traffic, even inside the same region</li>\n  <li>Appears on your bill as <code>EC2 - Other</code></li></ul><div class='example-box'>\n  <p><strong>Example:</strong> EC2 in us-east-1a talking to RDS in us-east-1b is paying for a virtual courier to cross the street.</p></div>"
                 },
                 {
                     "id": "why-it-matters",
                     "title": "Why It Matters",
-                    "content": "Even small cross-AZ traffic can become hundreds of dollars per month in production:\n\n- Microservices constantly exchanging data\n- Load balancers forwarding traffic across zones\n- Database replication or backup between AZs\n\nHidden charges are sneaky—they can silently inflate your bill without you noticing."
+                    "content": "<p>Even small cross-AZ traffic can become hundreds of dollars per month in production:</p><ul >  <li>Microservices constantly exchanging data</li>\n  <li>Load balancers forwarding traffic across zones</li>\n  <li>Database replication or backup between AZs</li></ul><div class='alert-box'>\n  <p><i class=\"fa-solid fa-triangle-exclamation\"></i> <strong>Warning:</strong> Hidden charges are sneaky—they can silently inflate your bill without you noticing.</p></div>"
                 },
                 {
                     "id": "examples-of-inter-az-traffic",
                     "title": "Examples of Inter-AZ Traffic",
-                    "content": "- EC2 → RDS replication or queries across AZs\n- Network Load Balancer balancing traffic to multiple AZs\n- Microservices calling APIs in different AZs\n- Message queues (Kafka, RabbitMQ) sending data across AZs"
+                    "content": "<ul >  <li><strong>EC2 → RDS</strong>: Replication or queries across AZs</li>\n  <li><strong>Network Load Balancer</strong>: Balancing traffic to multiple AZs</li>\n  <li><strong>Microservices</strong>: Calling APIs in different AZs</li>\n  <li><strong>Message queues</strong>: Kafka, RabbitMQ sending data across AZs</li></ul>"
                 },
                 {
                     "id": "costs-explained",
                     "title": "Costs Explained",
-                    "content": "Source | Destination | Data Transfer | Rate | Cost\n--- | --- | --- | --- | ---\nEC2 (us-east-1a) → RDS (us-east-1b) | Database replication & queries | 500 GB | $0.01/GB | $5.00\nMicroservices (cross-AZ communication) | Messaging, APIs, logs | 1,200 GB | $0.01/GB | $12.00\nNetwork Load Balancer | EC2 instances across AZs | 300 GB | $0.01/GB | $3.00\nTotal | | 2,000 GB | - | $20.00\n\nIn production with heavier traffic, this can easily scale to $200+ per month."
+                    "content": "<table class='blog-table'>\n  <thead>\n    <tr>\n      <th>Source</th>\n      <th>Destination</th>\n      <th>Data Transfer</th>\n      <th>Rate</th>\n      <th>Cost</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>EC2 (us-east-1a) → RDS (us-east-1b)</td>\n      <td>Database replication & queries</td>\n      <td>500 GB</td>\n      <td>$0.01/GB</td>\n      <td>$5.00</td>\n    </tr>\n    <tr>\n      <td>Microservices (cross-AZ communication)</td>\n      <td>Messaging, APIs, logs</td>\n      <td>1,200 GB</td>\n      <td>$0.01/GB</td>\n      <td>$12.00</td>\n    </tr>\n    <tr>\n      <td>Network Load Balancer</td>\n      <td>EC2 instances across AZs</td>\n      <td>300 GB</td>\n      <td>$0.01/GB</td>\n      <td>$3.00</td>\n    </tr>\n    <tr class='total-row'>\n      <td>Total</td>\n      <td></td>\n      <td>2,000 GB</td>\n      <td>-</td>\n      <td>$20.00</td>\n    </tr>\n  </tbody></table>\n\n<p>In production with heavier traffic, this can easily scale to <strong>$200+ per month</strong>.</p>"
+                },
+                {
+                    "id": "az-diagram",
+                    "title": "Understanding AWS AZs Visually",
+                    "content": "<div class='blog-image-container'>\n  <img src='/images/blog/aws-az-diagram.png' alt='AWS Availability Zones Diagram' class='blog-image' />\n  <p class='blog-image-caption'>Fig 1: Visual representation of inter-AZ data transfer costs</p></div>\n\n<p>The diagram above illustrates how data moves between different availability zones and the associated costs. When services in different AZs communicate, you pay for that traffic even within the same region.</p>"
                 },
                 {
                     "id": "how-to-detect-inter-az-charges",
                     "title": "How to Detect Inter-AZ Charges",
-                    "content": "Let's explore various methods to identify these hidden costs."
+                    "content": "<div class='section-intro'>\n  <p>Let's explore various methods to identify these hidden costs. Each approach has different advantages and limitations.</p>\n  <div class='detective-banner'>\n    <i class='fa-solid fa-magnifying-glass'></i>\n    <span>Becoming an AWS Cost Detective</span>\n  </div></div>"
                 },
                 {
                     "id": "method-1-cost-explorer",
                     "title": "Method 1: Cost Explorer",
-                    "content": "1. Open Cost Explorer\n2. Filter by EC2 - Other\n3. Group by API Operation\n4. Look for InterZone-In and InterZone-Out\n\nReality: You'll see how much data was transferred but not which instance talked to which."
+                    "content": "<ol class='numbered-steps'>\n  <li>Open Cost Explorer</li>\n  <li>Filter by EC2 - Other</li>\n  <li>Group by API Operation</li>\n  <li>Look for InterZone-In and InterZone-Out</li></ol>\n\n<div class='note-box'>\n  <p><strong>Reality Check:</strong> You'll see how much data was transferred but not which instance talked to which.</p></div>"
                 },
                 {
                     "id": "method-2-cost-and-usage-report",
                     "title": "Method 2: Cost and Usage Report (CUR)",
-                    "content": "1. Enable CUR with resource IDs\n2. Dump to S3\n3. Query using Athena:\n\n```sql\nSELECT resourceId, usageAmount, availabilityZone\nFROM your_cur_table\nWHERE lineItemType = 'DataTransfer-InterZone-Out-Bytes';\n```\n\nNow you know which instance caused the charge, but not who received it."
+                    "content": "<ol class='numbered-steps'>\n  <li>Enable CUR with resource IDs</li>\n  <li>Dump to S3</li>\n  <li>Query using Athena:</li></ol>\n\n<pre class='blog-code'><code class='language-sql'>SELECT resourceId, usageAmount, availabilityZone\nFROM your_cur_table\nWHERE lineItemType = 'DataTransfer-InterZone-Out-Bytes';\n</code></pre>\n\n<div class='note-box'>\n  <p><strong>Insight:</strong> Now you know which instance caused the charge, but not who received it.</p></div>"
                 },
                 {
                     "id": "method-3-cloudwatch-metrics",
                     "title": "Method 3: CloudWatch Metrics",
-                    "content": "- Shows high upload/download patterns\n- Doesn't show destinations\n- Useful for spotting heavy traffic patterns"
+                    "content": "<ol class='numbered-steps'>\n  <li>Open CloudWatch in the AWS console</li>\n  <li>Navigate to the EC2 metrics section</li>\n  <li>Filter by NetworkIn and NetworkOut metrics</li>\n  <li>Group by instance and availability zone</li></ol>\n\n<div class='note-box'>\n  <p><strong>Benefits & Limitations:</strong></p>\n  <ul >    <li>Shows high upload/download patterns</li>\n    <li>Doesn't show destinations</li>\n    <li>Useful for spotting heavy traffic patterns</li>\n  </ul></div>"
                 },
                 {
                     "id": "method-4-vpc-flow-logs",
                     "title": "Method 4: VPC Flow Logs",
-                    "content": "1. Enable VPC Flow Logs\n2. Collect logs to CloudWatch or S3\n3. Filter for: srcaddr, dstaddr, bytes, action\n4. Map IPs to AZs\n\nNow you can see exactly who is communicating across AZs."
+                    "content": "<ol class='numbered-steps'>\n  <li>Enable VPC Flow Logs</li>\n  <li>Collect logs to CloudWatch or S3</li>\n  <li>Filter for: srcaddr, dstaddr, bytes, action</li>\n  <li>Map IPs to AZs</li></ol>\n\n<div class='note-box success-box'>\n  <p><strong>Success:</strong> Now you can see exactly who is communicating across AZs.</p></div>"
                 },
                 {
                     "id": "the-super-combo",
                     "title": "The Super Combo: CUR + VPC Flow Logs",
-                    "content": "- CUR → \"Instance A sent 1 TB\"\n- VPC Logs → \"To Instance B in a different AZ\"\n\nFull picture: who sent, who received, who to blame at the next architecture review."
+                    "content": "<div class='combo-box'>\n  <div class='combo-item'>\n    <div class='combo-title'>CUR</div>\n    <div class='combo-content'>\"Instance A sent 1 TB\"</div>\n  </div>\n  <div class='combo-plus'>+</div>\n  <div class='combo-item'>\n    <div class='combo-title'>VPC Logs</div>\n    <div class='combo-content'>\"To Instance B in a different AZ\"</div>\n  </div>\n  <div class='combo-equals'>=</div>\n  <div class='combo-result'>Full picture: who sent, who received, who to blame at the next architecture review.</div></div>"
                 },
                 {
                     "id": "real-world-scenario",
                     "title": "Real-World Scenario: CorpCloud Inc.",
-                    "content": "**Setup**\n\nCorpCloud runs a medium-scale SaaS application:\n\n- EC2 Instances (us-east-1a) → Hosts microservices and background jobs\n- RDS Database (us-east-1b) → Primary + cross-AZ read replica\n- Microservices → Spread across AZs; frequent API calls\n- Network Load Balancer → Balances traffic across AZs\n- S3 / Storage → Backups and logs accessed across AZs\n\n**Observations**\n\n- Inter-AZ traffic is constant due to microservices chatter and NLB\n- Costs appear under EC2 - Other—often overlooked\n- Heavy traffic can quickly escalate the monthly bill\n\n**Expanded Cost Breakdown**\n\nSource | Destination | Data Transfer | Rate | Cost\n--- | --- | --- | --- | ---\nEC2 → RDS replication | | 500 GB | $0.01/GB | $5\nMicroservices chatter | | 1,500 GB | $0.01/GB | $15\nNLB cross-AZ forwarding | | 400 GB | $0.01/GB | $4\nBackups & logs | | 100 GB | $0.01/GB | $1\nTotal | | 2,500 GB | - | $25\n\nProduction-scale traffic may easily multiply this 10x–20x."
+                    "content": "<div class='scenario-box'>\n  <h3>Setup</h3>\n  <p>CorpCloud runs a medium-scale SaaS application:</p>\n  <ul >    <li><strong>EC2 Instances</strong> (us-east-1a) → Hosts microservices and background jobs</li>\n    <li><strong>RDS Database</strong> (us-east-1b) → Primary + cross-AZ read replica</li>\n    <li><strong>Microservices</strong> → Spread across AZs; frequent API calls</li>\n    <li><strong>Network Load Balancer</strong> → Balances traffic across AZs</li>\n    <li><strong>S3 / Storage</strong> → Backups and logs accessed across AZs</li>\n  </ul>  <h3>Observations</h3>\n  <ul >    <li>Inter-AZ traffic is constant due to microservices chatter and NLB</li>\n    <li>Costs appear under EC2 - Other—often overlooked</li>\n    <li>Heavy traffic can quickly escalate the monthly bill</li>\n  </ul>  <h3>Expanded Cost Breakdown</h3>\n  <table class='blog-table'>\n    <thead>\n      <tr>\n        <th>Source</th>\n        <th>Destination</th>\n        <th>Data Transfer</th>\n        <th>Rate</th>\n        <th>Cost</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>EC2 → RDS replication</td>\n        <td>Cross-AZ data</td>\n        <td>500 GB</td>\n        <td>$0.01/GB</td>\n        <td>$5</td>\n      </tr>\n      <tr>\n        <td>Microservices chatter</td>\n        <td>Cross-AZ APIs</td>\n        <td>1,500 GB</td>\n        <td>$0.01/GB</td>\n        <td>$15</td>\n      </tr>\n      <tr>\n        <td>NLB cross-AZ forwarding</td>\n        <td>Load balancing</td>\n        <td>400 GB</td>\n        <td>$0.01/GB</td>\n        <td>$4</td>\n      </tr>\n      <tr>\n        <td>Backups & logs</td>\n        <td>Storage access</td>\n        <td>100 GB</td>\n        <td>$0.01/GB</td>\n        <td>$1</td>\n      </tr>\n      <tr class='total-row'>\n        <td>Total</td>\n        <td></td>\n        <td>2,500 GB</td>\n        <td>-</td>\n        <td>$25</td>\n      </tr>\n    </tbody>\n  </table>\n\n  <div class='alert-box'>\n    <p><i class=\"fa-solid fa-triangle-exclamation\"></i> <strong>Scale Warning:</strong> Production-scale traffic may easily multiply this 10x–20x.</p>\n  </div></div>"
                 },
                 {
                     "id": "fixing-the-madness",
                     "title": "Fixing the Madness",
-                    "content": "Action | Result\n--- | ---\nMove EC2 & RDS to the same AZ | Avoid cross-AZ replication charges\nUse AZ-specific load balancers | Reduces unnecessary traffic\nLocalize microservices by AZ | Stop microservices from yelling across neighborhoods\nMonitor with CUR + Flow Logs | Catch new cross-AZ traffic early"
+                    "content": "<table class='blog-table action-table'>\n  <thead>\n    <tr>\n      <th>Action</th>\n      <th>Result</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Move EC2 & RDS to the same AZ</td>\n      <td>Avoid cross-AZ replication charges</td>\n    </tr>\n    <tr>\n      <td>Use AZ-specific load balancers</td>\n      <td>Reduces unnecessary traffic</td>\n    </tr>\n    <tr>\n      <td>Localize microservices by AZ</td>\n      <td>Stop microservices from yelling across neighborhoods</td>\n    </tr>\n    <tr>\n      <td>Monitor with CUR + Flow Logs</td>\n      <td>Catch new cross-AZ traffic early</td>\n    </tr>\n  </tbody></table>"
                 },
                 {
                     "id": "tips-and-best-practices",
                     "title": "Tips and Best Practices",
-                    "content": "- **Set Budgets & Alerts** → Use AWS Cost Explorer to detect anomalies\n- **Tag Resources** → Helps track costs per service or team\n- **Right-Size Resources** → Avoid over-provisioning instances\n- **Continuous Monitoring** → Monthly audits to prevent bill shock"
+                    "content": "<div class='tips-container'>\n  <div class='tip-card'>\n    <div class='tip-icon'><i class='fa-solid fa-bell'></i></div>\n    <div class='tip-title'>Set Budgets & Alerts</div>\n    <div class='tip-content'>Use AWS Cost Explorer to detect anomalies</div>\n  </div>\n  \n  <div class='tip-card'>\n    <div class='tip-icon'><i class='fa-solid fa-tags'></i></div>\n    <div class='tip-title'>Tag Resources</div>\n    <div class='tip-content'>Helps track costs per service or team</div>\n  </div>\n  \n  <div class='tip-card'>\n    <div class='tip-icon'><i class='fa-solid fa-arrows-to-circle'></i></div>\n    <div class='tip-title'>Right-Size Resources</div>\n    <div class='tip-content'>Avoid over-provisioning instances</div>\n  </div>\n  \n  <div class='tip-card'>\n    <div class='tip-icon'><i class='fa-solid fa-chart-line'></i></div>\n    <div class='tip-title'>Continuous Monitoring</div>\n    <div class='tip-content'>Monthly audits to prevent bill shock</div>\n  </div></div>"
                 },
                 {
                     "id": "conclusion",
                     "title": "Conclusion",
-                    "content": "Inter-AZ traffic may seem cheap per GB, but it adds up silently. With CUR, VPC Flow Logs, and smart architecture planning, you can stop the hidden AWS charges from eating your budget.\n\nRemember: sometimes moving \"closer\" in the cloud saves real money—and sanity!"
+                    "content": "<blockquote class='blog-quote'>\n  <p>\"Understanding where your data flows in AWS is as important as understanding what the data is. Every packet that crosses an Availability Zone boundary costs you money, and in high-scale systems, these costs compound dramatically.\"</p>\n  <cite>— AWS Solutions Architect</cite></blockquote>\n\n<p>Inter-AZ traffic may seem cheap per GB, but it adds up silently. With CUR, VPC Flow Logs, and smart architecture planning, you can stop the hidden AWS charges from eating your budget.</p>\n\n<p>Remember: sometimes moving \"closer\" in the cloud saves real money—and sanity!</p>"
                 }
             ]
         }

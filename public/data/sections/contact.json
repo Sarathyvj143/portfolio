@@ -68,7 +68,7 @@
                     "id": 3,
                     "faIcon": "fa-brands fa-linkedin",
                     "faIconColors": { "bg": "", "fill": "" },
-                    "label": "@markchoi",
+                    "label": "@ParthaSarathy",
                     "link": {"href": "https://linkedin.com/in/", "tooltipString": "open_website"},
                     "locales": {
                         "en": {"title": "LinkedIn"}
@@ -78,7 +78,7 @@
                     "id": 4,
                     "faIcon": "fa-brands fa-facebook",
                     "faIconColors": { "bg": "", "fill": "" },
-                    "label": "Mark Choi",
+                    "label": "Partha Sarathy",
                     "link": {"href": "https://facebook.com/profiles/mark.choi.855/default", "tooltipString": "open_website"},
                     "locales": {
                         "en": {"title": "Facebook"}
@@ -98,8 +98,8 @@
                     "id": 6,
                     "faIcon": "fa-brands fa-tiktok",
                     "faIconColors": { "bg": "", "fill": "" },
-                    "label": "@markchoi",
-                    "link": {"href": "https://tiktok.com/@markchoi", "tooltipString": "open_website"},
+                    "label": "@ParthaSarathy",
+                    "link": {"href": "https://tiktok.com/@ParthaSarathy", "tooltipString": "open_website"},
                     "locales": {
                         "en": { "title": "TikTok" }
                     }
