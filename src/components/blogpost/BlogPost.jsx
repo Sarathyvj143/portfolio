@@ -4,6 +4,7 @@ import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 import {useNavigation} from "/src/providers/NavigationProvider.jsx"
 import {useData} from "/src/providers/DataProvider.jsx"
 import {useViewport} from "/src/providers/ViewportProvider.jsx"
+import {useLocation} from "/src/providers/LocationProvider.jsx"
 import TableOfContents from "/src/components/blogpost/TableOfContents.jsx"
 import Layout from "/src/components/layout/Layout.jsx"
 import NavHeaderMain from "/src/components/nav/partials/NavHeaderMain.jsx"
@@ -13,11 +14,23 @@ import {useUtils} from "/src/hooks/utils.js"
 function BlogPost({ blogId, onBack }) {
     const language = useLanguage()
     const navigation = useNavigation()
+    const location = useLocation()
     const data = useData()
     const viewport = useViewport()
     const utils = useUtils()
     const [blogPost, setBlogPost] = useState(null)
     const [loading, setLoading] = useState(true)
+    
+    // Effect to collapse sidebar when entering blog post
+    useEffect(() => {
+        // Dispatch event to collapse sidebar when blog post mounts
+        window.dispatchEvent(new CustomEvent('sidebar-state-change', { 
+            detail: { expanded: false }
+        }))
+        
+        // When component unmounts, we don't restore the state
+        // This will be handled by SidebarStateProvider based on the next section
+    }, [])
 
     useEffect(() => {
         console.log("BlogPost: useEffect triggered with blogId:", blogId);
@@ -113,6 +126,18 @@ function BlogPost({ blogId, onBack }) {
             navigation.navigateToSection("blog"); // Fallback to navigation provider
         }
     }
+    
+    // Function to toggle the main sidebar
+    const toggleMainSidebar = () => {
+        // Get current state from DOM since we don't have direct access to NavSidebar's state
+        const sidebar = document.querySelector('.nav-sidebar')
+        const isCurrentlyCollapsed = sidebar?.classList.contains('nav-sidebar-shrink')
+        
+        // Dispatch event to toggle sidebar
+        window.dispatchEvent(new CustomEvent('sidebar-state-change', { 
+            detail: { expanded: isCurrentlyCollapsed }
+        }))
+    }
 
     if (loading) {
         return (
@@ -190,6 +215,14 @@ function BlogPost({ blogId, onBack }) {
                                 className="resume-button"
                             >
                                 <i className="fa-solid fa-file-arrow-down"></i> Resume
+                            </button>
+                            
+                            <button 
+                                onClick={toggleMainSidebar} 
+                                className="toggle-sidebar-button"
+                                title="Toggle main navigation"
+                            >
+                                <i className="fa-solid fa-bars"></i> Toggle Navigation
                             </button>
                         </div>
                         

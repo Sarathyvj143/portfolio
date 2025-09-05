@@ -40,7 +40,8 @@
             margin-bottom: 2rem;
             
             .back-button, 
-            .resume-button {
+            .resume-button,
+            .toggle-sidebar-button {
                 background: var(--color-bg-alt);
                 border: none;
                 padding: 0.75rem 1rem;
@@ -67,6 +68,16 @@
             .resume-button {
                 background: var(--color-primary-light, rgba(var(--color-primary-rgb), 0.15));
                 color: var(--color-primary);
+                
+                &:hover {
+                    background: var(--color-primary);
+                    color: var(--color-bg);
+                }
+            }
+            
+            .toggle-sidebar-button {
+                background: var(--color-bg-alt);
+                margin-top: 0.5rem;
                 
                 &:hover {
                     background: var(--color-primary);

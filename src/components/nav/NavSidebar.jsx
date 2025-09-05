@@ -15,6 +15,20 @@ function NavSidebar({ profile, links }) {
     const input = useInput()
 
     const [expandedOption, setExpandedOption] = useState(true)
+    
+    // Listen for sidebar state change events from SidebarStateProvider
+    useEffect(() => {
+        const handleSidebarStateChange = (event) => {
+            const { expanded } = event.detail
+            setExpandedOption(expanded)
+        }
+        
+        window.addEventListener('sidebar-state-change', handleSidebarStateChange)
+        
+        return () => {
+            window.removeEventListener('sidebar-state-change', handleSidebarStateChange)
+        }
+    }, [])
 
     const shouldForceShrink = !viewport.isBreakpoint("lg")
     const expanded = !shouldForceShrink && expandedOption

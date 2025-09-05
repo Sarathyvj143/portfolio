@@ -13,6 +13,7 @@ import LocationProvider from "/src/providers/LocationProvider.jsx"
 import FeedbacksProvider from "/src/providers/FeedbacksProvider.jsx"
 import InputProvider from "/src/providers/InputProvider.jsx"
 import NavigationProvider from "/src/providers/NavigationProvider.jsx"
+import SidebarStateProvider from "/src/providers/SidebarStateProvider.jsx"
 import Portfolio from "/src/components/Portfolio.jsx"
 
 /** Initialization Script... **/
@@ -151,7 +152,9 @@ const AppCapabilitiesWrapper = ({ children }) => {
                                               categories={appCategories}>
                                 <NavigationProvider sections={appSections}
                                                     categories={appCategories}>
-                                    {children}
+                                    <SidebarStateProvider>
+                                        {children}
+                                    </SidebarStateProvider>
                                 </NavigationProvider>
                             </LocationProvider>
                         </ThemeProvider>
