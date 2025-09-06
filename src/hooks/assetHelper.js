@@ -17,7 +17,7 @@ export function getBaseUrl() {
     
     // For GitHub Pages, we need to use the repository name as the base path
     // This should match the 'base' value in vite.config.js
-    return '/react-portfolio-template';
+    return '/portfolio';
 }
 
 /**
@@ -78,5 +78,6 @@ export function createSpaUrl(path, params = {}) {
         spaUrl += `?${queryString}`;
     }
     
+    console.log(`SPA URL helper: converted ${path} to ${spaUrl}`);
     return spaUrl;
 }

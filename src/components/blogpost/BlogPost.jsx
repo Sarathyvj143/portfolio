@@ -6,7 +6,7 @@ import {useData} from "/src/providers/DataProvider.jsx"
 import {useViewport} from "/src/providers/ViewportProvider.jsx"
 import {useLocation} from "/src/providers/LocationProvider.jsx"
 import TableOfContents from "/src/components/blogpost/TableOfContents.jsx"
-import { getAssetUrl, isGitHubPages } from "/src/hooks/assetHelper.js"
+import { getAssetUrl, isGitHubPages, getBaseUrl } from "/src/hooks/assetHelper.js"
 import {useUtils} from "/src/hooks/utils.js"
 
 function BlogPost({ blogId, onBack }) {
@@ -265,15 +265,55 @@ function BlogPost({ blogId, onBack }) {
                     </div>
                     
                     <div className="blog-post-content">
-                        {content && content.sections && content.sections.map((section, index) => (
-                            <section key={section.id || index} id={section.id} className="blog-post-section">
-                                <h2 className="blog-post-section-title">{section.title}</h2>
-                                <div 
-                                    className="blog-post-section-content"
-                                    dangerouslySetInnerHTML={{ __html: section.content }}
-                                ></div>
-                            </section>
-                        ))}
+                        {content && content.sections && content.sections.map((section, index) => {
+                            // Process content to fix image paths
+                            let processedContent = section.content;
+                            if (processedContent) {
+                                // Create a temporary div to parse HTML
+                                const tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = processedContent;
+                                
+                                // Fix image paths
+                                const images = tempDiv.querySelectorAll('img');
+                                images.forEach(img => {
+                                    if (img.src && img.getAttribute('src').startsWith('/')) {
+                                        // Get current base URL from our helper
+                                        const baseUrl = getBaseUrl();
+                                        // Update src attribute with the correct base path
+                                        const originalSrc = img.getAttribute('src');
+                                        img.setAttribute('src', `${baseUrl}${originalSrc}`);
+                                        console.log(`Adjusted image path: ${originalSrc} → ${baseUrl}${originalSrc}`);
+                                    }
+                                });
+                                
+                                // Get the updated HTML
+                                processedContent = tempDiv.innerHTML;
+                            }
+                            
+                            return (
+                                <section key={section.id || index} id={section.id} className="blog-post-section">
+                                    <h2 className="blog-post-section-title">{section.title}</h2>
+                                    <div 
+                                        className="blog-post-section-content"
+                                        dangerouslySetInnerHTML={{ __html: processedContent }}
+                                        ref={(el) => {
+                                            // Log any image loading errors
+                                            if (el) {
+                                                const images = el.querySelectorAll('img');
+                                                images.forEach(img => {
+                                                    img.addEventListener('error', (e) => {
+                                                        console.error(`Image failed to load: ${img.src}`, e);
+                                                    });
+                                                    img.addEventListener('load', () => {
+                                                        console.log(`Image loaded successfully: ${img.src}`);
+                                                    });
+                                                });
+                                            }
+                                        }}
+                                    ></div>
+                                </section>
+                            );
+                        })}
                     </div>
                 </main>
                 
