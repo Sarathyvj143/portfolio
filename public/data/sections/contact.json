@@ -27,7 +27,7 @@
                     "title": "Send me a {{message}}",
                     "phone": "8072381162",
                     "email": "Sarathyvj007@gmail.com",
-                    "address": "Cuddlore, Tamil Nadu"
+                    "address": "Cuddalore, Tamil Nadu"
                 }
             },
             "items": null
@@ -69,7 +69,7 @@
                     "faIcon": "fa-brands fa-linkedin",
                     "faIconColors": { "bg": "", "fill": "" },
                     "label": "@ParthaSarathy",
-                    "link": {"href": "https://linkedin.com/in/", "tooltipString": "open_website"},
+                    "link": {"href": "www.linkedin.com/in/parthasarthy-r-a67847203", "tooltipString": "open_website"},
                     "locales": {
                         "en": {"title": "LinkedIn"}
                     }
@@ -79,7 +79,7 @@
                     "faIcon": "fa-brands fa-facebook",
                     "faIconColors": { "bg": "", "fill": "" },
                     "label": "Partha Sarathy",
-                    "link": {"href": "https://facebook.com/profiles/mark.choi.855/default", "tooltipString": "open_website"},
+                    "link": {"href": "https://facebook.com/profiles/parthasarathy/default", "tooltipString": "open_website"},
                     "locales": {
                         "en": {"title": "Facebook"}
                     }
@@ -88,7 +88,7 @@
                     "id": 5,
                     "faIcon": "fa-brands fa-instagram",
                     "faIconColors": { "bg": "", "fill": "" },
-                    "label": "@codingmark",
+                    "label": "@sarathyvj007",
                     "link": {"href": "https://instagram.com/", "tooltipString": "open_website"},
                     "locales": {
                         "en": {"title": "Instagram"}

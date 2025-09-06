@@ -25,12 +25,6 @@
             "faIcon": "fa-solid fa-briefcase"
         },
         {
-            "id": "portfolio",
-            "categoryId": "showcase",
-            "jsonPath": "/data/sections/portfolio.json",
-            "faIcon": "fa-solid fa-folder-open"
-        },
-        {
             "id": "achievements",
             "categoryId": "showcase",
             "jsonPath": "/data/sections/achievements.json",
@@ -41,12 +35,6 @@
             "categoryId": "showcase",
             "jsonPath": "/data/sections/blog.json",
             "faIcon": "fa-solid fa-blog"
-        },
-        {
-            "id": "updates",
-            "categoryId": "more",
-            "jsonPath": "/data/sections/updates.json",
-            "faIcon": "fa-solid fa-rss"
         },
         {
             "id": "contact",
