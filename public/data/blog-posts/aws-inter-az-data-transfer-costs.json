@@ -42,7 +42,7 @@
                 {
                     "id": "az-diagram",
                     "title": "Understanding AWS AZs Visually",
-                    "content": "<div class='blog-image-container'>\n  <img src='/images/blog/aws-az-diagram.png' alt='AWS Availability Zones Diagram' class='blog-image' />\n  <p class='blog-image-caption'>Fig 1: Visual representation of inter-AZ data transfer costs</p></div>\n\n<p>The diagram above illustrates how data moves between different availability zones and the associated costs. When services in different AZs communicate, you pay for that traffic even within the same region.</p>"
+                    "content": "<div class='blog-image-container'>\n  <img src='/images/blog/aws-az-diagram.svg' alt='AWS Availability Zones Diagram' class='blog-image' />\n  <p class='blog-image-caption'>Fig 1: Visual representation of inter-AZ data transfer costs</p></div>\n\n<p>The diagram above illustrates how data moves between different availability zones and the associated costs. When services in different AZs communicate, you pay for that traffic even within the same region.</p>"
                 },
                 {
                     "id": "how-to-detect-inter-az-charges",
