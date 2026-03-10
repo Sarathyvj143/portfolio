@@ -69,39 +69,19 @@
                     "faIcon": "fa-brands fa-linkedin",
                     "faIconColors": { "bg": "", "fill": "" },
                     "label": "@ParthaSarathy",
-                    "link": {"href": "www.linkedin.com/in/parthasarthy-r-a67847203", "tooltipString": "open_website"},
+                    "link": {"href": "https://www.linkedin.com/in/parthasarthy-r-a67847203", "tooltipString": "open_website"},
                     "locales": {
                         "en": {"title": "LinkedIn"}
                     }
                 },
                 {
                     "id": 4,
-                    "faIcon": "fa-brands fa-facebook",
+                    "faIcon": "fa-brands fa-github",
                     "faIconColors": { "bg": "", "fill": "" },
-                    "label": "Partha Sarathy",
-                    "link": {"href": "https://facebook.com/profiles/parthasarathy/default", "tooltipString": "open_website"},
+                    "label": "@Sarathyvj143",
+                    "link": {"href": "https://github.com/Sarathyvj143", "tooltipString": "see_on_github"},
                     "locales": {
-                        "en": {"title": "Facebook"}
-                    }
-                },
-                {
-                    "id": 5,
-                    "faIcon": "fa-brands fa-instagram",
-                    "faIconColors": { "bg": "", "fill": "" },
-                    "label": "@sarathyvj007",
-                    "link": {"href": "https://instagram.com/", "tooltipString": "open_website"},
-                    "locales": {
-                        "en": {"title": "Instagram"}
-                    }
-                },
-                {
-                    "id": 6,
-                    "faIcon": "fa-brands fa-tiktok",
-                    "faIconColors": { "bg": "", "fill": "" },
-                    "label": "@ParthaSarathy",
-                    "link": {"href": "https://tiktok.com/@ParthaSarathy", "tooltipString": "open_website"},
-                    "locales": {
-                        "en": { "title": "TikTok" }
+                        "en": {"title": "GitHub"}
                     }
                 }
             ]

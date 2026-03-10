@@ -22,35 +22,33 @@
       "items": [
         {
           "id": 1,
-          "img": "images/pictures/timeline-place-purpledata.png",
+          "img": "",
           "faIcon": "fa-brands fa-python",
           "faIconColors": { "bg": "#FFD43B", "fill": "#306998" },
           "dateStart": { "year": 2024, "month": 1 },
           "dateEnd": { "now": true },
           "locales": {
             "en": {
-              "title": "{{Python Developer}}",
+              "title": "{{Python Backend Developer}}",
               "province": "Bangalore, Karnataka",
               "country": "India",
               "institution": "Purple Data Technologies",
-              "text": "Spearheading the complete Flask application lifecycle from API development to deployment, with a focus on cloud data workflows and observability.",
+              "text": "Architecting and deploying a comprehensive Flask application with 100+ REST API endpoints for multi-cloud cost optimization across AWS, GCP, and Azure.",
               "list": [
-                "Designed and implemented backend workflows for inventory and cost data collection across AWS, GCP, and Azure.",
-                "Created robust APIs for processing and serving cloud data to enable efficient visualization.",
-                "Built dynamic front-end interfaces integrated with Flask for seamless user experience.",
-                "Developed scalable database structures for optimized data storage and retrieval.",
-                "Delivered actionable insights for cost optimization, governance, and security via dashboards.",
-                "Led deployments ensuring high availability and reliability of Flask applications.",
-                "Automated workflows providing cost-saving and security governance recommendations.",
-                "Utilized Flask, Python, MySQL, AWS, GCP, and Azure in an integrated solution."
+                "Built backend data collection pipelines processing 20–30 lakh records from multiple cloud platforms, enabling real-time inventory and cost data observability.",
+                "Designed and maintained 40+ MySQL database tables with optimized indexing and relationships, supporting scalable data storage and high-performance retrieval.",
+                "Created interactive dashboards (Power BI / Flask frontend) delivering actionable insights for cost optimization, governance, and security across cloud environments.",
+                "Implemented Redis caching layer to improve API response performance and reduce database load on high-traffic endpoints.",
+                "Automated cloud data collection and reporting workflows, achieving 30% faster processing compared to previous manual flows.",
+                "Managed Docker-based deployments and CI/CD pipelines using GitHub Actions and Azure DevOps, ensuring consistent releases across staging and production."
               ],
-              "tags": ["Python", "Flask", "MySQL", "AWS", "GCP", "Azure", "APIs", "Data Visualization"]
+              "tags": ["Python", "Flask", "MySQL", "Redis", "Docker", "AWS", "GCP", "Azure", "CI/CD", "Power BI"]
             }
           }
         },
         {
           "id": 2,
-          "img": "images/pictures/timeline-place-prominance.png",
+          "img": "",
           "faIcon": "fa-solid fa-industry",
           "faIconColors": { "bg": "#444", "fill": "#EEE" },
           "dateStart": { "year": 2023, "month": 4 },
@@ -60,14 +58,12 @@
               "title": "Production Planning {{Intern}}",
               "province": "Coimbatore, Tamil Nadu",
               "country": "India",
-              "institution": "Prominance - uPVC Windows & Doors",
-              "text": "Contributed to production and inventory planning processes to improve efficiency and warehouse operations.",
+              "institution": "Prominance (uPVC Windows and Doors)",
+              "text": "Optimized production scheduling and warehouse dispatch logistics using data-driven planning.",
               "list": [
-                "Led production planning strategies to optimize manufacturing workflows.",
-                "Executed dispatch schedules ensuring timely deliveries.",
-                "Streamlined inventory management for warehouse operations."
+                "Optimized production scheduling and warehouse dispatch logistics using data-driven planning, achieving 30% faster delivery timelines compared to manual processes."
               ],
-              "tags": ["Production Planning", "Process Optimization", "Inventory Management"]
+              "tags": ["Production Planning", "Data-Driven Optimization", "Logistics"]
             }
           }
         }
