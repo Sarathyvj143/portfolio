@@ -18,6 +18,9 @@ function BlogPost({ blogId, onBack }) {
     const utils = useUtils()
     const [blogPost, setBlogPost] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [showMobileToc, setShowMobileToc] = useState(false)
+
+    const isMobile = viewport.isMobileLayout()
     
     // Effect to collapse sidebar when entering blog post
     useEffect(() => {
@@ -193,45 +196,36 @@ function BlogPost({ blogId, onBack }) {
 
     return (
         <div className="blog-post-container">
-            {/* Header Navbar */}
-            {/* <header className="blog-post-header-nav">
-                <NavHeaderMain activeHref="#blog" />
-            </header> */}
-            
+            {/* Mobile Header Bar with Back button */}
+            {isMobile && (
+                <div className="blog-post-mobile-header">
+                    <button onClick={handleBackToBlog} className="blog-post-mobile-back">
+                        <i className="fa-solid fa-arrow-left"></i> Back to Blog
+                    </button>
+                </div>
+            )}
+
             {/* Main Content Area */}
             <div className="blog-post-wrapper">
-                {/* Table of Contents Sidebar (20%) */}
-                <aside className="blog-post-toc">
-                    <div className="blog-post-toc-inner">
-                        <div className="blog-post-action-buttons">
-                            <button onClick={handleBackToBlog} className="back-button">
-                                ← Back to Blog
-                            </button>
-                            
-                            {/* <button 
-                                onClick={() => utils.file.download(getAssetUrl("/documents/Partha_Sarathy_R_Software_Developer.pdf"))} 
-                                className="resume-button"
-                            >
-                                <i className="fa-solid fa-file-arrow-down"></i> Resume
-                            </button> */}
-                            
-                            {/* <button 
-                                onClick={toggleMainSidebar} 
-                                className="toggle-sidebar-button"
-                                title="Toggle main navigation"
-                            >
-                                <i className="fa-solid fa-bars"></i> Toggle Navigation
-                            </button> */}
+                {/* Table of Contents Sidebar - desktop only */}
+                {!isMobile && (
+                    <aside className="blog-post-toc">
+                        <div className="blog-post-toc-inner">
+                            <div className="blog-post-action-buttons">
+                                <button onClick={handleBackToBlog} className="back-button">
+                                    ← Back to Blog
+                                </button>
+                            </div>
+
+                            <TableOfContents
+                                sections={content?.sections || []}
+                                title="Table of Contents"
+                            />
                         </div>
-                        
-                        <TableOfContents 
-                            sections={content?.sections || []}
-                            title="Table of Contents"
-                        />
-                    </div>
-                </aside>
-                
-                {/* Main Content (80%) */}
+                    </aside>
+                )}
+
+                {/* Main Content */}
                 <main className="blog-post">
                     <div className="blog-post-header">
                         <div className="blog-post-meta">
@@ -245,14 +239,12 @@ function BlogPost({ blogId, onBack }) {
                                 <span className="blog-post-author">By {author}</span>
                             )}
                         </div>
-                        
+
                         <h1 className="blog-post-title">{title}</h1>
                         {description && (
                             <p className="blog-post-description">{description}</p>
                         )}
-                        
-                        {/* Removed image container to create more space for content */}
-                        
+
                         {tags.length > 0 && (
                             <div className="blog-post-tags">
                                 {tags.map((tag, index) => (
@@ -263,49 +255,39 @@ function BlogPost({ blogId, onBack }) {
                             </div>
                         )}
                     </div>
-                    
+
                     <div className="blog-post-content">
                         {content && content.sections && content.sections.map((section, index) => {
                             // Process content to fix image paths
                             let processedContent = section.content;
                             if (processedContent) {
-                                // Create a temporary div to parse HTML
                                 const tempDiv = document.createElement('div');
                                 tempDiv.innerHTML = processedContent;
-                                
-                                // Fix image paths
+
                                 const images = tempDiv.querySelectorAll('img');
                                 images.forEach(img => {
                                     if (img.src && img.getAttribute('src').startsWith('/')) {
-                                        // Get current base URL from our helper
                                         const baseUrl = getBaseUrl();
-                                        // Update src attribute with the correct base path
                                         const originalSrc = img.getAttribute('src');
                                         img.setAttribute('src', `${baseUrl}${originalSrc}`);
-                                        console.log(`Adjusted image path: ${originalSrc} → ${baseUrl}${originalSrc}`);
                                     }
                                 });
-                                
-                                // Get the updated HTML
+
                                 processedContent = tempDiv.innerHTML;
                             }
-                            
+
                             return (
                                 <section key={section.id || index} id={section.id} className="blog-post-section">
                                     <h2 className="blog-post-section-title">{section.title}</h2>
-                                    <div 
+                                    <div
                                         className="blog-post-section-content"
                                         dangerouslySetInnerHTML={{ __html: processedContent }}
                                         ref={(el) => {
-                                            // Log any image loading errors
                                             if (el) {
                                                 const images = el.querySelectorAll('img');
                                                 images.forEach(img => {
                                                     img.addEventListener('error', (e) => {
                                                         console.error(`Image failed to load: ${img.src}`, e);
-                                                    });
-                                                    img.addEventListener('load', () => {
-                                                        console.log(`Image loaded successfully: ${img.src}`);
                                                     });
                                                 });
                                             }
@@ -316,65 +298,40 @@ function BlogPost({ blogId, onBack }) {
                         })}
                     </div>
                 </main>
-                
-                {/* Mobile TOC Button */}
-                {viewport.width <= 768 && (
-                    <button 
+
+                {/* Mobile TOC Button - React-based modal */}
+                {isMobile && (
+                    <button
                         className="blog-post-mobile-toc"
-                        onClick={() => {
-                            // Create a modal for TOC on mobile
-                            const modal = document.createElement('div');
-                            modal.style.position = 'fixed';
-                            modal.style.top = '0';
-                            modal.style.left = '0';
-                            modal.style.width = '100%';
-                            modal.style.height = '100%';
-                            modal.style.background = 'var(--color-bg)';
-                            modal.style.zIndex = '1000';
-                            modal.style.padding = '20px';
-                            modal.style.overflow = 'auto';
-                            
-                            // Add close button
-                            const closeBtn = document.createElement('button');
-                            closeBtn.innerHTML = '&times;';
-                            closeBtn.style.position = 'absolute';
-                            closeBtn.style.top = '10px';
-                            closeBtn.style.right = '10px';
-                            closeBtn.style.background = 'none';
-                            closeBtn.style.border = 'none';
-                            closeBtn.style.fontSize = '24px';
-                            closeBtn.style.color = 'var(--color-text)';
-                            closeBtn.style.cursor = 'pointer';
-                            closeBtn.onclick = () => document.body.removeChild(modal);
-                            
-                            // Clone the TOC
-                            const tocClone = document.querySelector('.blog-post-toc-inner').cloneNode(true);
-                            
-                            // Add the title
-                            const title = document.createElement('h2');
-                            title.textContent = 'Table of Contents';
-                            title.style.marginBottom = '20px';
-                            
-                            modal.appendChild(closeBtn);
-                            modal.appendChild(title);
-                            modal.appendChild(tocClone);
-                            
-                            // Add event listeners to all links in the cloned TOC
-                            const links = tocClone.querySelectorAll('.toc-link');
-                            links.forEach(link => {
-                                link.addEventListener('click', (e) => {
-                                    // Remove modal when a link is clicked
-                                    document.body.removeChild(modal);
-                                });
-                            });
-                            
-                            document.body.appendChild(modal);
-                        }}
+                        onClick={() => setShowMobileToc(true)}
                     >
                         <i className="fa-solid fa-list"></i>
                     </button>
                 )}
             </div>
+
+            {/* Mobile TOC Modal */}
+            {isMobile && showMobileToc && (
+                <div className="blog-post-mobile-toc-modal" onClick={() => setShowMobileToc(false)}>
+                    <div className="blog-post-mobile-toc-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="blog-post-mobile-toc-header">
+                            <h3>Table of Contents</h3>
+                            <button
+                                className="blog-post-mobile-toc-close"
+                                onClick={() => setShowMobileToc(false)}
+                            >
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div onClick={() => setShowMobileToc(false)}>
+                            <TableOfContents
+                                sections={content?.sections || []}
+                                title=""
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
