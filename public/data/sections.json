@@ -31,6 +31,12 @@
             "faIcon": "fa-solid fa-award"
         },
         {
+            "id": "portfolio",
+            "categoryId": "showcase",
+            "jsonPath": "/data/sections/portfolio.json",
+            "faIcon": "fa-solid fa-laptop-code"
+        },
+        {
             "id": "blog",
             "categoryId": "showcase",
             "jsonPath": "/data/sections/blog.json",
