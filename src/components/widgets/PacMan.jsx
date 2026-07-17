@@ -6,7 +6,7 @@ function PacMan({ className = "", color = "pacman-color-variant-loader", hidden 
         `pacman-wrapper-hidden` : ``
 
     return (
-        <div className={`pacman-wrapper ${className} ${hiddenClass}`}>
+        <div className={`pacman-wrapper ${className} ${hiddenClass}`} aria-hidden={`true`}>
             <div className={`pacman ${color}`}>
                 <div className={`pacman-content`}>
                     <div>

@@ -8,8 +8,15 @@
 
     "preloaderSettings": {
         "enabled": true,
-        "title": "React <strong>Portfolio</strong>",
-        "subtitle": "by Parthasarathy",
+        "title": "Partha <strong>Sarathy R</strong>",
+        "subtitle": "Python Backend Developer",
+        "loadingMessages": [
+            "Spinning up 100+ APIs…",
+            "Optimizing cloud costs…",
+            "Brewing coffee for the servers ☕",
+            "Waking up the backend…",
+            "Chomp chomp — almost there!"
+        ],
         "logoOffset": {
             "right": 14,
             "top": 2,

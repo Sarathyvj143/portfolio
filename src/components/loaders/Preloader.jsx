@@ -1,6 +1,6 @@
 import "./Preloader.scss"
 import React, {useEffect, useState} from 'react'
-import PacMan from "/src/components/widgets/PacMan.jsx"
+import NetworkMesh from "/src/components/widgets/NetworkMesh.jsx"
 import Logo from "/src/components/widgets/Logo.jsx"
 import {useScheduler} from "/src/hooks/scheduler.js"
 import {useUtils} from "/src/hooks/utils.js"
@@ -24,6 +24,7 @@ function Preloader({ children, preloaderSettings }) {
     const enabled = preloaderSettings?.enabled
     const title = preloaderSettings?.title || ""
     const subtitle = preloaderSettings?.subtitle || ""
+    const loadingMessages = preloaderSettings?.loadingMessages || []
     const logoOffset = preloaderSettings?.logoOffset || {}
 
     const [state, setState] = useState(PreloaderState.NONE)
@@ -140,6 +141,7 @@ function Preloader({ children, preloaderSettings }) {
             {shouldShowPreloaderWindow && (
                 <PreloaderWindow title={title}
                                  subtitle={subtitle}
+                                 loadingMessages={loadingMessages}
                                  logoOffset={logoOffset}
                                  setDidLoadAllImages={setDidLoadAllImages}
                                  showElements={shouldShowContentElements}
@@ -153,12 +155,8 @@ function Preloader({ children, preloaderSettings }) {
     )
 }
 
-function PreloaderWindow({ title, subtitle, logoOffset, setDidLoadAllImages, showElements, isHiding }) {
-    const scheduler = useScheduler()
-
+function PreloaderWindow({ title, subtitle, loadingMessages, logoOffset, setDidLoadAllImages, showElements, isHiding }) {
     const [didLoadLogo, setDidLoadLogo] = useState(false)
-
-    const [isPacManHidden, setIsPacManHidden] = useState(true)
 
     const hiddenClass = isHiding ?
         `preloader-window-hidden` : ``
@@ -168,26 +166,18 @@ function PreloaderWindow({ title, subtitle, logoOffset, setDidLoadAllImages, sho
             setDidLoadAllImages(true)
     }, [didLoadLogo])
 
-    useEffect(() => {
-        if(!showElements) {
-            setIsPacManHidden(true)
-            return
-        }
-
-        scheduler.clearAllWithTag("preloader-pacman")
-        scheduler.schedule(() => {
-            setIsPacManHidden(false)
-        }, 100, "preloader-pacman")
-    }, [showElements])
-
     return (
-        <div className={`preloader-window ${hiddenClass}`}>
-            <div className={`preloader-window-content`}>
-                <PacMan variant={PacMan.ColorVariants.LOADER}
-                        hidden={isPacManHidden}/>
+        <div className={`preloader-window ${hiddenClass}`}
+             role={`status`}
+             aria-live={`polite`}
+             aria-busy={!isHiding}
+             aria-label={`Loading portfolio`}>
+            <NetworkMesh/>
 
+            <div className={`preloader-window-content`}>
                 <PreloaderWindowInfo title={title}
                                      subtitle={subtitle}
+                                     loadingMessages={loadingMessages}
                                      logoOffset={logoOffset}
                                      hidden={!showElements}
                                      setDidLoadLogo={setDidLoadLogo}/>
@@ -196,7 +186,7 @@ function PreloaderWindow({ title, subtitle, logoOffset, setDidLoadAllImages, sho
     )
 }
 
-function PreloaderWindowInfo({ title, subtitle, logoOffset, hidden, setDidLoadLogo }) {
+function PreloaderWindowInfo({ title, subtitle, loadingMessages, logoOffset, hidden, setDidLoadLogo }) {
     const utils = useUtils()
     const scheduler = useScheduler()
 
@@ -273,6 +263,41 @@ function PreloaderWindowInfo({ title, subtitle, logoOffset, hidden, setDidLoadLo
                  style={developerStyle}
                  dangerouslySetInnerHTML={{__html: subtitle}}>
             </div>
+
+            <PreloaderLoadingMessage messages={loadingMessages}
+                                     hidden={hidden}/>
+        </div>
+    )
+}
+
+function PreloaderLoadingMessage({ messages, hidden }) {
+    const scheduler = useScheduler()
+    const [index, setIndex] = useState(0)
+
+    const tag = "preloader-loading-message"
+    const rotationMs = 1600
+
+    useEffect(() => {
+        if(hidden || !messages || messages.length <= 1)
+            return
+
+        scheduler.clearAllWithTag(tag)
+        scheduler.interval(() => {
+            setIndex(prev => (prev + 1) % messages.length)
+        }, rotationMs, tag)
+
+        return () => scheduler.clearAllWithTag(tag)
+    }, [hidden, messages.length])
+
+    if(!messages || messages.length === 0)
+        return null
+
+    return (
+        <div className={`preloader-window-info-status text-5`}
+             aria-live={`polite`}>
+            <span key={index} className={`preloader-window-info-status-text`}>
+                {messages[index]}
+            </span>
         </div>
     )
 }
