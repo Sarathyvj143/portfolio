@@ -46,7 +46,8 @@ function NavSidebar({ profile, links }) {
     }, [input.lastKeyPressed])
 
     return (
-        <nav className={`nav-sidebar ${constants.HTML_CLASSES.scrollbarDecorator} ${shrinkClass}`}>
+        <nav className={`nav-sidebar ${constants.HTML_CLASSES.scrollbarDecorator} ${shrinkClass}`}
+             aria-label={`Primary`}>
             <Card className={`nav-sidebar-card-wrapper`}>
                 {!shouldForceShrink && (
                     <NavToolShrinkToggle expanded={expandedOption}
