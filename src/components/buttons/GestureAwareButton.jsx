@@ -1,7 +1,7 @@
 import "./GestureAwareButton.scss"
 import React, {useEffect, useState} from 'react'
 
-function GestureAwareButton({ children, className = "", onClick = null, tooltip = "", disabled = false, hrefToolTip = null }) {
+function GestureAwareButton({ children, className = "", onClick = null, tooltip = "", disabled = false, hrefToolTip = null, ariaLabel = null, ariaCurrent = null }) {
     const [isTouched, setIsTouched] = useState(false)
     const [dispatchClickAt, setDispatchClickAt] = useState(0)
 
@@ -44,6 +44,8 @@ function GestureAwareButton({ children, className = "", onClick = null, tooltip 
             data-tooltip={tooltip}
             type={`button`}
             href={hrefToolTip}
+            aria-label={ariaLabel || undefined}
+            aria-current={ariaCurrent || undefined}
             onTouchStart={_onTouchStart}
             onTouchMove={_onTouchMove}
             onTouchEnd={_onTouchEnd}

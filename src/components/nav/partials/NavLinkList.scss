@@ -12,31 +12,57 @@ nav.nav-link-list {
 }
 
 a.nav-link {
+    position: relative;
     display: flex;
     align-items: center;
 
+    // Distribute available vertical space across items (replaces the old
+    // imperative JS height-measuring effect): grow to fill, cap at 52px,
+    // never shrink below a comfortable tap target.
+    flex: 1 1 auto;
+    min-height: 39px;
+    max-height: 52px;
+
     direction: ltr;
     border-top: 1px solid var(--theme-standard-borders);
-    transition: none!important;
-    min-height: 39px;
-
     padding: 0 5px;
+
+    transition: background-color 0.16s ease, color 0.16s ease;
+
+    // Left accent indicator — scales in on hover, full on active.
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--theme-primary);
+        transform: scaleY(0);
+        transform-origin: center;
+        transition: transform 0.18s ease;
+    }
 
     i {
         font-size: 1.15rem;
         min-width: 60px;
         opacity: 0.3;
         text-align: center;
-        transition: 0.2s scale ease-in-out;
+        transition: color 0.16s ease, opacity 0.16s ease, scale 0.16s ease-in-out;
     }
 
     span {
         opacity: 0.8;
+        transition: color 0.16s ease, opacity 0.16s ease;
     }
 }
 
 a.nav-link:hover {
     background-color: var(--theme-card-background-accent);
+
+    &::before {
+        transform: scaleY(0.55);
+    }
 
     i {
         color: var(--theme-primary);
@@ -50,21 +76,32 @@ a.nav-link:hover {
     }
 }
 
+a.nav-link:focus-visible {
+    outline: 2px solid var(--theme-primary);
+    outline-offset: -2px;
+}
+
 a.nav-link-active {
-    background-color: var(--theme-primary)!important;
-    border-top-color: var(--theme-primary);
+    background-color: var(--theme-card-background-accent); // fallback for older browsers
+    background-color: color-mix(in srgb, var(--theme-primary) 14%, transparent);
+    border-top-color: transparent;
     user-select: none;
     pointer-events: none;
 
+    &::before {
+        transform: scaleY(1);
+    }
+
     i {
-        color: var(--theme-texts-inv)!important;
-        opacity: 0.9;
-        scale: 1.1!important;
+        color: var(--theme-primary) !important;
+        opacity: 1;
+        scale: 1.1;
     }
 
     span {
-        color: var(--theme-texts-inv)!important;
+        color: var(--theme-primary) !important;
         opacity: 1;
+        font-weight: 600;
     }
 }
 
@@ -79,5 +116,14 @@ nav.nav-link-list-shrink {
             pointer-events: none;
             width: 100%;
         }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    a.nav-link,
+    a.nav-link::before,
+    a.nav-link i,
+    a.nav-link span {
+        transition: none;
     }
 }

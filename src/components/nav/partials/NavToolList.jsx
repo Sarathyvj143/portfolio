@@ -17,7 +17,10 @@ function NavToolList({ expanded }) {
     const data = useData()
 
     const profile = data.getProfile()
-    const maxWidgets = expanded ? 4 : 2
+    // Collapsed sidebar stacks tools vertically (see .nav-tools-shrink), so we
+    // can surface up to 3 as direct icons — keeps the résumé download visible
+    // instead of buried in the "⋯" overflow menu.
+    const maxWidgets = expanded ? 4 : 3
 
     const shrinkClass = expanded ?
         `` :

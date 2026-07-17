@@ -1,36 +1,13 @@
 import "./NavLinkList.scss"
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import Nav from "/src/components/nav/base/Nav.jsx"
 import GestureAwareButton from "/src/components/buttons/GestureAwareButton.jsx"
-import {useViewport} from "/src/providers/ViewportProvider.jsx"
-import {useUtils} from "/src/hooks/utils.js"
 
 function NavLinkList({ links, expanded }) {
-    const viewport = useViewport()
-    const utils = useUtils()
-
     const data = {expanded}
     const shrinkClass = expanded ?
         `` :
         `nav-link-list-shrink`
-
-    useEffect(() => {
-        const navLinkList = document.querySelector(`.nav-link-list`)
-        const navLinks = document.querySelectorAll(`.nav-link-list .nav-link`)
-
-        const totalHeight = navLinkList?.clientHeight - 10
-        const amountOfItems = navLinks?.length || 0
-        if(!totalHeight || !amountOfItems)
-            return
-
-        const targetItemHeight = utils.number.clamp(Math.floor(totalHeight / amountOfItems), 39, 52)
-        navLinks.forEach((link) => {
-            const currentHeight = link.clientHeight
-            if(currentHeight !== targetItemHeight) {
-                link.style.height = `${targetItemHeight}px`
-            }
-        })
-    }, [null, viewport.innerHeight, expanded])
 
     return (
         <Nav links={links}
@@ -49,12 +26,18 @@ function NavLink({ link, active, data, onClick }) {
         null :
         link.label
 
+    // Plain-text name for assistive tech — the visible label may be hidden
+    // (collapsed mode) or contain markup, and the icon is decorative.
+    const accessibleLabel = (link.label || "").replace(/<[^>]*>/g, "")
+
     return (
         <GestureAwareButton className={`nav-link ${activeClass}`}
                             hrefToolTip={link.href}
                             tooltip={tooltip}
+                            ariaLabel={accessibleLabel}
+                            ariaCurrent={active ? "page" : null}
                             onClick={onClick}>
-            <i className={`${link.faIcon}`}/>
+            <i className={`${link.faIcon}`} aria-hidden={`true`}/>
             <span dangerouslySetInnerHTML={{__html: link.label}}/>
         </GestureAwareButton>
     )

@@ -4,6 +4,7 @@ import {Card} from "react-bootstrap"
 import NavProfileCard from "/src/components/nav/partials/NavProfileCard.jsx"
 import NavToolLanguagePicker from "/src/components/nav/tools/NavToolLanguagePicker.jsx"
 import NavToolThemePicker from "/src/components/nav/tools/NavToolThemePicker.jsx"
+import NavToolResumeDownloader from "/src/components/nav/tools/NavToolResumeDownloader.jsx"
 import NavLinkPills from "/src/components/nav/partials/NavLinkPills.jsx"
 
 function NavHeaderMobile({ profile, links }) {
@@ -18,6 +19,7 @@ function NavHeaderMobile({ profile, links }) {
                 </div>
 
                 <div className={`right-tool-container`}>
+                    {profile.resumePdfUrl && (<NavToolResumeDownloader/>)}
                     <NavToolThemePicker/>
                 </div>
 
