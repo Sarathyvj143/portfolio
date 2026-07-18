@@ -33,31 +33,31 @@
 
 @import "theme-variables-builder";
 
-$primary: #269366;
-$secondary: darken(#798287, 10%);
-$dark: #bfe0c5;
+$primary: #0F6FCE;
+$secondary: darken(#7d848c, 10%);
+$dark: #bfd3e0;
 $danger: #932626;
-$muted: #7c8d7f;
+$muted: #7c828d;
 
-$base-bg: #91d7aa;
-$base-bg-light: #a6e3b8;
-$base-bg-dark: #7ecb94;
+$base-bg: #91b6d7;
+$base-bg-light: #a6c6e3;
+$base-bg-dark: #7ea3cb;
 
-$texts: #202521;
+$texts: #202325;
 $texts-inverted: #EEE;
 
-$base-container-bg: #d9f5e0;
-$base-container-bg-accent: #c2e9d0;
-$base-popover-bg: #cae1d4;
-$base-boards: #d2eed8;
-$base-info-badges: #c3e3cd;
-$empty: #e8f8ef;
+$base-container-bg: #d9ecf5;
+$base-container-bg-accent: #c2dbe9;
+$base-popover-bg: #cad8e1;
+$base-boards: #d2e5ee;
+$base-info-badges: #c3d7e3;
+$empty: #e8f2f8;
 
-$borders: #d9efdc;
+$borders: #d9e7ef;
 $borders-nav-mobile: rgba(white, 0.15);
 $borders-nav-mobile-accent: rgba(white, 0.2);
-$scrollbar-track: #daf5e1;
-$scrollbar-thumb: #55bd91;
+$scrollbar-track: #daf0f5;
+$scrollbar-thumb: #5598bd;
 
 [data-theme="light"] {
     @include build-theme(

@@ -49,7 +49,7 @@ function NetworkMesh() {
         const reduceMotion = window.matchMedia &&
             window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
-        const primaryHex = utils.css.getRootSCSSVariable("--theme-primary") || "#36ad59"
+        const primaryHex = utils.css.getRootSCSSVariable("--theme-primary") || "#46A6FF"
 
         if(!reduceMotion) {
             for(const node of nodes)
