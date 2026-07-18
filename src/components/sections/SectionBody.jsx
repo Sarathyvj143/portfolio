@@ -8,6 +8,7 @@ import ArticleInfoList from "/src/components/articles/ArticleInfoList.jsx"
 import ArticleInlineList from "/src/components/articles/ArticleInlineList.jsx"
 import ArticleNotFound from "/src/components/articles/ArticleNotFound.jsx"
 import ArticlePortfolio from "/src/components/articles/ArticlePortfolio.jsx"
+import ArticleResumeButton from "/src/components/articles/ArticleResumeButton.jsx"
 import ArticleStack from "/src/components/articles/ArticleStack.jsx"
 import ArticleSkills from "/src/components/articles/ArticleSkills.jsx"
 import ArticleTestimonials from "/src/components/articles/ArticleTestimonials.jsx"
@@ -40,6 +41,7 @@ SectionBody.ARTICLES = {
     ArticleInlineList,
     ArticleNotFound,
     ArticlePortfolio,
+    ArticleResumeButton,
     ArticleSkills,
     ArticleStack,
     ArticleTestimonials,

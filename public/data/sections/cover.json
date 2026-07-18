@@ -38,6 +38,62 @@
           "label": "+91-8072381162",
           "link": {"href": "tel:+918072381162", "tooltipString": "call_me"},
           "faIcon": "fa-solid fa-phone"
+        },
+        {
+          "id": 4,
+          "label": "LinkedIn",
+          "link": {"href": "https://www.linkedin.com/in/parthasarthy-r-a67847203", "tooltipString": "open_website"},
+          "faIcon": "fa-brands fa-linkedin"
+        },
+        {
+          "id": 5,
+          "label": "GitHub",
+          "link": {"href": "https://github.com/Sarathyvj143", "tooltipString": "see_on_github"},
+          "faIcon": "fa-brands fa-github"
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "component": "ArticleFacts",
+      "locales": {},
+      "settings": {
+        "order_items_by": "id",
+        "order_items_sort": "asc"
+      },
+      "items": [
+        {
+          "id": 1,
+          "faIcon": "fa-solid fa-briefcase",
+          "faIconColors": {"bg": "#6C63FF", "fill": "#FFFFFF"},
+          "locales": {
+            "en": {"title": "2+", "text": "Years of experience"}
+          }
+        },
+        {
+          "id": 2,
+          "faIcon": "fa-solid fa-plug",
+          "faIconColors": {"bg": "#00B894", "fill": "#FFFFFF"},
+          "locales": {
+            "en": {"title": "100+", "text": "REST APIs built"}
+          }
+        },
+        {
+          "id": 3,
+          "faIcon": "fa-solid fa-database",
+          "faIconColors": {"bg": "#0984E3", "fill": "#FFFFFF"},
+          "locales": {
+            "en": {"title": "1M+", "text": "Records processed"}
+          }
+        },
+        {
+          "id": 4,
+          "faIcon": "fa-solid fa-cloud",
+          "faIconColors": {"bg": "#E17055", "fill": "#FFFFFF"},
+          "locales": {
+            "en": {"title": "3", "text": "Cloud platforms"}
+          }
         }
       ]
     },
@@ -60,11 +116,30 @@
           "faIconColors": {"bg": "", "fill": ""},
           "locales": {
             "en": {
-              "text": "<p>I’m a {{Python Backend Developer}} with 2+ years of experience building large-scale Flask applications with 100+ REST APIs for multi-cloud cost optimization and data observability. I architect backend pipelines processing millions of records, design scalable database systems, and create data-driven dashboards.</p><p>Proficient in MySQL, Docker, Redis, and CI/CD with GitHub Actions, I adapt to diverse project needs — from automating cloud workflows to integrating AI/LLM APIs for intelligent solutions.</p><p>Always eager to tackle new challenges and collaborate [[with you!]]</p>"
+              "text": "<p>I’m a {{Python Backend Developer}} with 2+ years of experience building large-scale Flask applications that expose 100+ REST APIs for multi-cloud cost optimization and data observability. I architect backend pipelines processing millions of records, design scalable database systems, and create data-driven dashboards.</p>"
+            }
+          }
+        },
+        {
+          "id": 2,
+          "img": "",
+          "faIcon": "fa-solid fa-laptop-code",
+          "faIconColors": {"bg": "", "fill": "#6C63FF"},
+          "locales": {
+            "en": {
+              "text": "<p>Proficient in MySQL, Docker, Redis, and CI/CD with GitHub Actions, I adapt to diverse project needs — from automating cloud workflows to integrating AI/LLM APIs for intelligent solutions.</p><p>I’m always eager to tackle new challenges and collaborate [[with you!]]</p>"
             }
           }
         }
       ]
+    },
+
+    {
+      "id": 5,
+      "component": "ArticleResumeButton",
+      "locales": {},
+      "settings": {},
+      "items": []
     },
 
     {
@@ -81,78 +156,78 @@
         {
           "id": 1,
           "faIcon": "fa-solid fa-robot",
-          "faIconColors": {"bg": "", "fill": ""},
+          "faIconColors": {"bg": "#6C63FF", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
             "en": {
               "title": "{{AI}} & LLM Integration",
-              "text": "Exploring OpenAI, Gemini, and Claude APIs to build intelligent automation solutions."
+              "text": "Integrating OpenAI, Gemini, and Claude APIs to bring practical intelligence into real engineering workflows."
             }
           }
         },
         {
           "id": 2,
           "faIcon": "fa-solid fa-cloud",
-          "faIconColors": {"bg": "", "fill": ""},
+          "faIconColors": {"bg": "#0984E3", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
             "en": {
               "title": "{{Cloud}} Technologies",
-              "text": "Deep diving into AWS, GCP, and Azure for scalable cloud architectures."
+              "text": "Designing scalable, cost-aware architectures across AWS, GCP, and Azure."
             }
           }
         },
         {
           "id": 3,
           "faIcon": "fa-solid fa-code",
-          "faIconColors": {"bg": "", "fill": ""},
-          "label": null,
-          "link": {"href": null, "tooltipString": null},
+          "faIconColors": {"bg": "#6E5494", "fill": "#FFFFFF"},
+          "label": "View on GitHub",
+          "link": {"href": "https://github.com/Sarathyvj143", "tooltipString": "see_on_github"},
           "locales": {
             "en": {
               "title": "{{Open Source}} & Side Projects",
-              "text": "Building tools like job automation platforms and AI-powered chatbots."
+              "text": "Building and shipping side projects end to end — from job-automation platforms to AI-powered chatbots."
             }
           }
         },
         {
           "id": 4,
           "faIcon": "fa-solid fa-terminal",
-          "faIconColors": {"bg": "", "fill": ""},
+          "faIconColors": {"bg": "#00B894", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
             "en": {
               "title": "{{Developer}} Tools",
-              "text": "Experimenting with AI dev tools like Claude Code, Cursor, and GitHub Copilot."
+              "text": "Weaving AI pair-programming tools like Claude Code, Cursor, and Copilot into a sharper daily workflow."
             }
           }
         },
         {
           "id": 5,
           "faIcon": "fa-solid fa-database",
-          "faIconColors": {"bg": "", "fill": ""},
+          "faIconColors": {"bg": "#E17055", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
             "en": {
               "title": "{{Data}} & Visualization",
-              "text": "Creating insightful dashboards and working with large-scale data pipelines."
+              "text": "Turning large-scale data pipelines into dashboards that drive real decisions."
             }
           }
         },
         {
           "id": 6,
           "faIcon": "fa-solid fa-gears",
-          "faIconColors": {"bg": "", "fill": ""},
+          "faIconColors": {"bg": "#E84393", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
             "en": {
               "title": "{{Automation}} & Scripting",
-              "text": "Automating workflows with Playwright, Selenium, and Python scripting."
+              "text": "Removing repetitive, manual work through automation with Playwright, Selenium, and Python."
             }
           }
         }

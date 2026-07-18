@@ -1,0 +1,49 @@
+@import "/src/styles/extend.scss";
+
+div.article-resume-button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    @include media-breakpoint-down(xl) {
+        justify-content: center;
+    }
+}
+
+a.article-resume-button-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 26px;
+    border-radius: 999px;
+
+    color: #FFFFFF;
+    background-color: var(--theme-primary);
+    border: 1px solid var(--theme-primary);
+
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        color: #FFFFFF;
+        background-color: var(--theme-links-hover);
+        border-color: var(--theme-links-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -8px var(--theme-primary);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+i.article-resume-button-icon {
+    font-size: 1.05em;
+}
+
+span.article-resume-button-label {
+    line-height: 1;
+}
