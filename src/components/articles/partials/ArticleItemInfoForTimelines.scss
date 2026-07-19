@@ -44,8 +44,8 @@ div.article-timeline-item-info-for-timelines-header-title {
     width: 100%;
     position: relative;
 
-    h5 {
-        font-weight: bold;
+    h3 {
+        font-weight: 600;
         margin-bottom: 10px;
         max-width: calc(100% - var(--date-badge-width)*1.15);
         @include media-breakpoint-down(xl) {
@@ -72,6 +72,7 @@ div.article-timeline-item-info-for-timelines-body {
     display: flex;
     flex-direction: column;
     margin-top: 18px;
+    line-height: 1.6;
     color: var(--theme-texts-light);
     @include media-breakpoint-down($max-breakpoint-for-tabbed-interface) {
         margin-top: 12px;

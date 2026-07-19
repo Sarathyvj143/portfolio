@@ -33,11 +33,11 @@
               "province": "Bangalore, Karnataka",
               "country": "India",
               "institution": "Purple Data Technologies",
-              "text": "Architecting and deploying a comprehensive Flask application with 100+ REST API endpoints for multi-cloud cost optimization across AWS, GCP, and Azure.",
+              "text": "Architecting and deploying a Flask application with 100+ REST API endpoints for multi-cloud cost optimization across AWS, GCP, and Azure.",
               "list": [
-                "Built backend data collection pipelines processing 20–30 lakh records from multiple cloud platforms, enabling real-time inventory and cost data observability.",
+                "Built backend data-collection pipelines processing 2–3 million records from multiple cloud platforms, enabling real-time inventory and cost observability.",
                 "Designed and maintained 40+ MySQL database tables with optimized indexing and relationships, supporting scalable data storage and high-performance retrieval.",
-                "Created interactive dashboards (Power BI / Flask frontend) delivering actionable insights for cost optimization, governance, and security across cloud environments.",
+                "Created interactive dashboards (Power BI / Flask frontend) surfacing insights for cost optimization, governance, and security across cloud environments.",
                 "Implemented Redis caching layer to improve API response performance and reduce database load on high-traffic endpoints.",
                 "Automated cloud data collection and reporting workflows, achieving 30% faster processing compared to previous manual flows.",
                 "Managed Docker-based deployments and CI/CD pipelines using GitHub Actions and Azure DevOps, ensuring consistent releases across staging and production."
@@ -59,9 +59,9 @@
               "province": "Coimbatore, Tamil Nadu",
               "country": "India",
               "institution": "Prominance (uPVC Windows and Doors)",
-              "text": "Optimized production scheduling and warehouse dispatch logistics using data-driven planning.",
+              "text": "Supported the production planning function for a uPVC windows-and-doors manufacturer, focusing on scheduling efficiency and warehouse dispatch logistics.",
               "list": [
-                "Optimized production scheduling and warehouse dispatch logistics using data-driven planning, achieving 30% faster delivery timelines compared to manual processes."
+                "Applied data-driven planning to production scheduling and warehouse dispatch, cutting delivery lead times by ~30% versus manual processes."
               ],
               "tags": ["Production Planning", "Data-Driven Optimization", "Logistics"]
             }

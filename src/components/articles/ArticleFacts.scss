@@ -45,10 +45,16 @@ div.article-facts-item-info {
     margin-top: var(--info-margin-top);
     text-align: center;
 
-    h6 {
+    .article-facts-item-info-title {
         margin-bottom: 4px;
         color: var(--theme-primary);
         font-weight: bold;
+        // Own prominent stat size — not tied to the (smaller) section-header
+        // .lead scale, so the number reads as the hero of each fact card.
+        font-size: 1.6rem !important;
+        line-height: 1.2 !important;
+        @include media-breakpoint-down(md) { font-size: 1.4rem !important; }
+        @include media-breakpoint-down(sm) { font-size: 1.25rem !important; }
     }
 
     &-description {

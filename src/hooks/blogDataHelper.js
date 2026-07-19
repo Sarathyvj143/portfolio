@@ -13,12 +13,9 @@
  */
 export function processBlogItems(items, dataWrapper) {
     if (!items || !items.length) {
-        console.warn("No blog items to process");
         return [];
     }
-    
-    console.log("Processing blog items:", items);
-    
+
     // If we have access to the raw data, build a map of blog IDs
     let blogIdMap = {};
     
@@ -31,8 +28,6 @@ export function processBlogItems(items, dataWrapper) {
                 blogIdMap[item.id] = item.blogData;
             }
         });
-        
-        console.log("Created blog ID map:", blogIdMap);
     }
     
     // Process each item to ensure it has blogData

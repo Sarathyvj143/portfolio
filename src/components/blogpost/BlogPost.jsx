@@ -1,12 +1,12 @@
 import "./BlogPost.scss"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 import {useNavigation} from "/src/providers/NavigationProvider.jsx"
 import {useData} from "/src/providers/DataProvider.jsx"
 import {useViewport} from "/src/providers/ViewportProvider.jsx"
 import {useLocation} from "/src/providers/LocationProvider.jsx"
 import TableOfContents from "/src/components/blogpost/TableOfContents.jsx"
-import { getAssetUrl, isGitHubPages, getBaseUrl } from "/src/hooks/assetHelper.js"
+import { getAssetUrl, getBaseUrl } from "/src/hooks/assetHelper.js"
 import {useUtils} from "/src/hooks/utils.js"
 
 function BlogPost({ blogId, onBack }) {
@@ -21,131 +21,167 @@ function BlogPost({ blogId, onBack }) {
     const [showMobileToc, setShowMobileToc] = useState(false)
 
     const isMobile = viewport.isMobileLayout()
-    
-    // Effect to collapse sidebar when entering blog post
+
+    // Collapse the main sidebar when entering a blog post.
+    // The next section's state is restored by SidebarStateProvider.
     useEffect(() => {
-        // Dispatch event to collapse sidebar when blog post mounts
-        window.dispatchEvent(new CustomEvent('sidebar-state-change', { 
+        window.dispatchEvent(new CustomEvent('sidebar-state-change', {
             detail: { expanded: false }
         }))
-        
-        // When component unmounts, we don't restore the state
-        // This will be handled by SidebarStateProvider based on the next section
     }, [])
 
     useEffect(() => {
-        console.log("BlogPost: useEffect triggered with blogId:", blogId);
         if (blogId) {
             loadBlogPost(blogId)
-        } else {
-            console.log("BlogPost: No blogId provided");
         }
     }, [blogId])
 
     const loadBlogPost = async (id) => {
         try {
             setLoading(true)
-            console.log("BlogPost: Loading blog post with ID:", id);
-            
-            // Create the URL for the blog post JSON file using our asset helper
-            const blogPostUrl = getAssetUrl(`/data/blog-posts/${id}.json`);
-            
-            console.log("BlogPost: Attempting to fetch from URL:", blogPostUrl);
-            const response = await fetch(blogPostUrl, {
-                // Add cache control headers to prevent caching issues
-                headers: {
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache',
-                    'Expires': '0'
-                }
-            });
-            
-            console.log("BlogPost: Fetch response status:", response.status);
-            
+
+            // assetHelper normalizes the path for both local dev and GitHub Pages.
+            const blogPostUrl = getAssetUrl(`/data/blog-posts/${id}.json`)
+            const response = await fetch(blogPostUrl)
+
             if (response.ok) {
                 const blogData = await response.json()
-                console.log("BlogPost: Successfully loaded blog data:", blogData);
                 setBlogPost(blogData)
             } else {
                 console.error('Failed to load blog post:', id)
-                // Try a fallback approach for GitHub Pages if needed
-                if (isGitHubPages()) {
-                    tryFallbackLoad(id);
-                }
+                setBlogPost(null)
             }
         } catch (error) {
             console.error('Error loading blog post:', error)
-            // Try a fallback approach for GitHub Pages if needed
-            if (isGitHubPages()) {
-                tryFallbackLoad(id);
-            }
+            setBlogPost(null)
         } finally {
             setLoading(false)
         }
     }
-    
-    // Fallback loader for GitHub Pages
-    const tryFallbackLoad = async (id) => {
-        try {
-            console.log("BlogPost: Trying fallback load approach for GitHub Pages");
-            
-            // Try different path variations
-            const variations = [
-                `/react-portfolio-template/data/blog-posts/${id}.json`,
-                `./data/blog-posts/${id}.json`,
-                `../data/blog-posts/${id}.json`
-            ];
-            
-            // Try each variation
-            for (const path of variations) {
-                try {
-                    console.log(`BlogPost: Trying fallback path: ${path}`);
-                    const response = await fetch(path);
-                    
-                    if (response.ok) {
-                        const blogData = await response.json();
-                        console.log("BlogPost: Fallback successful with path:", path);
-                        setBlogPost(blogData);
-                        return; // Exit if successful
-                    }
-                } catch (e) {
-                    console.log(`Fallback path ${path} failed:`, e);
-                    // Continue to the next variation
-                }
-            }
-            
-            console.error("All fallback approaches failed");
-        } catch (error) {
-            console.error("Fallback loading failed:", error);
-        }
-    };
 
     const handleBackToBlog = () => {
         if (onBack) {
-            onBack(); // Use the provided callback if available
+            onBack() // Use the provided callback if available
         } else {
-            navigation.navigateToSection("blog"); // Fallback to navigation provider
+            navigation.navigateToSection("blog") // Fallback to navigation provider
         }
     }
-    
-    // Function to toggle the main sidebar
-    const toggleMainSidebar = () => {
-        // Get current state from DOM since we don't have direct access to NavSidebar's state
-        const sidebar = document.querySelector('.nav-sidebar')
-        const isCurrentlyCollapsed = sidebar?.classList.contains('nav-sidebar-shrink')
-        
-        // Dispatch event to toggle sidebar
-        window.dispatchEvent(new CustomEvent('sidebar-state-change', { 
-            detail: { expanded: isCurrentlyCollapsed }
-        }))
-    }
+
+    // Derive display values (guarded so the hooks below run before early returns).
+    const title = blogPost?.title?.[language.current] || blogPost?.title?.en || "Untitled"
+    const description = blogPost?.description?.[language.current] || blogPost?.description?.en || ""
+    const image = blogPost?.image
+    const date = blogPost?.date
+    const readTime = blogPost?.readTime
+    const author = blogPost?.author
+    const tags = blogPost?.tags || []
+    const content = blogPost?.content?.[language.current] || blogPost?.content?.en
+
+    // Pre-process section HTML once per post: normalize image paths and make
+    // in-content images lazy. Runs off render to avoid re-parsing every render.
+    const processedSections = useMemo(() => {
+        const sections = content?.sections || []
+        const baseUrl = getBaseUrl()
+
+        return sections.map((section) => {
+            let html = section.content || ''
+
+            if (html) {
+                const tempDiv = document.createElement('div')
+                tempDiv.innerHTML = html
+                tempDiv.querySelectorAll('img').forEach((img) => {
+                    const src = img.getAttribute('src')
+                    if (src && src.startsWith('/')) {
+                        img.setAttribute('src', `${baseUrl}${src}`)
+                    }
+                    img.setAttribute('loading', 'lazy')
+                    img.setAttribute('decoding', 'async')
+                })
+                html = tempDiv.innerHTML
+            }
+
+            return { id: section.id, title: section.title, html }
+        })
+    }, [content])
+
+    // SEO: manage document head (title, meta, Open Graph, JSON-LD) for the active post.
+    // Every element/attribute we touch is restored on cleanup so leaving the post
+    // (or switching posts) never leaves stale metadata behind.
+    useEffect(() => {
+        if (!blogPost) return
+
+        const absoluteImage = image
+            ? (image.startsWith('http') ? image : `${window.location.origin}${getAssetUrl(image)}`)
+            : ""
+        const pageUrl = window.location.href
+
+        // Track everything we change so we can revert it exactly.
+        const restorers = []
+
+        const prevTitle = document.title
+        document.title = `${title} | Blog`
+        restorers.push(() => { document.title = prevTitle })
+
+        const upsertMeta = (attr, key, metaContent) => {
+            if (!metaContent) return
+            const selector = `meta[${attr}="${key}"]`
+            let el = document.head.querySelector(selector)
+            if (el) {
+                const prev = el.getAttribute('content')
+                el.setAttribute('content', metaContent)
+                restorers.push(() => { el.setAttribute('content', prev) })
+            } else {
+                el = document.createElement('meta')
+                el.setAttribute(attr, key)
+                el.setAttribute('content', metaContent)
+                document.head.appendChild(el)
+                restorers.push(() => { el.remove() })
+            }
+        }
+
+        upsertMeta('name', 'description', description)
+        upsertMeta('property', 'og:type', 'article')
+        upsertMeta('property', 'og:title', title)
+        upsertMeta('property', 'og:description', description)
+        upsertMeta('property', 'og:url', pageUrl)
+        upsertMeta('property', 'og:image', absoluteImage)
+        upsertMeta('name', 'twitter:card', absoluteImage ? 'summary_large_image' : 'summary')
+        upsertMeta('name', 'twitter:title', title)
+        upsertMeta('name', 'twitter:description', description)
+        upsertMeta('name', 'twitter:image', absoluteImage)
+
+        // BlogPosting structured data for rich results.
+        const jsonLd = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": title,
+            "description": description,
+            "datePublished": date,
+            "dateModified": date,
+            "author": { "@type": "Person", "name": author || "Partha Sarathy R" },
+            "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+        }
+        if (absoluteImage) jsonLd.image = absoluteImage
+        if (tags.length > 0) jsonLd.keywords = tags.join(", ")
+
+        const ldScript = document.createElement('script')
+        ldScript.type = 'application/ld+json'
+        ldScript.text = JSON.stringify(jsonLd)
+        document.head.appendChild(ldScript)
+        restorers.push(() => { ldScript.remove() })
+
+        return () => {
+            // Revert in reverse order.
+            for (let i = restorers.length - 1; i >= 0; i--) restorers[i]()
+        }
+        // title/description/image/date/author/tags are all pure derivations of
+        // blogPost + language.current, so these two deps fully cover them —
+        // and avoid re-running on the fresh `tags` array minted each render.
+    }, [blogPost, language.current])
 
     if (loading) {
         return (
             <div className="blog-post-container">
-                {/* <header className="blog-post-header-nav">
-                    <NavHeaderMain activeHref="#blog" />
-                </header> */}
                 <div className="blog-post-wrapper">
                     <div className="blog-post-loading">
                         <div className="loading-spinner"></div>
@@ -159,9 +195,6 @@ function BlogPost({ blogId, onBack }) {
     if (!blogPost) {
         return (
             <div className="blog-post-container">
-                {/* <header className="blog-post-header-nav">
-                    <NavHeaderMain activeHref="#blog" />
-                </header> */}
                 <div className="blog-post-wrapper">
                     <div className="blog-post-error">
                         <h2>Blog Post Not Found</h2>
@@ -173,25 +206,6 @@ function BlogPost({ blogId, onBack }) {
                 </div>
             </div>
         )
-    }
-
-    const title = blogPost.title?.[language.current] || blogPost.title?.en || "Untitled"
-    const description = blogPost.description?.[language.current] || blogPost.description?.en || ""
-    const image = blogPost.image
-    const date = blogPost.date
-    const readTime = blogPost.readTime
-    const author = blogPost.author
-    const tags = blogPost.tags || []
-    const content = blogPost.content?.[language.current] || blogPost.content?.en
-
-    const formatDate = (dateString) => {
-        if (!dateString) return ""
-        const date = new Date(dateString)
-        return date.toLocaleDateString(language.current || 'en', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        })
     }
 
     return (
@@ -230,7 +244,7 @@ function BlogPost({ blogId, onBack }) {
                     <div className="blog-post-header">
                         <div className="blog-post-meta">
                             {date && (
-                                <span className="blog-post-date">{formatDate(date)}</span>
+                                <span className="blog-post-date">{utils.date.formatLocalized(date, language.current)}</span>
                             )}
                             {readTime && (
                                 <span className="blog-post-read-time">{readTime}</span>
@@ -247,8 +261,8 @@ function BlogPost({ blogId, onBack }) {
 
                         {tags.length > 0 && (
                             <div className="blog-post-tags">
-                                {tags.map((tag, index) => (
-                                    <span key={index} className="blog-post-tag">
+                                {tags.map((tag) => (
+                                    <span key={tag} className="blog-post-tag">
                                         {tag}
                                     </span>
                                 ))}
@@ -257,45 +271,15 @@ function BlogPost({ blogId, onBack }) {
                     </div>
 
                     <div className="blog-post-content">
-                        {content && content.sections && content.sections.map((section, index) => {
-                            // Process content to fix image paths
-                            let processedContent = section.content;
-                            if (processedContent) {
-                                const tempDiv = document.createElement('div');
-                                tempDiv.innerHTML = processedContent;
-
-                                const images = tempDiv.querySelectorAll('img');
-                                images.forEach(img => {
-                                    if (img.src && img.getAttribute('src').startsWith('/')) {
-                                        const baseUrl = getBaseUrl();
-                                        const originalSrc = img.getAttribute('src');
-                                        img.setAttribute('src', `${baseUrl}${originalSrc}`);
-                                    }
-                                });
-
-                                processedContent = tempDiv.innerHTML;
-                            }
-
-                            return (
-                                <section key={section.id || index} id={section.id} className="blog-post-section">
-                                    <h2 className="blog-post-section-title">{section.title}</h2>
-                                    <div
-                                        className="blog-post-section-content"
-                                        dangerouslySetInnerHTML={{ __html: processedContent }}
-                                        ref={(el) => {
-                                            if (el) {
-                                                const images = el.querySelectorAll('img');
-                                                images.forEach(img => {
-                                                    img.addEventListener('error', (e) => {
-                                                        console.error(`Image failed to load: ${img.src}`, e);
-                                                    });
-                                                });
-                                            }
-                                        }}
-                                    ></div>
-                                </section>
-                            );
-                        })}
+                        {processedSections.map((section, index) => (
+                            <section key={section.id || index} id={section.id} className="blog-post-section">
+                                <h2 className="blog-post-section-title">{section.title}</h2>
+                                <div
+                                    className="blog-post-section-content"
+                                    dangerouslySetInnerHTML={{ __html: section.html }}
+                                ></div>
+                            </section>
+                        ))}
                     </div>
                 </main>
 
@@ -304,6 +288,7 @@ function BlogPost({ blogId, onBack }) {
                     <button
                         className="blog-post-mobile-toc"
                         onClick={() => setShowMobileToc(true)}
+                        aria-label="Open table of contents"
                     >
                         <i className="fa-solid fa-list"></i>
                     </button>
@@ -319,6 +304,7 @@ function BlogPost({ blogId, onBack }) {
                             <button
                                 className="blog-post-mobile-toc-close"
                                 onClick={() => setShowMobileToc(false)}
+                                aria-label="Close table of contents"
                             >
                                 <i className="fa-solid fa-xmark"></i>
                             </button>

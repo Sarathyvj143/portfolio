@@ -22,10 +22,17 @@ div.layout-navigation-wrapper {
 
 div.layout-navigation-children-wrapper {
     width: 100%;
-    min-height: 100%;
+    // Lock the content column to the frame height (same reference as the
+    // sidebar). A definite height — not min-height — lets the child slideshow
+    // resolve `height: 100%` and keeps overflow inside the inner Scrollable,
+    // so the column can't grow past the sidebar as zoom rescales vh vs rem.
+    height: 100%;
+    min-height: 0;
     margin-left: var(--default-card-spacing);
 
     @include media-breakpoint-down($max-breakpoint-for-tabbed-interface) {
+        height: auto;
+        min-height: 100%;
         margin-left: 0;
         margin-top: calc(var(--default-card-spacing) - 1px);
         margin-bottom: $nav-tabs-height;

@@ -20,7 +20,7 @@ function PropList({ children, className = ``, inlineBreakpoint = `xl` }) {
 function PropListItem({ children, type, value, faIcon, iconSpacing = 25, className = `` }) {
     return (
         <li className={`prop-list-item ${className}`}>
-            <i className={`fa-icon ${faIcon}`} style={{minWidth: iconSpacing}}/>
+            <i className={`fa-icon ${faIcon}`} style={{minWidth: iconSpacing}} aria-hidden="true"/>
 
             {type === PropListItem.Types.SINGLE && (
                 <span dangerouslySetInnerHTML={{__html: value}}/>
@@ -29,7 +29,8 @@ function PropListItem({ children, type, value, faIcon, iconSpacing = 25, classNa
             {type === PropListItem.Types.INTERVAL && (
                 <>
                     <span dangerouslySetInnerHTML={{__html: value[0]}}/>
-                    <i className={`fa-solid fa-arrow-right-long mx-1 mx-sm-2 text-1 prop-list-separator`}/>
+                    <span className={`visually-hidden`}> to </span>
+                    <i className={`fa-solid fa-arrow-right-long mx-1 mx-sm-2 text-1 prop-list-separator`} aria-hidden="true"/>
                     <span dangerouslySetInnerHTML={{__html: value[1]}}/>
                 </>
             )}
@@ -37,7 +38,7 @@ function PropListItem({ children, type, value, faIcon, iconSpacing = 25, classNa
             {type === PropListItem.Types.DUO && (
                 <>
                     <span dangerouslySetInnerHTML={{__html: value[0]}}/>
-                    <span className={`mx-1 px-1 px-sm-0 mx-sm-2 prop-list-separator`}>·</span>
+                    <span className={`mx-1 px-1 px-sm-0 mx-sm-2 prop-list-separator`} aria-hidden="true">·</span>
                     <span dangerouslySetInnerHTML={{__html: value[1]}}/>
                 </>
             )}

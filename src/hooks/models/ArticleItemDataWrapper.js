@@ -213,6 +213,10 @@ export default class ArticleItemDataWrapper {
         return `Item ${this.id}`
     }
 
+    get isOngoing() {
+        return Boolean(this._rawData?.dateEnd?.now)
+    }
+
     get faIconWithFallback() {
         return this.faIcon || `fa-solid fa-clone`
     }

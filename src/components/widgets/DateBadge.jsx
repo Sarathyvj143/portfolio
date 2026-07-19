@@ -13,7 +13,10 @@ function DateBadge({ dateStart, dateEnd, variant = "default", className = "" }) 
                 )}
 
                 {(dateStart && dateEnd) && (
-                    <i className={`fa-solid fa-arrow-right-long mx-2 opacity-75`}/>
+                    <>
+                        <span className={`visually-hidden`}> to </span>
+                        <i className={`fa-solid fa-arrow-right-long mx-2 opacity-75`} aria-hidden="true"/>
+                    </>
                 )}
 
                 {dateEnd && (

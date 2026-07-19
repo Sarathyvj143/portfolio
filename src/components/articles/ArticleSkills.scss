@@ -102,17 +102,27 @@ div.article-skills-item-title {
     width: 100%;
     margin-bottom: 0;
 
-    span.article-skills-item-title-main {
+    .article-skills-item-title-main {
+        margin: 0;
+        font-size: inherit;
+        line-height: inherit;
         font-weight: bold;
         color: var(--theme-texts-light);
     }
 
-    span.article-skills-item-title-suffix {
-        color: var(--theme-texts-light-2);
+    .article-skills-item-title-right-column {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        padding-left: 8px;
     }
 
-    span.article-skills-item-title-percentage {
-        color: var(--theme-texts-light);
+    span.article-skills-item-title-tier {
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+        color: var(--theme-primary);
     }
 }
 

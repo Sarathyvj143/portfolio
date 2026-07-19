@@ -5,11 +5,14 @@ div.layout-slideshow {
     grid-template-columns: 1fr;
     width: calc(100% + var(--default-card-spacing));
     height: 100%;
-    padding: 1.25rem 3rem 1.25rem calc(3rem + var(--default-card-spacing));
+    // No top/bottom padding so the section card sits flush with the frame —
+    // aligning its top (and bottom) with the sidebar card. Horizontal padding
+    // stays for the sidebar↔content gap and the slide-in animation clip.
+    padding: 0 1.25rem 0 calc(1.25rem + var(--default-card-spacing));
     overflow-x: hidden;
 
     @include media-breakpoint-down(xl) {
-        padding: 10px calc(var(--default-card-spacing) + 10px) 10px 10px;
+        padding: 0 calc(var(--default-card-spacing) + 10px) 0 10px;
         height: 100%;
     }
 

@@ -13,60 +13,6 @@
   "articles": [
     {
       "id": 1,
-      "component": "ArticleCards",
-      "locales": {},
-      "settings": {
-        "order_items_by": "id",
-        "order_items_sort": "asc"
-      },
-      "items": [
-        {
-          "id": 1,
-          "img": "",
-          "faIcon": "fa-solid fa-code",
-          "faIconColors": { "bg": "", "fill": "" },
-          "date": { "year": null, "month": null },
-          "link": { "href": "", "tooltipString": "" },
-          "locales": {
-            "en": {
-              "title": "{{Languages & Frameworks}}",
-              "text": "Python, SQL, Bash, Flask, FastAPI, SQLAlchemy, Pydantic, Streamlit"
-            }
-          }
-        },
-        {
-          "id": 2,
-          "img": "",
-          "faIcon": "fa-solid fa-cloud",
-          "faIconColors": { "bg": "", "fill": "" },
-          "date": { "year": null, "month": null },
-          "link": { "href": "", "tooltipString": "" },
-          "locales": {
-            "en": {
-              "title": "{{Cloud & DevOps}}",
-              "text": "AWS, GCP, Azure, Docker, Linux, Git/GitHub, CI/CD, Azure DevOps"
-            }
-          }
-        },
-        {
-          "id": 3,
-          "img": "",
-          "faIcon": "fa-solid fa-robot",
-          "faIconColors": { "bg": "", "fill": "" },
-          "date": { "year": null, "month": null },
-          "link": { "href": "", "tooltipString": "" },
-          "locales": {
-            "en": {
-              "title": "{{AI & Automation}}",
-              "text": "OpenAI API, Gemini API, Claude, RAG, Playwright, Selenium"
-            }
-          }
-        }
-      ]
-    },
-
-    {
-      "id": 2,
       "component": "ArticleSkills",
       "locales": {
         "en": { "title": "Languages & Frameworks" }
@@ -90,7 +36,7 @@
             "en": {
               "title": "Python",
               "text": "Primary language for backend development, automation, and data processing.",
-              "level": ""
+              "level": "Expert"
             }
           }
         },
@@ -98,14 +44,14 @@
           "id": 2,
           "img": "",
           "faIcon": "fa-solid fa-flask",
-          "faIconColors": { "bg": "", "fill": "#000000" },
+          "faIconColors": { "bg": "", "fillLight": "#1F2937", "fillDark": "#D1D5DB" },
           "date": { "year": 2024, "month": 1 },
           "percentage": 85,
           "locales": {
             "en": {
               "title": "Flask",
               "text": "Built large-scale Flask apps with 100+ REST API endpoints.",
-              "level": ""
+              "level": "Expert"
             }
           }
         },
@@ -120,7 +66,7 @@
             "en": {
               "title": "FastAPI",
               "text": "Building high-performance APIs with FastAPI and Pydantic validation.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -135,7 +81,7 @@
             "en": {
               "title": "SQLAlchemy",
               "text": "ORM-based database modeling and query optimization.",
-              "level": ""
+              "level": "Expert"
             }
           }
         },
@@ -150,7 +96,7 @@
             "en": {
               "title": "SQL & Bash",
               "text": "Database queries, scripting, and shell automation.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         }
@@ -158,7 +104,7 @@
     },
 
     {
-      "id": 3,
+      "id": 2,
       "component": "ArticleSkills",
       "locales": {
         "en": { "title": "Databases & DevOps" }
@@ -182,7 +128,7 @@
             "en": {
               "title": "MySQL",
               "text": "Designed 40+ tables with optimized indexing and relationships.",
-              "level": ""
+              "level": "Expert"
             }
           }
         },
@@ -197,7 +143,7 @@
             "en": {
               "title": "Redis",
               "text": "Caching layer for API performance and reducing database load.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -212,7 +158,7 @@
             "en": {
               "title": "Docker",
               "text": "Containerized deployments for staging and production environments.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -220,14 +166,14 @@
           "id": 4,
           "img": "",
           "faIcon": "fa-brands fa-github",
-          "faIconColors": { "bg": "", "fill": "#181717" },
+          "faIconColors": { "bg": "", "fillLight": "#24292F", "fillDark": "#E6EDF3" },
           "date": { "year": 2025, "month": 9 },
           "percentage": 80,
           "locales": {
             "en": {
               "title": "Git & CI/CD",
               "text": "GitHub Actions and Azure DevOps for automated pipelines.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -242,7 +188,7 @@
             "en": {
               "title": "Linux",
               "text": "Server management and shell-based development workflows.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         }
@@ -250,7 +196,7 @@
     },
 
     {
-      "id": 4,
+      "id": 3,
       "component": "ArticleSkills",
       "locales": {
         "en": { "title": "Cloud & AI" }
@@ -274,7 +220,7 @@
             "en": {
               "title": "AWS",
               "text": "Cloud cost optimization and data collection across AWS services.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -289,7 +235,7 @@
             "en": {
               "title": "GCP",
               "text": "Google Cloud Platform for app deployment and cloud services.",
-              "level": ""
+              "level": "Familiar"
             }
           }
         },
@@ -304,7 +250,7 @@
             "en": {
               "title": "Azure",
               "text": "Azure DevOps and cloud infrastructure management.",
-              "level": ""
+              "level": "Familiar"
             }
           }
         },
@@ -319,7 +265,7 @@
             "en": {
               "title": "OpenAI & Gemini API",
               "text": "AI-powered resume tailoring, chatbots, and LLM integration with RAG.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -334,7 +280,7 @@
             "en": {
               "title": "Playwright & Selenium",
               "text": "Browser automation, web scraping, and end-to-end testing.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         },
@@ -349,7 +295,7 @@
             "en": {
               "title": "Power BI & Pandas",
               "text": "Data visualization dashboards and data analysis pipelines.",
-              "level": ""
+              "level": "Proficient"
             }
           }
         }

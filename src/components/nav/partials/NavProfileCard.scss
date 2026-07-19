@@ -1,14 +1,14 @@
 @import "/src/styles/extend.scss";
 
 div.nav-profile-card {
-    --avatar-size: 140px;
-    --border-size: 6px;
-    --info-margin-top: 10px;
-    --offset-status-circle: 15px;
-    @media(min-height: 760px) {--avatar-size: 150px; --info-margin-top: 11px;}
-    @media(min-height: 800px) {--avatar-size: 155px}
-    @media(max-height: 690px) {--avatar-size: 130px}
-    @media(max-height: 650px) {--avatar-size: 120px}
+    --avatar-size: 100px;
+    --border-size: 5px;
+    --info-margin-top: 9px;
+    --offset-status-circle: 13px;
+    @media(min-height: 760px) {--avatar-size: 106px; --info-margin-top: 10px;}
+    @media(min-height: 800px) {--avatar-size: 110px}
+    @media(max-height: 690px) {--avatar-size: 92px}
+    @media(max-height: 650px) {--avatar-size: 86px}
 
     display: flex;
     align-items: center;
@@ -45,11 +45,11 @@ div.nav-profile-card {
     h1.nav-profile-card-name {
         text-align: center;
 
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 4px;
+        margin-right: 4px;
         margin-bottom: 4px;
-        font-size: 1.25rem!important;
-        line-height: 1.8rem!important;
+        font-size: 0.94rem!important;
+        line-height: 1.4rem!important;
 
         @include media-breakpoint-down($max-breakpoint-for-tabbed-interface) {
             font-size: 1.5rem!important;
@@ -69,8 +69,8 @@ div.nav-profile-card {
         align-items: center;
         justify-content: center;
         color: var(--theme-secondary);
-        font-size: 0.9rem;
-        min-height: 25px;
+        font-size: 0.72rem;
+        min-height: 22px;
         @include media-breakpoint-down($max-breakpoint-for-tabbed-interface) {
             font-size: 0.95rem;
             min-height: 25px;
@@ -79,9 +79,9 @@ div.nav-profile-card {
 }
 
 div.nav-profile-card-shrink {
-    --avatar-size: 80px;
+    --avatar-size: 54px;
     --border-size: 3px;
-    --offset-status-circle: 12px;
+    --offset-status-circle: 11px;
 
     div.nav-profile-card-avatar {
         border-radius: calc($standard-border-radius * 2)!important;

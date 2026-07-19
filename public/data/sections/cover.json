@@ -18,7 +18,7 @@
       "settings": {
         "order_items_by": "id",
         "order_items_sort": "asc",
-        "display_as_list_if_width_is_lower_than": 380
+        "display_as_list_if_width_is_lower_than": 1200
       },
       "items": [
         {
@@ -66,7 +66,7 @@
         {
           "id": 1,
           "faIcon": "fa-solid fa-briefcase",
-          "faIconColors": {"bg": "#6C63FF", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#46A6FF", "fill": "#FFFFFF"},
           "locales": {
             "en": {"title": "2+", "text": "Years of experience"}
           }
@@ -74,7 +74,7 @@
         {
           "id": 2,
           "faIcon": "fa-solid fa-plug",
-          "faIconColors": {"bg": "#00B894", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#22B8CF", "fill": "#FFFFFF"},
           "locales": {
             "en": {"title": "100+", "text": "REST APIs built"}
           }
@@ -82,7 +82,7 @@
         {
           "id": 3,
           "faIcon": "fa-solid fa-database",
-          "faIconColors": {"bg": "#0984E3", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#3B82F6", "fill": "#FFFFFF"},
           "locales": {
             "en": {"title": "1M+", "text": "Records processed"}
           }
@@ -90,7 +90,7 @@
         {
           "id": 4,
           "faIcon": "fa-solid fa-cloud",
-          "faIconColors": {"bg": "#E17055", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#38BDF8", "fill": "#FFFFFF"},
           "locales": {
             "en": {"title": "3", "text": "Cloud platforms"}
           }
@@ -111,9 +111,9 @@
       "items": [
         {
           "id": 1,
-          "img": "images/pictures/about-texts-image-1.png",
-          "faIcon": "",
-          "faIconColors": {"bg": "", "fill": ""},
+          "img": "",
+          "faIcon": "fa-brands fa-python",
+          "faIconColors": {"bg": "", "fill": "#46A6FF"},
           "locales": {
             "en": {
               "text": "<p>I’m a {{Python Backend Developer}} with 2+ years of experience building large-scale Flask applications that expose 100+ REST APIs for multi-cloud cost optimization and data observability. I architect backend pipelines processing millions of records, design scalable database systems, and create data-driven dashboards.</p>"
@@ -124,7 +124,7 @@
           "id": 2,
           "img": "",
           "faIcon": "fa-solid fa-laptop-code",
-          "faIconColors": {"bg": "", "fill": "#6C63FF"},
+          "faIconColors": {"bg": "", "fill": "#46A6FF"},
           "locales": {
             "en": {
               "text": "<p>Proficient in MySQL, Docker, Redis, and CI/CD with GitHub Actions, I adapt to diverse project needs — from automating cloud workflows to integrating AI/LLM APIs for intelligent solutions.</p><p>I’m always eager to tackle new challenges and collaborate [[with you!]]</p>"
@@ -150,13 +150,13 @@
         "order_items_sort": "asc"
       },
       "locales": {
-        "en": {"title": "Personal {{interests}}"}
+        "en": {"title": "Focus {{areas}}"}
       },
       "items": [
         {
           "id": 1,
           "faIcon": "fa-solid fa-robot",
-          "faIconColors": {"bg": "#6C63FF", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#46A6FF", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
@@ -169,7 +169,7 @@
         {
           "id": 2,
           "faIcon": "fa-solid fa-cloud",
-          "faIconColors": {"bg": "#0984E3", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#38BDF8", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
@@ -182,7 +182,7 @@
         {
           "id": 3,
           "faIcon": "fa-solid fa-code",
-          "faIconColors": {"bg": "#6E5494", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#3B82F6", "fill": "#FFFFFF"},
           "label": "View on GitHub",
           "link": {"href": "https://github.com/Sarathyvj143", "tooltipString": "see_on_github"},
           "locales": {
@@ -195,7 +195,7 @@
         {
           "id": 4,
           "faIcon": "fa-solid fa-terminal",
-          "faIconColors": {"bg": "#00B894", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#22B8CF", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
@@ -208,7 +208,7 @@
         {
           "id": 5,
           "faIcon": "fa-solid fa-database",
-          "faIconColors": {"bg": "#E17055", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#4C6EF5", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {
@@ -221,7 +221,7 @@
         {
           "id": 6,
           "faIcon": "fa-solid fa-gears",
-          "faIconColors": {"bg": "#E84393", "fill": "#FFFFFF"},
+          "faIconColors": {"bg": "#5C7CFA", "fill": "#FFFFFF"},
           "label": null,
           "link": {"href": null, "tooltipString": null},
           "locales": {

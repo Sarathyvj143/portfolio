@@ -9,7 +9,13 @@ div.section-content {
     position: relative;
     width: 100%;
     padding: var(--padding);
-    min-height: calc(100vh - calc($default-card-spacing*5));
+    // Fill the scroll frame instead of re-deriving from 100vh with a different
+    // constant. The parent .scrollable is definite-height, so 100% resolves to
+    // the exact frame height — no forced overflow, consistent at any zoom.
+    min-height: 100%;
+    @include media-breakpoint-down($max-breakpoint-for-tabbed-interface) {
+        min-height: calc(100vh - calc($default-card-spacing*5));
+    }
 }
 
 div.section-content-border-decoration {
