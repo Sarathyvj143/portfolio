@@ -35,15 +35,7 @@ function ArticleInlineList({ dataWrapper, id }) {
 function ArticleInlineListItems({ dataWrapper, selectedItemCategoryId}) {
     const viewport = useViewport()
 
-    const maxItems = viewport.getValueFromBreakpointHash({
-        xxl: 5,
-        xl: 4,
-        sm: 2,
-        default: 2
-    })
-
     const filteredItems = dataWrapper.getOrderedItemsFilteredBy(selectedItemCategoryId)
-    const slicedItems = filteredItems.slice(0, maxItems)
 
     const displayAsList = viewport.innerWidth < dataWrapper.settings.displayAsListIfWidthIsLowerThan
     const listClass = displayAsList ?
@@ -52,7 +44,7 @@ function ArticleInlineListItems({ dataWrapper, selectedItemCategoryId}) {
 
     return (
         <ul className={`article-inline-list-items ${listClass}`}>
-            {slicedItems.map((itemWrapper, key) => (
+            {filteredItems.map((itemWrapper, key) => (
                 <ArticleInlineListItem itemWrapper={itemWrapper}
                                        key={key}/>
             ))}

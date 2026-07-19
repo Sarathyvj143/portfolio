@@ -66,8 +66,8 @@ function ArticleFactsItem({ itemWrapper }) {
                         className={`article-facts-item-avatar`}/>
 
             <div className={`article-facts-item-info`}>
-                <h6 className={`article-facts-item-info-title lead`}
-                    dangerouslySetInnerHTML={{__html: itemWrapper.locales.title || itemWrapper.placeholder}}/>
+                <div className={`article-facts-item-info-title lead`}
+                     dangerouslySetInnerHTML={{__html: itemWrapper.locales.title || itemWrapper.placeholder}}/>
 
                 <div className={`article-facts-item-info-description text-3 mt-1`}
                      dangerouslySetInnerHTML={{__html: itemWrapper.locales.text}}/>

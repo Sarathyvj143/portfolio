@@ -15,7 +15,7 @@
             "component": "Blog",
             "locales": {
                 "en": {
-                    "description": "Read my latest thoughts, tutorials, and insights"
+                    "description": "Featured deep-dives on cloud architecture, cost optimization, and backend engineering."
                 }
             },
             "settings": {
@@ -26,7 +26,7 @@
                 {
                     "id": 4,
                     "categoryId": "blog",
-                    "img": "/images/pictures/blog-aws.jpg",
+                    "img": "",
                     "faIcon": "fas fa-cloud",
                     "faIconColors": {"bg": "#ff9900", "fill": "#ffffff"},
                     "link": {"href": "", "tooltipString": ""},

@@ -1,7 +1,11 @@
 @import "/src/styles/extend.scss";
 
 div.transitionable-wrapper {
-    min-height: calc(100vh - calc($default-card-spacing*5));
+    // Fill the parent article region rather than re-deriving from 100vh. On
+    // desktop the article ancestors are auto-height, so this resolves to
+    // content height — the stack/portfolio no longer imposes its own viewport
+    // height and stays within the frame-locked scroll area at any zoom.
+    min-height: 100%;
     @include media-breakpoint-down($max-breakpoint-for-tabbed-interface) {
         min-height: 70vh;
     }

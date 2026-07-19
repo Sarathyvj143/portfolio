@@ -1,5 +1,5 @@
 import "./BlogList.scss"
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 import {useNavigation} from "/src/providers/NavigationProvider.jsx"
 import BlogCard from "/src/components/blog/BlogCard.jsx"
@@ -8,11 +8,6 @@ import { getBlogIdFromItem } from "/src/hooks/blogDataHelper.js"
 function BlogList({ items, description, onBlogSelect }) {
     const language = useLanguage()
     const navigation = useNavigation()
-    
-    // Debug: Log the items when component mounts or updates
-    useEffect(() => {
-        console.log("BlogList: Received items:", items);
-    }, [items]);
 
     if (!items || items.length === 0) {
         return null
@@ -24,13 +19,10 @@ function BlogList({ items, description, onBlogSelect }) {
             console.error("Missing blog ID for navigation");
             return;
         }
-        console.log("BlogList: Calling onBlogSelect with blogId:", blogId);
         onBlogSelect(blogId);
     }
 
     const handleCardClick = (item) => {
-        console.log("BlogCard clicked:", item);
-        
         // Get the blog ID using our helper function
         const blogId = getBlogIdFromItem(item);
         

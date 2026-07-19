@@ -77,7 +77,10 @@
 
     .blog-list-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        // Cap each card so a single post stays a card (not a full-width banner);
+        // multiple posts wrap and remain centered.
+        grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+        justify-content: center;
         gap: 2rem;
 
         @media (max-width: 768px) {

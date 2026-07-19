@@ -14,7 +14,7 @@ function AvatarView({ src = "", alt = "", faIcon = "", className = "",  id = nul
             )}
 
             {!src && (
-                <div className={`avatar-icon-view`}>
+                <div className={`avatar-icon-view`} aria-hidden={`true`}>
                     <i className={`${faIcon}`}/>
                 </div>
             )}

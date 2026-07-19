@@ -1,5 +1,5 @@
 import "./ArticleItemInfoForTimelines.scss"
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {useViewport} from "/src/providers/ViewportProvider.jsx"
 import DateBadge from "/src/components/widgets/DateBadge.jsx"
 import {PropList, PropListItem} from "/src/components/generic/PropList.jsx"
@@ -9,13 +9,12 @@ import {useLanguage} from "/src/providers/LanguageProvider.jsx"
 
 /**
  * @param {*} children
- * @param {ArticleItemDataWrapper} itemWrapper
  * @param {String} className
  * @param {Boolean} smallDateBadge
  * @return {JSX.Element}
  * @constructor
  */
-function ArticleItemInfoForTimelines({ children, itemWrapper, className = "", smallDateBadge = false }) {
+function ArticleItemInfoForTimelines({ children, className = "", smallDateBadge = false }) {
     const dateBadgeClass = smallDateBadge ?
         `article-timeline-item-info-for-timelines-date-badge-small` :
         ``
@@ -59,7 +58,7 @@ function ArticleItemInfoForTimelinesHeader({ itemWrapper, className = "", dateIn
 
         if(location) {
             propListItems.push({
-                faIcon: `fa-regular fa-font-awesome`,
+                faIcon: `fa-solid fa-location-dot`,
                 type: PropListItem.Types.SINGLE,
                 value: [location]
             })
@@ -86,7 +85,7 @@ function ArticleItemInfoForTimelinesHeader({ itemWrapper, className = "", dateIn
     return (
         <div className={`article-timeline-item-info-for-timelines-header ${className}`}>
             <div className={`article-timeline-item-info-for-timelines-header-title`}>
-                <h5 className={``}
+                <h3 className={`h5`}
                     dangerouslySetInnerHTML={{__html: itemWrapper.locales.title || itemWrapper.placeholder}}/>
 
                 {shouldShowDateBadge && (

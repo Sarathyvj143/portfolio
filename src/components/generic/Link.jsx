@@ -6,7 +6,7 @@ import {useLocation} from "/src/providers/LocationProvider.jsx"
 import {useUtils} from "/src/hooks/utils.js"
 import {useScheduler} from "/src/hooks/scheduler.js"
 
-function Link({ id = null, className = "", href, children, tooltip = null, metadata = null, onClick = null, onClickTimeout = 0, onHoverStatus = null, intercept = false }) {
+function Link({ id = null, className = "", href, children, tooltip = null, ariaLabel = null, metadata = null, onClick = null, onClickTimeout = 0, onHoverStatus = null, intercept = false }) {
     const feedbacks = useFeedbacks()
     const language = useLanguage()
     const location = useLocation()
@@ -102,6 +102,7 @@ function Link({ id = null, className = "", href, children, tooltip = null, metad
            onMouseEnter={_onMouseEnter}
            onMouseLeave={_onMouseLeave}
            data-tooltip={tooltip}
+           aria-label={ariaLabel}
            draggable={false}>
             {children}
         </a>

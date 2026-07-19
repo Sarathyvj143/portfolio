@@ -11,7 +11,7 @@ function TableOfContents({ sections, title }) {
     useEffect(() => {
         const handleScroll = () => {
             // Check if sidebar should be sticky
-            const sidebar = document.querySelector('.blog-post-sidebar')
+            const sidebar = document.querySelector('.blog-post-toc')
             if (sidebar) {
                 const rect = sidebar.getBoundingClientRect()
                 setIsSticky(rect.top <= 20)
@@ -82,11 +82,15 @@ function TableOfContents({ sections, title }) {
         return null
     }
 
-    const tocTitle = title?.[language.current] || title?.en || "Table of Contents"
+    // `title` may be a plain string (desktop) or an empty string (mobile modal,
+    // which supplies its own heading). Support both and hide when blank.
+    const tocTitle = typeof title === 'string'
+        ? title
+        : (title?.[language.current] || title?.en || "Table of Contents")
 
     return (
         <div className={`table-of-contents ${isSticky ? 'sticky' : ''}`}>
-            <h3 className="toc-title">{tocTitle}</h3>
+            {tocTitle && <h3 className="toc-title">{tocTitle}</h3>}
             <nav className="toc-nav">
                 <ul className="toc-list">
                     {sections.map((section, index) => {

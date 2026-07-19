@@ -74,12 +74,15 @@ function ArticleCardsItem({ itemWrapper }) {
         <div className={`article-cards-item`}>
             {itemWrapper.link && itemWrapper.link.href && (
                 <Link href={itemWrapper.link.href}
-                      className={`article-cards-item-link`}>
+                      className={`article-cards-item-link`}
+                      ariaLabel={[itemWrapper.link.tooltip, itemWrapper.imageAlt].filter(Boolean).join(": ")}>
                     <CircularButton faIcon={itemWrapper.link.faIcon || `fa-solid fa-arrow-up-right-dots`}
                                     size={CircularButton.Sizes.EXTRA_LARGE}
                                     variant={CircularButton.Variants.TRANSPARENT}
                                     className={`article-cards-item-link-button`}
-                                    tooltip={itemWrapper.link.tooltip}/>
+                                    tooltip={itemWrapper.link.tooltip}
+                                    ariaHidden={true}
+                                    tabIndex={-1}/>
                 </Link>
             )}
 

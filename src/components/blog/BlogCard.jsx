@@ -1,32 +1,15 @@
 import "./BlogCard.scss"
-import React, { useEffect } from 'react'
+import React from 'react'
 import { getAssetUrl } from "/src/hooks/assetHelper.js"
+import { _dateUtils } from "/src/hooks/utils/_date-utils.js"
 
 function BlogCard({ item, language, onClick }) {
-    // Debug: Log the blog item when it mounts
-    useEffect(() => {
-        console.log("BlogCard received item:", item);
-        if (item.blogData) {
-            console.log("BlogCard has blogData:", item.blogData);
-        }
-    }, [item]);
-
     const title = item.locales?.title || "Untitled"
     const description = item.locales?.text || ""
     const image = item.img
     const date = item.blogData?.date
     const readTime = item.blogData?.readTime
     const tags = item.blogData?.tags || []
-
-    const formatDate = (dateString) => {
-        if (!dateString) return ""
-        const date = new Date(dateString)
-        return date.toLocaleDateString(language || 'en', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        })
-    }
 
     const handleImageError = (e) => {
         // Replace broken image with a placeholder
@@ -37,26 +20,36 @@ function BlogCard({ item, language, onClick }) {
         }
     }
 
-    const handleClick = (e) => {
-        console.log("BlogCard clicked, item:", item);
-        
-        if (onClick) {
-            // If it's an anchor tag click, let the default behavior work
-            if (e && e.target && e.target.tagName === 'A') {
-                return;
-            }
-            
-            // Otherwise use the custom handler
-            onClick();
+    const activate = (e) => {
+        if (!onClick) return
+
+        // If it's an anchor tag click, let the default behavior work
+        if (e && e.target && e.target.tagName === 'A') {
+            return
+        }
+
+        onClick()
+    }
+
+    const handleKeyDown = (e) => {
+        // Activate on Enter or Space, matching native button behavior
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault()
+            activate(e)
         }
     }
 
     return (
-        <div className="blog-card" onClick={handleClick}>
+        <div className="blog-card"
+             role="button"
+             tabIndex={0}
+             aria-label={`Read blog post: ${title}`}
+             onClick={activate}
+             onKeyDown={handleKeyDown}>
             <div className="blog-card-image-container">
                 {image ? (
-                    <img 
-                        src={image.startsWith('http') ? image : getAssetUrl(image)} 
+                    <img
+                        src={image.startsWith('http') ? image : getAssetUrl(image)}
                         alt={title}
                         className="blog-card-image"
                         loading="lazy"
@@ -82,24 +75,24 @@ function BlogCard({ item, language, onClick }) {
                     </div>
                 </div>
             </div>
-            
+
             <div className="blog-card-content">
                 <div className="blog-card-meta">
                     {date && (
-                        <span className="blog-card-date">{formatDate(date)}</span>
+                        <span className="blog-card-date">{_dateUtils.formatLocalized(date, language)}</span>
                     )}
                     {readTime && (
                         <span className="blog-card-read-time">{readTime}</span>
                     )}
                 </div>
-                
+
                 <h3 className="blog-card-title">{title}</h3>
                 <p className="blog-card-description">{description}</p>
-                
+
                 {tags.length > 0 && (
                     <div className="blog-card-tags">
-                        {tags.map((tag, index) => (
-                            <span key={index} className="blog-card-tag">
+                        {tags.map((tag) => (
+                            <span key={tag} className="blog-card-tag">
                                 {tag}
                             </span>
                         ))}

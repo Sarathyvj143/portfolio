@@ -7,7 +7,6 @@ import {useViewport} from "/src/providers/ViewportProvider.jsx"
 import {useConstants} from "/src/hooks/constants.js"
 import AvatarView from "/src/components/generic/AvatarView.jsx"
 import {useLocation} from "/src/providers/LocationProvider.jsx"
-import NumberAnimation from "/src/components/generic/NumberAnimation.jsx"
 
 /**
  * @param {ArticleDataWrapper} dataWrapper
@@ -114,12 +113,11 @@ function ArticleSkillsItemInfo({ itemWrapper }) {
     const description = itemWrapper.locales.text
     const experienceTime = itemWrapper.dateStartDisplayAsExperienceTime
 
-    const displayLevel = utils.string.if(level, ` - ${level}`)
     const hasPercentage = utils.number.isValidNumber(percentage)
 
     const progressStyle = {
         width: `${utils.string.toDisplayPercentage(animationPercentage)}`,
-        opacity: percentage ? 0.25 + percentage/75 : 0
+        opacity: hasPercentage ? utils.number.clamp(percentage / 100, 0.55, 1) : 0
     }
 
     let descriptionClass = `text-3`
@@ -134,33 +132,21 @@ function ArticleSkillsItemInfo({ itemWrapper }) {
         <div className={`article-skills-item-info`}>
             <div className={`article-skills-item-title text-5`}>
                 <div className={`article-skills-item-title-left-column`}>
-                    <span className={`article-skills-item-title-main`}
-                          dangerouslySetInnerHTML={{__html: itemWrapper.locales.title || itemWrapper.placeholder}}/>
-
-                    {displayLevel && (
-                        <span className={`article-skills-item-title-suffix text-5`}
-                              dangerouslySetInnerHTML={{__html: displayLevel}}/>
-                    )}
+                    <h5 className={`article-skills-item-title-main`}
+                        dangerouslySetInnerHTML={{__html: itemWrapper.locales.title || itemWrapper.placeholder}}/>
                 </div>
 
-                <div className={`article-skills-item-title-right-column`}>
-                    {percentage && (
-                        <NumberAnimation className={`article-skills-item-title-percentage text-3`}
-                                         id={`article-skills-item-title-percentage-${itemWrapper.uniqueId}`}
-                                         initialValue={initialPercentage}
-                                         targetValue={animationPercentage}
-                                         format={`{n}%`}/>
-                    )}
-                </div>
+                {level && (
+                    <div className={`article-skills-item-title-right-column`}>
+                        <span className={`article-skills-item-title-tier text-2`}
+                              dangerouslySetInnerHTML={{__html: level}}/>
+                    </div>
+                )}
             </div>
 
             {hasPercentage && (
-                <div className="article-skills-item-progress progress">
+                <div className="article-skills-item-progress progress" aria-hidden={`true`}>
                     <div className="progress-bar"
-                         role="progressbar"
-                         aria-valuenow={animationPercentage}
-                         aria-valuemin={0}
-                         aria-valuemax={100}
                          style={progressStyle}/>
                 </div>
             )}
